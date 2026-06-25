@@ -1,4 +1,4 @@
-import { ApiErrorResponse } from "@/features/api";
+import { ApiErrorResponse } from "@/features/api/types";
 
 export function getErrorMessage(error: ApiErrorResponse): string {
 	if (typeof error.errors === "string") {
