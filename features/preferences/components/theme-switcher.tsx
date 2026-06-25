@@ -1,12 +1,10 @@
 "use client";
 
-import { Check } from "lucide-react";
 import { Fragment } from "react";
-import { VariantProps } from "class-variance-authority";
-import { buttonVariants } from "@/components/ui/button";
 
-import { THEMES } from "../constants";
-import { useThemeSwitcher } from "../hooks";
+import { VariantProps } from "class-variance-authority";
+import { Check } from "lucide-react";
+
 import {
 	Button,
 	DropdownMenu,
@@ -14,7 +12,12 @@ import {
 	DropdownMenuItem,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
+	Spinner,
 } from "@/components/ui";
+import { buttonVariants } from "@/components/ui/button";
+
+import { THEMES } from "../constants";
+import { useThemeSwitcher } from "../hooks";
 
 interface BaseSwitcherProps {
 	className?: string;
@@ -33,7 +36,12 @@ export function ThemeSwitcher(props: BaseSwitcherProps) {
 
 	const { mounted, theme, setTheme } = useThemeSwitcher();
 
-	if (!mounted) return null;
+	if (!mounted)
+		return (
+			<Button variant={variant} size={size} className={className}>
+				<Spinner className="size-4" />
+			</Button>
+		);
 
 	const currentTheme =
 		THEMES.find((item) => item.value === theme) ?? THEMES[0];

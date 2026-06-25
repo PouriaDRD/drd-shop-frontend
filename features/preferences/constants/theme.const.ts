@@ -1,5 +1,6 @@
-import { Theme } from "../types";
 import { LaptopIcon, MoonIcon, SunIcon } from "lucide-react";
+
+import { Theme } from "../types";
 
 export const THEMES: Theme[] = [
 	{

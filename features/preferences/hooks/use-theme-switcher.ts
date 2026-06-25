@@ -1,7 +1,8 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+
+import { useTheme } from "next-themes";
 
 /**
  * Hook to switch between light, dark, and system themes.

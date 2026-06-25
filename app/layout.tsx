@@ -1,15 +1,16 @@
-import "./globals.css";
+import { PropsWithChildren } from "react";
 
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { PropsWithChildren } from "react";
 
 import { ThemeProvider } from "@/features/preferences/contexts";
 
+import "./globals.css";
+
 export const metadata: Metadata = {
 	title: {
-		default: "DRD Shop",
-		template: "%s | DRD Shop",
+		default: "دی‌آردی شاپ",
+		template: "دی‌آردی شاپ | %s",
 	},
 	description: "Created by Pouria DRD",
 };
@@ -23,7 +24,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
 			data-scroll-behavior="smooth"
 			className={`h-full antialiased font-iran-yekan-x ss02
 			${peyda.variable} ${iranYekanX.variable}`}>
-			<body className="min-h-full flex flex-col">
+			<body className="flex flex-col h-dvh">
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="system"
