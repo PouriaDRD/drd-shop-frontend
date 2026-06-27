@@ -8,7 +8,7 @@ import { cookies } from "next/headers";
 
 const API_URL = process.env.API_URL;
 
-function calculateMaxAgeFromUtc(expireTimeUtc: string): number {
+function calculateMaxAgeFromUtc(expireTimeUtc: Date): number {
 	const now = Math.floor(Date.now() / 1000);
 	const exp = Math.floor(new Date(expireTimeUtc).getTime() / 1000);
 
@@ -22,7 +22,7 @@ function calculateMaxAgeFromUtc(expireTimeUtc: string): number {
 interface CreateSessionProps {
 	token: string;
 	type: "acs" | "rfs";
-	expireTimeUtc: string;
+	expireTimeUtc: Date;
 }
 /**
  * Create session from API response

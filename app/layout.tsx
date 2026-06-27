@@ -3,7 +3,9 @@ import { PropsWithChildren } from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
+import { QCProvider } from "@/features/api/contexts";
 import { ThemeProvider } from "@/features/preferences/contexts";
+import { AppToaster } from "@/features/shared/contexts";
 
 import "./globals.css";
 
@@ -30,7 +32,8 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
 					defaultTheme="system"
 					enableSystem
 					disableTransitionOnChange>
-					{children}
+					<AppToaster />
+					<QCProvider>{children}</QCProvider>
 				</ThemeProvider>
 			</body>
 		</html>
