@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-export function useScrollToSection() {
+export default function useScrollToSection() {
 	useEffect(() => {
 		const targetId = sessionStorage.getItem("scroll_to");
 		if (!targetId) return;

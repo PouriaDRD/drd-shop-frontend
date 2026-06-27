@@ -1,23 +1,24 @@
 "use client";
 
-import type { UseFormReturn } from "react-hook-form";
-
 import { Button, CardContent } from "@/components/ui";
 
-import { RequestOtpFormValues } from "../../types";
+import useRequestOtpForm from "../../hooks/use-request-otp-form";
+import { RequestOtpData } from "../../types";
 import { PhoneNumberField } from "../fields";
 
-type Props = {
-	form: UseFormReturn<RequestOtpFormValues>;
-	isSubmitting: boolean;
-	onSubmit: (data: RequestOtpFormValues) => Promise<void>;
-};
+interface Props {
+	onSuccess: (data: RequestOtpData) => void;
+}
 
 export default function RequestOtpForm(props: Props) {
-	const { form, isSubmitting, onSubmit } = props;
+	const { form, submit, isPending } = useRequestOtpForm({
+		onSuccess(data) {
+			props.onSuccess(data);
+		},
+	});
 
 	return (
-		<form onSubmit={form.handleSubmit(onSubmit)} id="request-otp-from">
+		<form onSubmit={submit} id="request-otp-from">
 			<CardContent className="flex flex-col items-center gap-4">
 				<PhoneNumberField control={form.control} name="phone_number" />
 
@@ -26,8 +27,8 @@ export default function RequestOtpForm(props: Props) {
 					variant={"default"}
 					form="request-otp-from"
 					className="w-full"
-					disabled={isSubmitting}>
-					ارسال کد
+					disabled={isPending}>
+					{isPending ? "درحال ارسال" : "ارسال کد"}
 				</Button>
 			</CardContent>
 		</form>

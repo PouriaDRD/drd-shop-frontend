@@ -1,34 +1,51 @@
 "use client";
 
-import type { UseFormReturn } from "react-hook-form";
-
 import { Button, CardContent } from "@/components/ui";
+import { Countdown } from "@/features/shared/components";
 
-import { VerifyOtpFormValues } from "../../types";
+import useVerifyOtpForm from "../../hooks/use-verify-otp-form";
 import { OtpFields } from "../fields";
 
-type Props = {
-	form: UseFormReturn<VerifyOtpFormValues>;
-	isSubmitting: boolean;
-	onSubmit: (data: VerifyOtpFormValues) => Promise<void>;
-};
+interface Props {
+	otpId: string;
+	phoneNumber: string;
+	onEditPhone: () => void;
+	onSuccess?: () => void;
+}
 
 export default function VerifyOtpForm(props: Props) {
-	const { form, isSubmitting, onSubmit } = props;
+	const { otpId, phoneNumber, onEditPhone, onSuccess } = props;
+
+	const { form, submit, handleResend, isPending } = useVerifyOtpForm({
+		otpId,
+		phoneNumber,
+		onSuccess,
+	});
 
 	return (
-		<form onSubmit={form.handleSubmit(onSubmit)} id="verify-otp-from">
-			<CardContent className="flex flex-col items-center gap-4">
+		<form onSubmit={submit} id="verify-otp-from">
+			<CardContent className="flex flex-col items-center gap-5">
 				<OtpFields control={form.control} name="code" />
 
-				<Button
-					type="submit"
-					variant={"default"}
-					form="verify-otp-from"
-					className="w-full"
-					disabled={isSubmitting}>
-					تایید کد
-				</Button>
+				{/* countdown */}
+				<Countdown onResend={handleResend} />
+
+				<div className="w-full space-y-2">
+					<Button
+						variant="outline"
+						onClick={onEditPhone}
+						className="w-full">
+						ویرایش شماره
+					</Button>
+					<Button
+						type="submit"
+						variant="default"
+						form="verify-otp-from"
+						className="w-full"
+						disabled={isPending}>
+						{isPending ? "درحال بررسی..." : "تایید کد"}
+					</Button>
+				</div>
 			</CardContent>
 		</form>
 	);

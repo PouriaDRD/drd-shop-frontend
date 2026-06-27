@@ -2,11 +2,11 @@
 
 import { cookies } from "next/headers";
 
+import { buildApiUrl, endpoints } from "@/features/api/lib";
+
 // ============================
 // Helpers
 // ============================
-
-const API_URL = process.env.API_URL;
 
 function calculateMaxAgeFromUtc(expireTimeUtc: Date): number {
 	const now = Math.floor(Date.now() / 1000);
@@ -60,13 +60,9 @@ export async function getSession(): Promise<string | null> {
 
 		const cookieStore = await cookies();
 
-		const access = cookieStore.get("acs")?.value;
-		if (access) return access;
+		const session = cookieStore.get("acs")?.value;
 
-		// if no access → try refresh
-		const newAccess = await refreshAccessToken();
-
-		return newAccess;
+		return session || null;
 	} catch (error) {
 		if (process.env.NODE_ENV === "development") {
 			console.error("[getSession]", error);
@@ -99,7 +95,7 @@ export async function refreshAccessToken(): Promise<string | null> {
 			return null;
 		}
 
-		const res = await fetch(`${API_URL}/authentication/refresh/`, {
+		const res = await fetch(buildApiUrl(endpoints.auth.refresh), {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -124,7 +120,9 @@ export async function refreshAccessToken(): Promise<string | null> {
 
 		return data.access;
 	} catch (err) {
-		console.error("[refreshAccessToken]", err);
+		if (process.env.NODE_ENV === "development") {
+			console.error("[refreshAccessToken]", err);
+		}
 		await clearSession();
 		return null;
 	}

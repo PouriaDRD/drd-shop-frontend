@@ -7,13 +7,15 @@ export interface ApiSuccessResponse<T = unknown> {
 	data: T;
 }
 
+export type ApiError = string | Record<string, string | string[]>;
+
 /**
  * Base error response.
  */
 export interface ApiErrorResponse {
 	success: false;
 	message: string;
-	errors: string | Record<string, string | string[]>;
+	errors: ApiError;
 }
 
 /**

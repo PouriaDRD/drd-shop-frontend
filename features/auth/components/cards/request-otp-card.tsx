@@ -9,38 +9,28 @@ import {
 	CardTitle,
 } from "@/components/ui";
 
-import useVerifyOtp from "../hooks/use-verify-otp";
-
-import { VerifyOtpForm } from "./forms";
+import { RequestOtpData } from "../../types";
+import { RequestOtpForm } from "../forms";
 
 interface Props {
-	otpId: string;
-	phoneNumber: string;
+	onSuccess: (data: RequestOtpData) => void;
 }
 
-function RequestOtpCard(props: Props) {
-	const { form, submit, isSubmitting } = useVerifyOtp({
-		otpId: props.otpId,
-		phoneNumber: props.phoneNumber,
-	});
-
-	const text = `کد ارسال شده به شماره ${props.phoneNumber} را وارد کنید`;
-
+function RequestOtpCard({ onSuccess }: Props) {
 	return (
 		<Card className="mx-auto max-w-full sm:max-w-xs w-full bg-background ring-0 border-0">
 			<CardHeader className="flex flex-col items-center">
 				<PdIcon className="size-11" />
 				<div className="text-center">
 					<CardTitle>ورود / ثبت نام</CardTitle>
-					<CardDescription>{text}</CardDescription>
+					<CardDescription>
+						شماره همراه خود را وارد کنید
+					</CardDescription>
 				</div>
 			</CardHeader>
 
-			<VerifyOtpForm
-				form={form}
-				isSubmitting={isSubmitting}
-				onSubmit={submit}
-			/>
+			<RequestOtpForm onSuccess={onSuccess} />
+
 			<CardFooter className="text-center text-xs text-muted-foreground">
 				با ورود به سایت، قوانین و مقررات سامانه را می‌پذیرید.
 			</CardFooter>

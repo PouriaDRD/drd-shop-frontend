@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-import { ApiResponse } from "@/features/api/types";
-
 import { verifyOtpSchema } from "../schemas";
 
 export type VerifyOtpFormValues = z.infer<typeof verifyOtpSchema>;
@@ -18,4 +16,4 @@ export type VerifyOtpData = {
 	is_new: boolean;
 };
 
-export type VerifyOtpResponse = ApiResponse<VerifyOtpData>;
+export type VerifyOtpResponse = VerifyOtpData;
