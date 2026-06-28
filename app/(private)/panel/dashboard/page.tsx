@@ -1,110 +1,216 @@
 "use client";
 
+import { TriangleAlert } from "lucide-react";
+
+import { PageLayout } from "@/components/layouts";
 import {
-	Badge,
+	Avatar,
+	AvatarFallback,
+	AvatarImage,
 	Card,
 	CardContent,
 	CardHeader,
-	CardTitle,
 } from "@/components/ui";
 import { ThemeSwitcher } from "@/features/preferences/components";
 import { toIranDateTime } from "@/features/shared/utils";
 import { useUser } from "@/features/user/context";
-import { User, UserRole, UserStatus } from "@/features/user/types/user.type";
+import { User } from "@/features/user/types";
 
 function PanelDashboardPage() {
 	const { user, isAuthenticated, isLoading } = useUser();
 
-	if (isLoading) return <div>Loading user...</div>;
-	if (!isAuthenticated || !user) return <div>User not found...</div>;
-
+	if (isLoading) {
+		return (
+			<PageLayout className="flex items-center justify-center">
+				<LoadingState />;
+			</PageLayout>
+		);
+	}
+	if (!isAuthenticated || !user) {
+		return (
+			<PageLayout className="flex items-center justify-center">
+				<NotFoundState />;
+			</PageLayout>
+		);
+	}
 	return (
-		<div className="p-6 flex justify-center">
-			<UserInfoCard user={user} />
-		</div>
+		<PageLayout className="flex flex-col gap-5 max-w-4xl mx-auto p-4 sm:p-6 w-full">
+			<DashboardHeader />
+			<StatsRow user={user} />
+			<div className="grid grid-cols-1 gap-4">
+				<DetailsCard user={user} />
+			</div>
+		</PageLayout>
 	);
 }
 
 export default PanelDashboardPage;
 
-type Props = {
-	user: User;
-};
+// ─── Sub-components ────────────────────────────────────────────────────────────
 
-function getRoleVariant(role: UserRole) {
-	switch (role) {
-		case "superuser":
-			return "destructive";
-		case "admin":
-			return "default";
-		default:
-			return "secondary";
-	}
+type Props = { user: User };
+
+function DashboardHeader() {
+	return (
+		<div className="flex items-center justify-between">
+			<div>
+				<h2 className="text-xl font-medium text-foreground">
+					داشبورد کاربری
+				</h2>
+				<p className="text-sm text-muted-foreground mt-0.5">
+					خلاصه اطلاعات و وضعیت حساب شما
+				</p>
+			</div>
+			<ThemeSwitcher />
+		</div>
+	);
 }
 
-function getStatusVariant(status: UserStatus) {
-	switch (status) {
-		case "active":
-			return "default";
-		case "inactive":
-			return "secondary";
-		case "banned":
-			return "destructive";
-	}
-}
-
-function UserInfoCard({ user }: Props) {
+function StatsRow({ user }: Props) {
 	const lastLogin = toIranDateTime(user.last_login);
 	const createdAt = toIranDateTime(user.created_at);
 
 	return (
-		<Card className="w-full max-w-md">
+		<div className="grid grid-cols-2 gap-4">
+			<StatCard
+				label="آخرین ورود"
+				value={lastLogin.dateWithMonthName}
+				value2={lastLogin.time}
+				small
+			/>
+			<StatCard
+				label="تاریخ عضویت"
+				value={createdAt.dateWithMonthName}
+				value2={createdAt.time}
+				small
+			/>
+		</div>
+	);
+}
+
+interface StatCardProps {
+	label: string;
+	value: string;
+	value2?: string;
+	accent?: boolean;
+	small?: boolean;
+}
+
+function StatCard(props: StatCardProps) {
+	const { label, value, value2, accent, small } = props;
+
+	return (
+		<Card className="px-2 py-4">
 			<CardHeader>
-				<CardTitle className="text-lg">User Profile</CardTitle>
-				<ThemeSwitcher />
+				<p className="text-xs text-muted-foreground mb-1.5">{label}</p>
+				<p
+					className={[
+						"font-medium",
+						accent ? "text-primary text-2xl" : "text-foreground",
+						small ? "text-sm" : "text-2xl",
+					].join(" ")}>
+					{value}
+				</p>
+				{value2 && (
+					<span className="text-muted-foreground text-sm">
+						{value2}
+					</span>
+				)}
 			</CardHeader>
+		</Card>
+	);
+}
 
-			<CardContent className="space-y-3 text-sm">
-				<div className="flex justify-between">
-					<span className="text-muted-foreground">Email</span>
-					<span className="font-medium">{user.email}</span>
+function DetailsCard({ user }: Props) {
+	const lastLogin = toIranDateTime(user.last_login);
+	const createdAt = toIranDateTime(user.created_at);
+
+	const rows: Array<{ label: string; value: React.ReactNode }> = [
+		{
+			label: "وضعیت ایمیل",
+			value: (
+				<span
+					className={
+						user.email_verified
+							? "text-primary text-sm"
+							: "text-destructive text-sm"
+					}>
+					{user.email_verified ? "تأیید شده" : "تأیید نشده"}
+				</span>
+			),
+		},
+		{ label: "آخرین ورود", value: lastLogin.dateWithMonthName },
+		{ label: "تاریخ عضویت", value: createdAt.dateWithMonthName },
+	];
+	const initials = user.email.slice(0, 2).toUpperCase();
+
+	return (
+		<Card>
+			<CardHeader>
+				{/* Avatar */}
+				<Avatar size="lg">
+					<AvatarImage src={user.email} />
+					<AvatarFallback>{initials}</AvatarFallback>
+				</Avatar>
+
+				<div className="text-start">
+					<p className="font-medium text-sm text-foreground">
+						{user.email}
+					</p>
 				</div>
-
-				<div className="flex justify-between items-center">
-					<span className="text-muted-foreground">Role</span>
-					<Badge variant={getRoleVariant(user.role)}>
-						{user.role}
-					</Badge>
-				</div>
-
-				<div className="flex justify-between items-center">
-					<span className="text-muted-foreground">Status</span>
-					<Badge variant={getStatusVariant(user.status)}>
-						{user.status}
-					</Badge>
-				</div>
-
-				<div className="flex justify-between">
-					<span className="text-muted-foreground">Verified</span>
-					<span className="font-medium">
-						{user.email_verified ? "Yes" : "No"}
-					</span>
-				</div>
-
-				<div className="flex justify-between">
-					<span className="text-muted-foreground">Last login</span>
-					<span className="font-medium">
-						{lastLogin.dateWithMonthName}
-					</span>
-				</div>
-
-				<div className="flex justify-between">
-					<span className="text-muted-foreground">Created at</span>
-					<span className="font-medium">
-						{createdAt.dateWithMonthName}
-					</span>
+			</CardHeader>
+			<CardContent>
+				<div className="divide-y divide-border">
+					{rows.map(({ label, value }) => (
+						<div
+							key={label}
+							className="flex justify-between items-center py-2.5">
+							<span className="text-sm text-muted-foreground">
+								{label}
+							</span>
+							<span className="text-sm font-medium text-foreground">
+								{value}
+							</span>
+						</div>
+					))}
 				</div>
 			</CardContent>
+		</Card>
+	);
+}
+
+// ─── Fallback states ────────────────────────────────────────────────────────────
+
+function LoadingState() {
+	return (
+		<div className="p-6 flex flex-col gap-5 max-w-4xl mx-auto animate-pulse w-full">
+			<div className="h-10 bg-muted rounded-lg w-48" />
+			<div className="grid grid-cols-3 gap-3">
+				{[...Array(3)].map((_, i) => (
+					<div key={i} className="h-16 bg-muted rounded-lg" />
+				))}
+			</div>
+			<div className="grid grid-cols-[1fr_1.6fr] gap-4">
+				<div className="h-64 bg-muted rounded-xl" />
+				<div className="h-64 bg-muted rounded-xl" />
+			</div>
+		</div>
+	);
+}
+
+function NotFoundState() {
+	return (
+		<Card className="max-w-xs w-full items-center justify-center gap-2">
+			{/* Icon */}
+			<div className="flex size-14 items-center justify-center rounded-2xl bg-primary/5 dark:bg-primary">
+				<TriangleAlert
+					className="size-7 text-primary dark:text-foreground"
+					strokeWidth={1.75}
+				/>
+			</div>
+			<div className="text-center">
+				<p className="text-muted-foreground text-sm">کاربر یافت نشد</p>
+			</div>
 		</Card>
 	);
 }
