@@ -11,11 +11,18 @@ import {
 	VerifyOtpFormValues,
 	VerifyOtpResponse,
 } from "../types";
+import { LoginFormValues, LoginResponse } from "../types/login.type";
+import { RegisterFormValues, RegisterResponse } from "../types/register.type";
 
 export const authApi = {
-	/**
-	 * Request OTP code
-	 */
+	login: (data: LoginFormValues) => {
+		return apiClient.post<LoginResponse>(endpoints.auth.login, data);
+	},
+
+	register: (data: RegisterFormValues) => {
+		return apiClient.post<RegisterResponse>(endpoints.auth.register, data);
+	},
+
 	requestOtp: (data: RequestOtpFormValues) => {
 		return apiClient.post<RequestOtpResponse>(
 			endpoints.auth.requestOtp,
@@ -23,9 +30,6 @@ export const authApi = {
 		);
 	},
 
-	/**
-	 * Verify OTP and get JWT tokens
-	 */
 	verifyOtp: (data: VerifyOtpFormValues) => {
 		return apiClient.post<VerifyOtpResponse>(
 			endpoints.auth.verifyOtp,

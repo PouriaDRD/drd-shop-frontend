@@ -1,5 +1,7 @@
 export const endpoints = {
 	auth: {
+		login: "authentication/login/",
+		register: "authentication/register/",
 		requestOtp: "authentication/request-otp/",
 		verifyOtp: "authentication/verify-otp/",
 		refresh: "authentication/refresh/",
