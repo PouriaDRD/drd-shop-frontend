@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { Label as LabelPrimitive } from "radix-ui";
 
-import { cn } from "@/features/shared/utils/index";
+import { cn } from "@/features/shared/utils";
 
 function Label({
 	className,

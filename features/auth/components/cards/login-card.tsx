@@ -1,7 +1,10 @@
 "use client";
 
+import Link from "next/link";
+
 import { PdIcon } from "@/components/icons";
 import {
+	Button,
 	Card,
 	CardContent,
 	CardDescription,
@@ -33,7 +36,13 @@ function LoginCard({ onSuccess }: Props) {
 				<LoginForm onSuccess={onSuccess} />
 			</CardContent>
 
-			<CardFooter className="text-center text-xs text-muted-foreground">
+			<CardFooter className="flex flex-col items-center text-center text-xs text-muted-foreground">
+				<Link href="/auth/register">
+					حساب کاربری ندارید؟
+					<Button variant={"link"} size={"xs"}>
+						ثبت نام کنید
+					</Button>
+				</Link>
 				با ورود در سایت، قوانین و مقررات سامانه را می‌پذیرید.
 			</CardFooter>
 		</Card>

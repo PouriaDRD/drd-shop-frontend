@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "@/features/shared/utils/index";
+import { cn } from "@/features/shared/utils";
 
 function Card({
 	className,

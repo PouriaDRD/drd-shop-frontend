@@ -60,9 +60,12 @@ export async function getSession(): Promise<string | null> {
 
 		const cookieStore = await cookies();
 
-		const session = cookieStore.get("acs")?.value;
+		let session = cookieStore.get("acs")?.value ?? null;
 
-		return session || null;
+		if (!session) {
+			session = await refreshAccessToken();
+		}
+		return session;
 	} catch (error) {
 		if (process.env.NODE_ENV === "development") {
 			console.error("[getSession]", error);
@@ -111,14 +114,16 @@ export async function refreshAccessToken(): Promise<string | null> {
 		}
 
 		const data = await res.json();
+		const access = data.data.access;
+		const expireTimeUtc = data.data.access_expires_at;
 
 		await createSession({
-			token: data.access,
+			token: access,
 			type: "acs",
-			expireTimeUtc: data.access_expires_at,
+			expireTimeUtc: expireTimeUtc,
 		});
 
-		return data.access;
+		return access;
 	} catch (err) {
 		if (process.env.NODE_ENV === "development") {
 			console.error("[refreshAccessToken]", err);
