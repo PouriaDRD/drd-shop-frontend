@@ -4,7 +4,7 @@ import { getSession } from "@/features/auth/actions";
 
 export async function proxy(request: NextRequest) {
 	// Redirect to login page if the user is not authenticated
-	const redirectUrl = new URL("/auth", request.url);
+	const redirectUrl = new URL("/auth/login", request.url);
 	// Preserve the original URL in the 'next' parameter
 	redirectUrl.searchParams.set("next", request.url);
 
