@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 
+import { TooltipProvider } from "@/components/ui";
 import { QCProvider } from "@/features/api/contexts";
 import { ThemeProvider } from "@/features/preferences/contexts";
 import { AppToaster } from "@/features/shared/contexts";
@@ -34,7 +35,9 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
 					enableSystem
 					disableTransitionOnChange>
 					<AppToaster />
-					<QCProvider>{children}</QCProvider>
+					<QCProvider>
+						<TooltipProvider>{children}</TooltipProvider>
+					</QCProvider>
 				</ThemeProvider>
 			</body>
 		</html>

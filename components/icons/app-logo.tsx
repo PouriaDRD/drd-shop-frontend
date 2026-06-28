@@ -13,7 +13,7 @@ function AppLogo({ className }: Props) {
 				"flex items-center justify-center text-center gap-2",
 				className,
 			)}>
-			<span className="text-2xl font-bold text-center font-mono leading-relaxed">
+			<span className="text-2xl font-bold text-center pt-1">
 				DRD Shop
 			</span>
 			<div className="size-8">

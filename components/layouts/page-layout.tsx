@@ -7,7 +7,11 @@ interface Props {
 
 function PageLayout({ children, className }: Props) {
 	return (
-		<main className={cn("flex-1 h-full w-full p-4 sm:p-6 ", className)}>
+		<main
+			className={cn(
+				"flex-1 h-full w-full px-4 py-4 sm:px-8 sm:py-8",
+				className,
+			)}>
 			{children}
 		</main>
 	);

@@ -1,12 +1,13 @@
 "use client";
 
-import { TriangleAlert } from "lucide-react";
+import { RefreshCw, TriangleAlert } from "lucide-react";
 
 import { PageLayout } from "@/components/layouts";
 import {
 	Avatar,
 	AvatarFallback,
 	AvatarImage,
+	Button,
 	Card,
 	CardContent,
 	CardHeader,
@@ -20,15 +21,15 @@ function PanelDashboardPage() {
 
 	if (isLoading) {
 		return (
-			<PageLayout className="flex items-center justify-center">
-				<LoadingState />;
+			<PageLayout className="flex flex-col gap-4">
+				<LoadingState />
 			</PageLayout>
 		);
 	}
 	if (!isAuthenticated || !user) {
 		return (
 			<PageLayout className="flex items-center justify-center">
-				<NotFoundState />;
+				<ErrorState />
 			</PageLayout>
 		);
 	}
@@ -184,7 +185,7 @@ function DetailsCard({ user }: Props) {
 
 function LoadingState() {
 	return (
-		<div className="p-6 flex flex-col gap-5 max-w-4xl mx-auto animate-pulse w-full">
+		<div className="flex flex-col gap-4 mx-auto animate-pulse w-full">
 			<div className="h-10 bg-muted rounded-lg w-48" />
 			<div className="grid grid-cols-3 gap-3">
 				{[...Array(3)].map((_, i) => (
@@ -199,19 +200,29 @@ function LoadingState() {
 	);
 }
 
-function NotFoundState() {
+function ErrorState() {
 	return (
-		<Card className="max-w-xs w-full items-center justify-center gap-2">
-			{/* Icon */}
-			<div className="flex size-14 items-center justify-center rounded-2xl bg-primary/5 dark:bg-primary">
-				<TriangleAlert
-					className="size-7 text-primary dark:text-foreground"
-					strokeWidth={1.75}
-				/>
-			</div>
-			<div className="text-center">
-				<p className="text-muted-foreground text-sm">کاربر یافت نشد</p>
-			</div>
+		<Card className="mx-auto w-full max-w-md border-dashed">
+			<CardContent className="flex min-h-80 flex-col items-center justify-center px-6 py-10 text-center">
+				<div className="mb-6 flex size-16 items-center justify-center rounded-full bg-destructive/10">
+					<TriangleAlert className="size-8 text-destructive" />
+				</div>
+
+				<h3 className="text-lg font-semibold">خطا در دریافت اطلاعات</h3>
+
+				<p className="mt-2 max-w-xs text-sm leading-6 text-muted-foreground">
+					متأسفانه اطلاعات حساب کاربری قابل دریافت نیست. لطفاً چند
+					لحظه دیگر دوباره تلاش کنید.
+				</p>
+
+				<Button
+					variant="outline"
+					className="mt-6 gap-2"
+					onClick={() => window.location.reload()}>
+					<RefreshCw className="size-4" />
+					تلاش مجدد
+				</Button>
+			</CardContent>
 		</Card>
 	);
 }
