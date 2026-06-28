@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { PdIcon } from "@/components/icons";
+import { AppIcon } from "@/components/icons";
 import {
 	Button,
 	Card,
@@ -23,7 +23,7 @@ function RegisterCard({ onSuccess }: Props) {
 	return (
 		<Card className="mx-auto max-w-full sm:max-w-xs w-full bg-background ring-0 border-0">
 			<CardHeader className="flex flex-col items-center">
-				<PdIcon className="size-11" />
+				<AppIcon className="size-11" />
 				<div className="text-center">
 					<CardTitle>ثبت نام</CardTitle>
 					<CardDescription>

@@ -1,1 +1,2 @@
-export { default as PdIcon } from "./pd-icon";
+export * from "./app-icon";
+export * from "./app-logo";

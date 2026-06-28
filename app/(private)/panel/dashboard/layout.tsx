@@ -1,8 +1,6 @@
-import { PropsWithChildren } from "react";
+import { Fragment, PropsWithChildren } from "react";
 
 import { Metadata } from "next";
-
-import { UserProvider } from "@/features/user/context";
 
 export async function generateMetadata(): Promise<Metadata> {
 	return {
@@ -12,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 function DashboardLayout({ children }: Readonly<PropsWithChildren>) {
-	return <UserProvider>{children}</UserProvider>;
+	return <Fragment>{children}</Fragment>;
 }
 
 export default DashboardLayout;

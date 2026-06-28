@@ -6,13 +6,13 @@ import { motion, useAnimation, Variants } from "framer-motion";
 
 import { cn } from "@/features/shared/utils";
 
-interface PdIconProps {
+interface Props {
 	className?: string;
 	animation?: boolean;
 	repeat?: number;
 }
 
-const PdIcon = (props: PdIconProps) => {
+export const AppIcon = (props: Props) => {
 	const repeat = props.repeat ?? 10000;
 	const animation = props.animation ?? true;
 
@@ -99,5 +99,3 @@ const PdIcon = (props: PdIconProps) => {
 		);
 	}
 };
-
-export default PdIcon;

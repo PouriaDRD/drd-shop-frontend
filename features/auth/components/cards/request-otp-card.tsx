@@ -1,6 +1,6 @@
 "use client";
 
-import { PdIcon } from "@/components/icons";
+import { AppIcon } from "@/components/icons";
 import {
 	Card,
 	CardDescription,
@@ -20,7 +20,7 @@ function RequestOtpCard({ onSuccess }: Props) {
 	return (
 		<Card className="mx-auto max-w-full sm:max-w-xs w-full bg-background ring-0 border-0">
 			<CardHeader className="flex flex-col items-center">
-				<PdIcon className="size-11" />
+				<AppIcon className="size-11" />
 				<div className="text-center">
 					<CardTitle>ورود / ثبت نام</CardTitle>
 					<CardDescription>

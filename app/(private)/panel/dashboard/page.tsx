@@ -11,7 +11,6 @@ import {
 	CardContent,
 	CardHeader,
 } from "@/components/ui";
-import { ThemeSwitcher } from "@/features/preferences/components";
 import { toIranDateTime } from "@/features/shared/utils";
 import { useUser } from "@/features/user/context";
 import { User } from "@/features/user/types";
@@ -34,7 +33,7 @@ function PanelDashboardPage() {
 		);
 	}
 	return (
-		<PageLayout className="flex flex-col gap-5 max-w-4xl mx-auto p-4 sm:p-6 w-full">
+		<PageLayout className="flex flex-col gap-4">
 			<DashboardHeader />
 			<StatsRow user={user} />
 			<div className="grid grid-cols-1 gap-4">
@@ -61,7 +60,6 @@ function DashboardHeader() {
 					خلاصه اطلاعات و وضعیت حساب شما
 				</p>
 			</div>
-			<ThemeSwitcher />
 		</div>
 	);
 }
@@ -149,7 +147,10 @@ function DetailsCard({ user }: Props) {
 			<CardHeader>
 				{/* Avatar */}
 				<Avatar size="lg">
-					<AvatarImage src={user.email} />
+					<AvatarImage
+						src="/images/avatar-fallback.png"
+						className="p-2 bg-muted"
+					/>
 					<AvatarFallback>{initials}</AvatarFallback>
 				</Avatar>
 
