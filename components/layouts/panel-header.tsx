@@ -2,7 +2,7 @@ import { ThemeSwitcher } from "@/features/preferences/components";
 
 import AppLogo from "../icons/app-logo";
 
-export default function PanelHeader() {
+export function PanelHeader() {
 	return (
 		<header
 			className={`bg-sidebar/95 sticky top-0 z-10 

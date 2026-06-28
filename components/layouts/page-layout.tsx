@@ -5,7 +5,7 @@ interface Props {
 	children?: React.ReactNode;
 }
 
-function PageLayout({ children, className }: Props) {
+export function PageLayout({ children, className }: Props) {
 	return (
 		<main
 			className={cn(
@@ -16,5 +16,3 @@ function PageLayout({ children, className }: Props) {
 		</main>
 	);
 }
-
-export default PageLayout;
