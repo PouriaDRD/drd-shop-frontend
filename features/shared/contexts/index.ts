@@ -1,1 +1,1 @@
-export { default as AppToaster } from "./app-toaster";
+export { default as Providers } from "./providers";

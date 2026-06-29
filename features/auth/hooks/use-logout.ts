@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-import { useRouter } from "next/navigation";
-
 import { toast } from "sonner";
 
 import { useUser } from "@/features/user/context";
@@ -15,9 +13,6 @@ export function useLogout() {
 
 	const { clearUser } = useUser();
 
-	// Router
-	const router = useRouter();
-
 	const handleLogout = async () => {
 		setIsLoading(true);
 		try {
@@ -26,7 +21,8 @@ export function useLogout() {
 			clearUser();
 			// redirect to login page
 			toast.success("با موفقیت خارج شدید");
-			router.push("/auth/login");
+
+			window.location.href = "/auth/login";
 		} catch (error) {
 			if (process.env.NODE_ENV === "development") {
 				console.error("[LogoutAction]", error);

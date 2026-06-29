@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { AppIcon } from "@/components/icons";
 import {
 	CardContent,
@@ -33,7 +35,11 @@ export default function RequestOtpCard({ otpType }: Props) {
 				<RequestOtpForm otpType={otpType} />
 			</CardContent>
 
-			<CardFooter className="w-full">
+			<CardFooter className="flex flex-col items-center text-center text-xs text-muted-foreground gap-2">
+				{otpType === "login" && (
+					<Link href="/auth/login">ورود با رمز عبور</Link>
+				)}
+
 				<span className="text-xs text-muted-foreground text-center w-full">
 					{otpType === "login"
 						? "با ورود، قوانین را می‌پذیرید"

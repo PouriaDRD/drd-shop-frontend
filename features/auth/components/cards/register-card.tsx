@@ -36,14 +36,16 @@ function RegisterCard({ onSuccess }: Props) {
 				<RegisterForm onSuccess={onSuccess} />
 			</CardContent>
 
-			<CardFooter className="flex flex-col items-center text-center text-xs text-muted-foreground">
+			<CardFooter className="flex flex-col items-center text-center text-xs text-muted-foreground gap-1">
 				<Link href="/auth/login">
 					حساب کاربری دارید؟
 					<Button variant={"link"} size={"xs"}>
 						وارد شوید
 					</Button>
 				</Link>
-				با ثبت نام در سایت، قوانین و مقررات سامانه را می‌پذیرید.
+				<span>
+					با ثبت نام در سایت، قوانین و مقررات سامانه را می‌پذیرید.
+				</span>
 			</CardFooter>
 		</Card>
 	);

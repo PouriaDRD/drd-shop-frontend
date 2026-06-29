@@ -8,6 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
+import { useUser } from "@/features/user/context";
+
 import { createSession } from "../actions";
 import { useRegister } from "../mutations";
 import { registerSchema } from "../schemas";
@@ -19,14 +21,14 @@ interface Props {
 }
 
 export function useRegisterForm({ onSuccess }: Props) {
-	const registerMutation = useRegister();
-	// Store
-	const registerStore = useRegisterStore();
-
 	// Router
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const next = searchParams.get("next");
+
+	const { refetchUser } = useUser();
+	const registerMutation = useRegister();
+	const registerStore = useRegisterStore();
 
 	const form = useForm({
 		resolver: zodResolver(registerSchema),
@@ -49,6 +51,7 @@ export function useRegisterForm({ onSuccess }: Props) {
 				expireTimeUtc: data.refresh_expires_at,
 				type: "rfs",
 			}),
+			refetchUser(),
 		]);
 
 		toast.success("حساب کاربری با موفقیت ایجاد شد!");

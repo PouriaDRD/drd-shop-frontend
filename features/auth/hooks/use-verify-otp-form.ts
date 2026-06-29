@@ -11,6 +11,7 @@ import { toast } from "sonner";
 
 import { queryKeys } from "@/features/api/lib";
 import { getErrorMessage } from "@/features/shared/utils";
+import { useUser } from "@/features/user/context";
 
 import { createSession } from "../actions";
 import { useRequestOtp, useVerifyOtp } from "../mutations";
@@ -24,14 +25,15 @@ interface Props {
 }
 
 export default function useVerifyOtpForm({ otpType, onSuccess }: Props) {
-	const queryClient = useQueryClient();
-	const otpStore = useOtpStore();
-	const verifyMutation = useVerifyOtp();
-	const resendMutation = useRequestOtp();
-
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const next = searchParams.get("next");
+
+	const otpStore = useOtpStore();
+	const { refetchUser } = useUser();
+	const queryClient = useQueryClient();
+	const verifyMutation = useVerifyOtp();
+	const resendMutation = useRequestOtp();
 
 	const form = useForm<VerifyOtpFormValues>({
 		resolver: zodResolver(verifyOtpSchema),
@@ -60,6 +62,7 @@ export default function useVerifyOtpForm({ otpType, onSuccess }: Props) {
 					expireTimeUtc: data.refresh_expires_at,
 					type: "rfs",
 				}),
+				refetchUser(),
 			]);
 		} else if (otpType === "verify_email") {
 			await Promise.all([

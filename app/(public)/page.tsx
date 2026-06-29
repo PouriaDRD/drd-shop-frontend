@@ -26,7 +26,7 @@ function LandingPage() {
 				</CardHeader>
 				<CardContent className="flex flex-col items-center gap-2">
 					<ThemeSwitcher />
-					<Link href={"/auth"}>
+					<Link href={"/auth/login"}>
 						<Button>ورود</Button>
 					</Link>
 				</CardContent>

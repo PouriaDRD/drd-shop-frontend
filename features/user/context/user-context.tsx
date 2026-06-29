@@ -1,70 +1,74 @@
 "use client";
 
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+	createContext,
+	ReactNode,
+	useCallback,
+	useContext,
+	useMemo,
+	useState,
+} from "react";
 
 import { useMeQuery } from "../mutations";
 import { User } from "../types";
 
-// =========================
-// Types
-// =========================
-
-type UserContextType = {
+interface UserContextType {
 	user: User | null;
 	setUser: (user: User | null) => void;
-	isAuthenticated: boolean;
 	clearUser: () => void;
+	isAuthenticated: boolean;
 	isLoading: boolean;
-	refetchUser: () => void;
-};
-
-// =========================
-// Context
-// =========================
+	refetchUser: ReturnType<typeof useMeQuery>["refetch"];
+}
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-// =========================
-// Provider
-// =========================
-
 export function UserProvider({ children }: { children: ReactNode }) {
-	const [localUser, setLocalUser] = useState<User | null | undefined>(
+	// Holds a temporary user override.
+	// `undefined` means "use the user from the query".
+	// `null` means "explicitly no authenticated user".
+	const [overrideUser, setOverrideUser] = useState<User | null | undefined>(
 		undefined,
 	);
 
+	// Fetch the currently authenticated user.
 	const { data, isLoading, refetch } = useMeQuery();
 
+	// Extract the user only when the request succeeds.
 	const queryUser = data?.success ? data.data : null;
 
-	const user = localUser === undefined ? queryUser : localUser;
+	// Prefer the local override when it exists;
+	// otherwise fall back to the server response.
+	const user = overrideUser === undefined ? queryUser : overrideUser;
 
-	const setUser = (user: User | null) => {
-		setLocalUser(user);
-	};
+	// Stable setter to avoid unnecessary re-renders.
+	const setUser = useCallback((user: User | null) => {
+		setOverrideUser(user);
+	}, []);
 
-	const clearUser = () => {
-		setLocalUser(null);
-	};
+	// Clears the authenticated user locally.
+	const clearUser = useCallback(() => {
+		setOverrideUser(null);
+	}, []);
+
+	// Memoize the context value so consumers only
+	// re-render when one of its dependencies changes.
+	const value = useMemo(
+		() => ({
+			user,
+			setUser,
+			clearUser,
+			isAuthenticated: !!user,
+			isLoading,
+			refetchUser: refetch,
+		}),
+		[user, isLoading, refetch, setUser, clearUser],
+	);
 
 	return (
-		<UserContext.Provider
-			value={{
-				user,
-				setUser,
-				isAuthenticated: !!user,
-				clearUser,
-				isLoading,
-				refetchUser: refetch,
-			}}>
-			{children}
-		</UserContext.Provider>
+		<UserContext.Provider value={value}>{children}</UserContext.Provider>
 	);
 }
-
-// =========================
-// Hook (THIS WAS MISSING)
-// =========================
 
 export function useUser() {
 	const context = useContext(UserContext);

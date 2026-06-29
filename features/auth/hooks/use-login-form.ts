@@ -8,6 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
+import { useUser } from "@/features/user/context";
+
 import { createSession } from "../actions";
 import { useLogin } from "../mutations";
 import { loginSchema } from "../schemas";
@@ -19,14 +21,14 @@ interface Props {
 }
 
 export function useLoginForm({ onSuccess }: Props) {
-	const loginMutation = useLogin();
-	// Store
-	const loginStore = useLoginStore();
-
 	// Router
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const next = searchParams.get("next");
+
+	const { refetchUser } = useUser();
+	const loginMutation = useLogin();
+	const loginStore = useLoginStore();
 
 	const form = useForm({
 		resolver: zodResolver(loginSchema),
@@ -48,8 +50,8 @@ export function useLoginForm({ onSuccess }: Props) {
 				expireTimeUtc: data.refresh_expires_at,
 				type: "rfs",
 			}),
+			refetchUser(),
 		]);
-
 		toast.success("ورود موفقیت آمیز  بود!");
 
 		// Reset form and store
@@ -58,7 +60,6 @@ export function useLoginForm({ onSuccess }: Props) {
 
 		onSuccess?.();
 
-		// Redirect to dashboard page or next link
 		const redirectTo = next ?? "/panel/dashboard";
 		router.push(redirectTo as "/");
 	};

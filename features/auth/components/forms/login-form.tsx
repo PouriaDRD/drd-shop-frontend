@@ -35,7 +35,7 @@ function LoginForm({ onSuccess }: Props) {
 				form="register-form"
 				className="w-full mt-6"
 				disabled={isPending}>
-				{isPending ? <Spinner /> : "ثبت نام"}
+				{isPending ? <Spinner /> : "ورود به حساب"}
 			</Button>
 		</form>
 	);
