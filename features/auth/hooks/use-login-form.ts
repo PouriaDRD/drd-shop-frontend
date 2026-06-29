@@ -11,8 +11,8 @@ import { toast } from "sonner";
 import { createSession } from "../actions";
 import { useLogin } from "../mutations";
 import { loginSchema } from "../schemas";
-import { useLoginStore } from "../stores/login.store";
-import { LoginData } from "../types/login.type";
+import { useLoginStore } from "../stores";
+import { LoginData } from "../types";
 
 interface Props {
 	onSuccess?: () => void;

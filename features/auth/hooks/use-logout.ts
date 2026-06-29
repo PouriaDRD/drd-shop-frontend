@@ -8,7 +8,7 @@ import { toast } from "sonner";
 
 import { useUser } from "@/features/user/context";
 
-import logoutAction from "../actions/logout.actions";
+import { logoutAction } from "../actions";
 
 export function useLogout() {
 	const [isLoading, setIsLoading] = useState(false);

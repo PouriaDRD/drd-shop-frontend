@@ -12,7 +12,7 @@ import { createSession } from "../actions";
 import { useRegister } from "../mutations";
 import { registerSchema } from "../schemas";
 import { useRegisterStore } from "../stores";
-import { RegisterData } from "../types/register.type";
+import { RegisterData } from "../types";
 
 interface Props {
 	onSuccess?: () => void;

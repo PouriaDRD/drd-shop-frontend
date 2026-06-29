@@ -4,16 +4,19 @@ import useCountdown from "../hooks/use-countdown";
 import { cn } from "../utils";
 
 interface Props {
-	onResend: () => void;
+	countdown?: number;
+	onResend?: () => void;
 }
 
-function Countdown({ onResend }: Props) {
-	const { formatted, canResend, restart } = useCountdown();
+function Countdown({ countdown, onResend }: Props) {
+	const { formatted, canResend, restart } = useCountdown({
+		countdown,
+	});
 
 	const handleResend = () => {
 		if (!canResend) return;
 		restart();
-		onResend();
+		onResend?.();
 	};
 
 	return (

@@ -1,2 +1,3 @@
-export * from "./request-otp.type";
-export * from "./verify-otp.type";
+export * from "./login.type";
+export * from "./otp.type";
+export * from "./register.type";

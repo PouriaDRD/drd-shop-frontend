@@ -36,14 +36,18 @@ function LoginCard({ onSuccess }: Props) {
 				<LoginForm onSuccess={onSuccess} />
 			</CardContent>
 
-			<CardFooter className="flex flex-col items-center text-center text-xs text-muted-foreground">
+			<CardFooter className="flex flex-col items-center text-center text-xs text-muted-foreground gap-1">
+				<Link href="/auth/otp">ورود با کد یک بار مصرف</Link>
+
 				<Link href="/auth/register">
 					حساب کاربری ندارید؟
 					<Button variant={"link"} size={"xs"}>
 						ثبت نام کنید
 					</Button>
 				</Link>
-				با ورود در سایت، قوانین و مقررات سامانه را می‌پذیرید.
+				<span>
+					با ورود در سایت، قوانین و مقررات سامانه را می‌پذیرید.
+				</span>
 			</CardFooter>
 		</Card>
 	);

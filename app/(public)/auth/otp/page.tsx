@@ -1,14 +1,14 @@
 "use client";
 
 import { PageLayout } from "@/components/layouts";
-import { AuthCard } from "@/features/auth/components/cards";
+import { OtpCard } from "@/features/auth/components/cards";
 
-function AuthPage() {
+function OtpPage() {
 	return (
 		<PageLayout className="flex items-center justify-center p-4">
-			<AuthCard />
+			<OtpCard otpType="login" />
 		</PageLayout>
 	);
 }
 
-export default AuthPage;
+export default OtpPage;

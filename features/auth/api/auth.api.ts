@@ -6,13 +6,16 @@
 import { apiClient, endpoints } from "@/features/api/lib";
 
 import {
+	LoginFormValues,
+	LoginResponse,
+	OtpType,
+	RegisterFormValues,
+	RegisterResponse,
 	RequestOtpFormValues,
 	RequestOtpResponse,
 	VerifyOtpFormValues,
 	VerifyOtpResponse,
 } from "../types";
-import { LoginFormValues, LoginResponse } from "../types/login.type";
-import { RegisterFormValues, RegisterResponse } from "../types/register.type";
 
 export const authApi = {
 	login: (data: LoginFormValues) => {
@@ -23,7 +26,7 @@ export const authApi = {
 		return apiClient.post<RegisterResponse>(endpoints.auth.register, data);
 	},
 
-	requestOtp: (data: RequestOtpFormValues) => {
+	requestOtp: (data: RequestOtpFormValues & { otp_type: OtpType }) => {
 		return apiClient.post<RequestOtpResponse>(
 			endpoints.auth.requestOtp,
 			data,

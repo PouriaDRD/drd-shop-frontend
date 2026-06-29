@@ -9,33 +9,31 @@ import {
 	CardTitle,
 } from "@/components/ui";
 
-import { RequestOtpData } from "../../types";
+import { OtpType } from "../../types";
 import { RequestOtpForm } from "../forms";
 
 interface Props {
-	onSuccess: (data: RequestOtpData) => void;
+	otpType: OtpType;
 }
 
-function RequestOtpCard({ onSuccess }: Props) {
+export default function RequestOtpCard({ otpType }: Props) {
 	return (
-		<Card className="mx-auto max-w-full sm:max-w-xs w-full bg-background ring-0 border-0">
+		<Card className="mx-auto w-full max-w-xs bg-background border-0">
 			<CardHeader className="flex flex-col items-center">
 				<AppIcon className="size-11" />
-				<div className="text-center">
-					<CardTitle>ورود / ثبت نام</CardTitle>
-					<CardDescription>
-						شماره همراه خود را وارد کنید
-					</CardDescription>
-				</div>
+				<CardTitle>
+					{otpType === "login" ? "ورود" : "تایید ایمیل"}
+				</CardTitle>
+				<CardDescription>ایمیل خود را وارد کنید</CardDescription>
 			</CardHeader>
 
-			<RequestOtpForm onSuccess={onSuccess} />
+			<RequestOtpForm otpType={otpType} />
 
-			<CardFooter className="text-center text-xs text-muted-foreground">
-				با ورود به سایت، قوانین و مقررات سامانه را می‌پذیرید.
+			<CardFooter>
+				<span className="text-xs text-muted-foreground text-center w-full">
+					با ورود، قوانین را می‌پذیرید
+				</span>
 			</CardFooter>
 		</Card>
 	);
 }
-
-export default RequestOtpCard;

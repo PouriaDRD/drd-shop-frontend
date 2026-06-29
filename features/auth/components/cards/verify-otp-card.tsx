@@ -2,53 +2,51 @@
 
 import { AppIcon } from "@/components/icons";
 import {
-	Card,
+	CardContent,
 	CardDescription,
 	CardFooter,
 	CardHeader,
 	CardTitle,
 } from "@/components/ui";
 
+import { useOtpStore } from "../../stores";
+import { OtpType } from "../../types";
 import { VerifyOtpForm } from "../forms";
 
 interface Props {
-	otpId: string;
-	phoneNumber: string;
-	onEditPhone: () => void;
-	onSuccess?: () => void;
+	otpType: OtpType;
 }
 
-function VerifyOtpCard(props: Props) {
-	const { otpId, phoneNumber, onEditPhone, onSuccess } = props;
+export default function VerifyOtpCard({ otpType }: Props) {
+	const email = useOtpStore((s) => s.email);
+	const countdown = useOtpStore((s) => s.expires_in) * 60;
 
 	return (
-		<Card className="mx-auto max-w-full sm:max-w-xs w-full bg-background ring-0 border-0 gap-4">
-			<CardHeader className="flex flex-col items-center">
+		<div
+			className={`flex flex-col items-center justify-between gap-4
+			mx-auto w-full max-w-xs bg-background border-0 p-4`}>
+			<CardHeader className="flex flex-col items-center w-full">
 				<AppIcon className="size-11" />
-				<div className="text-center">
-					<CardTitle>کد تایید</CardTitle>
-					<CardDescription>
-						کد 6 رقمی ارسال شده به{" "}
-						<span dir="ltr" className="inline-block font-mono">
-							{phoneNumber}
-						</span>{" "}
-						را وارد کنید
-					</CardDescription>
-				</div>
+
+				<CardTitle>تایید کد</CardTitle>
+
+				<CardDescription>
+					کد به{" "}
+					<span dir="ltr" className="font-mono font-bold">
+						{email}
+					</span>{" "}
+					ارسال شد!
+				</CardDescription>
 			</CardHeader>
 
-			<VerifyOtpForm
-				otpId={otpId}
-				phoneNumber={phoneNumber}
-				onSuccess={onSuccess}
-				onEditPhone={onEditPhone}
-			/>
-
-			<CardFooter className="text-center text-xs text-muted-foreground">
-				با ورود به سایت، قوانین و مقررات سامانه را می‌پذیرید.
+			<CardContent className="w-full">
+				<VerifyOtpForm countdown={countdown} otpType={otpType} />
+			</CardContent>
+			<CardFooter className="w-full">
+				<span className="text-xs text-muted-foreground text-center w-full">
+					با ورود، قوانین را می‌پذیرید
+				</span>
 			</CardFooter>
-		</Card>
+		</div>
 	);
 }
-
-export default VerifyOtpCard;

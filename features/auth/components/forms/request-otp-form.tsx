@@ -2,25 +2,23 @@
 
 import { Button, CardContent } from "@/components/ui";
 
-import useRequestOtpForm from "../../hooks/use-request-otp-form";
-import { RequestOtpData } from "../../types";
-import { PhoneNumberField } from "../fields";
+import { useRequestOtpForm } from "../../hooks";
+import { OtpType } from "../../types";
+import { EmailField } from "../fields";
 
 interface Props {
-	onSuccess: (data: RequestOtpData) => void;
+	otpType: OtpType;
 }
 
-export default function RequestOtpForm(props: Props) {
+export default function RequestOtpForm({ otpType }: Props) {
 	const { form, submit, isPending } = useRequestOtpForm({
-		onSuccess(data) {
-			props.onSuccess(data);
-		},
+		otpType,
 	});
 
 	return (
 		<form onSubmit={submit} id="request-otp-from">
 			<CardContent className="flex flex-col items-center gap-4">
-				<PhoneNumberField control={form.control} name="phone_number" />
+				<EmailField control={form.control} name="email" />
 
 				<Button
 					type="submit"

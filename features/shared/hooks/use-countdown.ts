@@ -2,15 +2,17 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const RESEND_SECONDS = 90; // 01:30 minutes
+interface Props {
+	countdown?: number;
+}
 
-export default function useCountdown() {
-	const [secondsLeft, setSecondsLeft] = useState(RESEND_SECONDS);
+export default function useCountdown({ countdown = 90 }: Props) {
+	const [secondsLeft, setSecondsLeft] = useState(10);
 	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
 	const start = useCallback(() => {
-		setSecondsLeft(RESEND_SECONDS);
-	}, []);
+		setSecondsLeft(countdown);
+	}, [countdown]);
 
 	useEffect(() => {
 		if (secondsLeft <= 0) {
