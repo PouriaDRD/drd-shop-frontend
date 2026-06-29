@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, CardContent } from "@/components/ui";
+import { Button } from "@/components/ui";
 
 import { useRequestOtpForm } from "../../hooks";
 import { OtpType } from "../../types";
@@ -16,19 +16,20 @@ export default function RequestOtpForm({ otpType }: Props) {
 	});
 
 	return (
-		<form onSubmit={submit} id="request-otp-from">
-			<CardContent className="flex flex-col items-center gap-4">
-				<EmailField control={form.control} name="email" />
+		<form
+			onSubmit={submit}
+			id="request-otp-from"
+			className="flex flex-col items-center gap-4">
+			<EmailField control={form.control} name="email" />
 
-				<Button
-					type="submit"
-					variant={"default"}
-					form="request-otp-from"
-					className="w-full"
-					disabled={isPending}>
-					{isPending ? "درحال ارسال" : "ارسال کد"}
-				</Button>
-			</CardContent>
+			<Button
+				type="submit"
+				variant={"default"}
+				form="request-otp-from"
+				className="w-full"
+				disabled={isPending}>
+				{isPending ? "درحال ارسال" : "ارسال کد"}
+			</Button>
 		</form>
 	);
 }

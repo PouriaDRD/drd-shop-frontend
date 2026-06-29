@@ -33,7 +33,7 @@ export const authApi = {
 		);
 	},
 
-	verifyOtp: (data: VerifyOtpFormValues) => {
+	verifyOtp: (data: VerifyOtpFormValues & { otp_type: OtpType }) => {
 		return apiClient.post<VerifyOtpResponse>(
 			endpoints.auth.verifyOtp,
 			data,

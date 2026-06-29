@@ -24,7 +24,7 @@ export default function VerifyOtpCard({ otpType }: Props) {
 	return (
 		<div
 			className={`flex flex-col items-center justify-between gap-4
-			mx-auto w-full max-w-xs bg-background border-0 p-4`}>
+			mx-auto w-full max-w-xs bg-none border-0 p-4`}>
 			<CardHeader className="flex flex-col items-center w-full">
 				<AppIcon className="size-11" />
 
@@ -44,7 +44,9 @@ export default function VerifyOtpCard({ otpType }: Props) {
 			</CardContent>
 			<CardFooter className="w-full">
 				<span className="text-xs text-muted-foreground text-center w-full">
-					با ورود، قوانین را می‌پذیرید
+					{otpType === "login"
+						? "با ورود، قوانین را می‌پذیرید"
+						: "با تایید ایمیل، قوانین را می‌پذیرید"}
 				</span>
 			</CardFooter>
 		</div>

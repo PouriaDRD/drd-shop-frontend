@@ -2,7 +2,7 @@
 
 import { AppIcon } from "@/components/icons";
 import {
-	Card,
+	CardContent,
 	CardDescription,
 	CardFooter,
 	CardHeader,
@@ -18,8 +18,10 @@ interface Props {
 
 export default function RequestOtpCard({ otpType }: Props) {
 	return (
-		<Card className="mx-auto w-full max-w-xs bg-background border-0">
-			<CardHeader className="flex flex-col items-center">
+		<div
+			className={`flex flex-col items-center justify-between gap-4
+			mx-auto w-full max-w-xs bg-none border-0 p-4`}>
+			<CardHeader className="flex flex-col items-center w-full">
 				<AppIcon className="size-11" />
 				<CardTitle>
 					{otpType === "login" ? "ورود" : "تایید ایمیل"}
@@ -27,13 +29,17 @@ export default function RequestOtpCard({ otpType }: Props) {
 				<CardDescription>ایمیل خود را وارد کنید</CardDescription>
 			</CardHeader>
 
-			<RequestOtpForm otpType={otpType} />
+			<CardContent className="w-full">
+				<RequestOtpForm otpType={otpType} />
+			</CardContent>
 
-			<CardFooter>
+			<CardFooter className="w-full">
 				<span className="text-xs text-muted-foreground text-center w-full">
-					با ورود، قوانین را می‌پذیرید
+					{otpType === "login"
+						? "با ورود، قوانین را می‌پذیرید"
+						: "با تایید ایمیل، قوانین را می‌پذیرید"}
 				</span>
 			</CardFooter>
-		</Card>
+		</div>
 	);
 }

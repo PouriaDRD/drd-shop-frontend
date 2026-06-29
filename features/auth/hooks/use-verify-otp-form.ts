@@ -5,9 +5,11 @@ import { useEffect, useEffectEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
+import { queryKeys } from "@/features/api/lib";
 import { getErrorMessage } from "@/features/shared/utils";
 
 import { createSession } from "../actions";
@@ -22,6 +24,7 @@ interface Props {
 }
 
 export default function useVerifyOtpForm({ otpType, onSuccess }: Props) {
+	const queryClient = useQueryClient();
 	const otpStore = useOtpStore();
 	const verifyMutation = useVerifyOtp();
 	const resendMutation = useRequestOtp();
@@ -58,6 +61,12 @@ export default function useVerifyOtpForm({ otpType, onSuccess }: Props) {
 					type: "rfs",
 				}),
 			]);
+		} else if (otpType === "verify_email") {
+			await Promise.all([
+				queryClient.invalidateQueries({
+					queryKey: queryKeys.accounts.me,
+				}),
+			]);
 		}
 
 		/**
@@ -72,8 +81,8 @@ export default function useVerifyOtpForm({ otpType, onSuccess }: Props) {
 			toast.success("ورود موفقیت‌آمیز بود!");
 
 			router.push((next ?? "/panel/dashboard") as "/");
-		} else {
-			toast.success("کد تایید شد!");
+		} else if (otpType === "verify_email") {
+			toast.success("ایمیل تایید شد!");
 		}
 	};
 
@@ -88,22 +97,28 @@ export default function useVerifyOtpForm({ otpType, onSuccess }: Props) {
 	 * 5. Redirect the user if necessary.
 	 */
 	const submit = form.handleSubmit((values) => {
-		verifyMutation.mutate(values, {
-			onSuccess: async (res) => {
-				if (!res.success) {
-					toast.error(getErrorMessage(res.errors));
-					return;
-				}
-
-				if (res.success) {
-					await handleOnSuccess(res.data);
-				}
+		verifyMutation.mutate(
+			{
+				...values,
+				otp_type: otpType,
 			},
+			{
+				onSuccess: async (res) => {
+					if (!res.success) {
+						toast.error(getErrorMessage(res.errors));
+						return;
+					}
 
-			onError: () => {
-				toast.error("خطا در تایید کد");
+					if (res.success) {
+						await handleOnSuccess(res.data);
+					}
+				},
+
+				onError: () => {
+					toast.error("خطا در تایید کد");
+				},
 			},
-		});
+		);
 	});
 
 	/**

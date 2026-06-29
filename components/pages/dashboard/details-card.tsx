@@ -7,6 +7,7 @@ import {
 	CardFooter,
 	CardHeader,
 } from "@/components/ui";
+import ConfirmEmailDialog from "@/features/auth/components/dialogs/confirm-email-dialog";
 import LogoutDialog from "@/features/auth/components/dialogs/logout-dialog";
 import { toIranDateTime } from "@/features/shared/utils";
 import { User } from "@/features/user/types";
@@ -39,22 +40,25 @@ export function DetailsCard({ user }: Props) {
 	const initials = user.email.slice(0, 2).toUpperCase();
 
 	return (
-		<Card className="pb-0 md:pb-6">
-			<CardHeader>
+		<Card className="pb-0 md:pb-6 w-full">
+			<CardHeader className="flex flex-row justify-between w-full">
 				{/* Avatar */}
-				<Avatar size="lg">
-					<AvatarImage
-						src="/images/avatar-fallback.png"
-						className="p-2 bg-muted"
-					/>
-					<AvatarFallback>{initials}</AvatarFallback>
-				</Avatar>
+				<div className="space-y-2">
+					<Avatar size="lg">
+						<AvatarImage
+							src="/images/avatar-fallback.png"
+							className="p-2 bg-muted"
+						/>
+						<AvatarFallback>{initials}</AvatarFallback>
+					</Avatar>
 
-				<div className="text-start">
-					<p className="font-medium text-sm text-foreground">
-						{user.email}
-					</p>
+					<div className="text-start">
+						<p className="font-medium text-sm text-foreground">
+							{user.email}
+						</p>
+					</div>
 				</div>
+				{!user.email_verified && <ConfirmEmailDialog />}
 			</CardHeader>
 			<CardContent>
 				<div className="divide-y divide-border">
