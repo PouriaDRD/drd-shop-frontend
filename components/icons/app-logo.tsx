@@ -13,10 +13,10 @@ function AppLogo({ className }: Props) {
 				"flex items-center justify-center text-center gap-2",
 				className,
 			)}>
-			<span className="text-2xl font-bold text-center pt-1">
+			<span className="text-xl md:text-2xl font-bold text-center pt-1">
 				DRD Shop
 			</span>
-			<div className="size-8">
+			<div className="size-7 md:size-8">
 				<AppIcon className="size-full" />
 			</div>
 		</div>

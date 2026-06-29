@@ -25,7 +25,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
 			data-scroll-behavior="smooth"
 			className={`h-full antialiased font-iran-yekan-x ss02
 			${geistSans.variable} ${geistMono.variable} ${peyda.variable} ${iranYekanX.variable}`}>
-			<body className="flex flex-col h-dvh">
+			<body className="flex flex-1 h-full">
 				<Providers>{children}</Providers>
 			</body>
 		</html>
