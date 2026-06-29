@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function useCountdown({ countdown = 90 }: Props) {
-	const [secondsLeft, setSecondsLeft] = useState(10);
+	const [secondsLeft, setSecondsLeft] = useState(countdown);
 	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
 	const start = useCallback(() => {
