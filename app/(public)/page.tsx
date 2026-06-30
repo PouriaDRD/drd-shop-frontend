@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { toast } from "sonner";
 
-import { PageLayout } from "@/components/layouts";
+import { PageLayout } from "@/components/pages";
 import {
 	Button,
 	Card,

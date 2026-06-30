@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { PageLayout } from "@/components/layouts";
+import { PageLayout } from "@/components/pages";
 import { Button } from "@/components/ui";
 import { LoginCard } from "@/features/auth/components/cards";
 import { GridShape } from "@/features/shared/components";

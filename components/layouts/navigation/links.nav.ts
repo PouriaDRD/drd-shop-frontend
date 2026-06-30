@@ -4,7 +4,7 @@ import {
 	HeadsetIcon,
 	LayoutDashboard,
 	LucideIcon,
-	ShoppingBagIcon,
+	ShoppingBasket,
 	WalletIcon,
 } from "lucide-react";
 
@@ -27,7 +27,7 @@ export const SIDEBAR_LINKS: NavigationLink[] = [
 	{
 		name: "بازارچه",
 		href: "/panel/bazaar",
-		Icon: ShoppingBagIcon,
+		Icon: ShoppingBasket,
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 	{
@@ -54,7 +54,7 @@ export const MOBILE_LINKS: NavigationLink[] = [
 	{
 		name: "بازارچه",
 		href: "/panel/bazaar",
-		Icon: ShoppingBagIcon,
+		Icon: ShoppingBasket,
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 	{
