@@ -4,16 +4,33 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 
-import { Providers } from "@/features/shared/contexts";
+import { ThemeProvider } from "@/features/preferences/contexts";
 
 import "./globals.css";
 
+const keywords = [
+	"دی‌آردی وی‌ پی‌ ان",
+	"دی‌آردی",
+	"وی‌ پی‌ ان",
+	"ایران",
+	"وی پی ان",
+	"اینترنت ملی",
+	"وی پی ان مخصوص اینترنت ملی",
+	"وی پی ان ارزان",
+	"وی پی ان پر سرعت",
+	"پوریا دارندی",
+	"دارندی",
+	"پوریا",
+];
+
 export const metadata: Metadata = {
 	title: {
-		default: "دی‌آردی شاپ",
-		template: "دی‌آردی شاپ | %s",
+		default: "دی‌آردی وی‌پی‌ان",
+		template: "دی‌آردی وی‌پی‌ان | %s",
 	},
-	description: "Created by Pouria DRD",
+	description: "ساخته شده توسط پوریا دارندی",
+
+	keywords: keywords,
 };
 
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
@@ -25,8 +42,14 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
 			data-scroll-behavior="smooth"
 			className={`h-full antialiased font-iran-yekan-x ss02
 			${geistSans.variable} ${geistMono.variable} ${peyda.variable} ${iranYekanX.variable}`}>
-			<body className="flex flex-1 h-full">
-				<Providers>{children}</Providers>
+			<body>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange>
+					{children}
+				</ThemeProvider>
 			</body>
 		</html>
 	);

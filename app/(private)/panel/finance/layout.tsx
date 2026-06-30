@@ -5,7 +5,7 @@ import { Metadata } from "next";
 export async function generateMetadata(): Promise<Metadata> {
 	return {
 		title: "مالی",
-		description: "مدیریت مالی در دی‌آردی شاپ",
+		description: "مدیریت مالی کاربران در دی‌آردی وی‌پی‌ان",
 	};
 }
 

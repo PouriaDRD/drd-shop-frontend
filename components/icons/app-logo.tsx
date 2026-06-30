@@ -3,10 +3,11 @@ import { cn } from "@/features/shared/utils";
 import { AppIcon } from "./app-icon";
 
 interface Props {
+	text?: string;
 	className?: string;
 }
 
-function AppLogo({ className }: Props) {
+function AppLogo({ className, text }: Props) {
 	return (
 		<div
 			className={cn(
@@ -14,7 +15,7 @@ function AppLogo({ className }: Props) {
 				className,
 			)}>
 			<span className="text-xl md:text-2xl font-bold text-center pt-1">
-				DRD Shop
+				{text || "DRD VPN"}
 			</span>
 			<div className="size-7 md:size-8">
 				<AppIcon className="size-full" />

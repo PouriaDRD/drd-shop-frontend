@@ -15,6 +15,7 @@ export default function PanelDashboardPage() {
 		return (
 			<PageLayout className="flex flex-col gap-4">
 				<DashLoading />
+				<DashLoading />
 			</PageLayout>
 		);
 	}

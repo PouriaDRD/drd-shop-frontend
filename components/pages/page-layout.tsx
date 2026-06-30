@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/features/shared/utils";
 
 interface Props {

@@ -1,3 +1,5 @@
+"use client";
+
 import { RefreshCw, TriangleAlert } from "lucide-react";
 
 import { Button, Card, CardContent } from "../ui";
