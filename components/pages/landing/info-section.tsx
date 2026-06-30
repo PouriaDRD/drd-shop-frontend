@@ -30,7 +30,7 @@ export function InfoSection() {
 		<section id="info" className="border-t bg-background">
 			<div className="container mx-auto grid gap-8 py-20 lg:grid-cols-2">
 				{/* FAQ */}
-				<Card className="border-border/60 shadow-none">
+				<Card className="border-0 ring-0 shadow-none bg-background">
 					<CardHeader>
 						<CardTitle>سوالات متداول</CardTitle>
 
@@ -64,7 +64,7 @@ export function InfoSection() {
 				</Card>
 
 				{/* Socials */}
-				<Card className="border-border/60 shadow-none">
+				<Card className="border-0 ring-0 shadow-none bg-background">
 					<CardHeader>
 						<CardTitle>همراه ما باشید</CardTitle>
 
