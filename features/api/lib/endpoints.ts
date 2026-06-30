@@ -11,6 +11,10 @@ export const endpoints = {
 		me: "accounts/me/",
 	},
 
+	notifications: {
+		announcements: "notifications/announcements/",
+	},
+
 	finance: {
 		wallet: "finance/wallet/",
 

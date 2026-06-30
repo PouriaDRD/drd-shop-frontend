@@ -8,13 +8,13 @@ import {
 	ServerStatus,
 	SocialChannels,
 } from "@/components/pages/landing";
-import { NotificationAlert } from "@/features/shared/components";
+import { AnnouncementsAlert } from "@/features/notifications/components";
 
 export default function LandingPage() {
 	return (
 		<main>
 			<Header />
-			<NotificationAlert />
+			<AnnouncementsAlert />
 			<Hero />
 			<Features />
 			<ServerStatus />

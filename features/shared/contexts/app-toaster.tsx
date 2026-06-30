@@ -6,7 +6,7 @@ import { Toaster } from "sonner";
 
 import { ThemeType } from "@/features/preferences/types";
 
-export default function AppToaster() {
+export function AppToaster() {
 	const { theme = "system" } = useTheme();
 
 	return <Toaster position="top-center" theme={theme as ThemeType} />;

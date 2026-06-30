@@ -4,7 +4,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 
+import { TooltipProvider } from "@/components/ui";
+import { QCProvider } from "@/features/api/contexts";
 import { ThemeProvider } from "@/features/preferences/contexts";
+import { AppToaster } from "@/features/shared/contexts";
 
 import "./globals.css";
 
@@ -43,13 +46,16 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
 			className={`h-full antialiased font-iran-yekan-x ss02
 			${geistSans.variable} ${geistMono.variable} ${peyda.variable} ${iranYekanX.variable}`}>
 			<body>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem
-					disableTransitionOnChange>
-					{children}
-				</ThemeProvider>
+				<QCProvider>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange>
+						<AppToaster />
+						<TooltipProvider>{children}</TooltipProvider>
+					</ThemeProvider>
+				</QCProvider>
 			</body>
 		</html>
 	);

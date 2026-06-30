@@ -9,11 +9,32 @@ const alertVariants = cva(
 	{
 		variants: {
 			variant: {
-				default: "bg-card text-card-foreground",
+				default: "border-border bg-card text-card-foreground",
+
+				info: "border-sky-200 bg-sky-50 text-sky-900 dark:border-sky-900 dark:bg-sky-950 dark:text-sky-100",
+
+				success:
+					"border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-900 dark:bg-emerald-950 dark:text-emerald-100",
+
 				warning:
-					"border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-50",
+					"border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-100",
+
 				destructive:
-					"bg-card text-destructive *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current",
+					"border-red-200 bg-red-50 text-red-900 dark:border-red-900 dark:bg-red-950 dark:text-red-100",
+
+				error: "border-red-200 bg-red-50 text-red-900 dark:border-red-900 dark:bg-red-950 dark:text-red-100",
+
+				primary:
+					"border-primary/20 bg-primary/10 text-primary dark:border-primary/30 dark:bg-primary/15",
+
+				secondary:
+					"border-secondary bg-secondary text-secondary-foreground",
+
+				muted: "border-muted bg-muted text-muted-foreground",
+
+				accent: "border-accent bg-accent text-accent-foreground",
+
+				outline: "border-border bg-background text-foreground",
 			},
 		},
 		defaultVariants: {
@@ -29,8 +50,8 @@ function Alert({
 }: React.ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
 	return (
 		<div
-			data-slot="alert"
 			role="alert"
+			data-slot="alert"
 			className={cn(alertVariants({ variant }), className)}
 			{...props}
 		/>
@@ -58,7 +79,7 @@ function AlertDescription({
 		<div
 			data-slot="alert-description"
 			className={cn(
-				"text-sm text-balance text-muted-foreground md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
+				"text-sm text-balance opacity-90 md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
 				className,
 			)}
 			{...props}
