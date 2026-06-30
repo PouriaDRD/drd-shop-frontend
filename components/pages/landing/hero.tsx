@@ -14,7 +14,7 @@ export function Hero() {
 				<div>
 					<div
 						className={`mb-5 inline-flex items-center gap-2 rounded-full border
-						bg-white dark:bg-card px-3 py-1 text-[11px] text-muted-foreground`}>
+						bg-card px-3 py-1 text-[11px] text-muted-foreground`}>
 						<span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
 						+{serverNum} سرور آنلاین در همین لحظه
 					</div>
@@ -22,7 +22,7 @@ export function Hero() {
 					<h1 className="text-[34px] font-medium leading-[1.35] tracking-tight text-foreground sm:text-[44px]">
 						وی پی انی که هرجا باشی،
 						<br />
-						<span className="text-foreground">قطع نمی‌شود.</span>
+						<span className="text-foreground">قطع نمی‌شه!</span>
 					</h1>
 
 					<p className="mt-5 max-w-md text-[15px] leading-7 text-muted-foreground">
