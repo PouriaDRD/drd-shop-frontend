@@ -1,12 +1,21 @@
 "use client";
 
-import { useState } from "react";
-
 import Link from "next/link";
 
-import { ChevronDown, MessageCircle, Send } from "lucide-react";
+import { MessageCircle, Send } from "lucide-react";
 
 import { InstagramIcon } from "@/components/icons";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui";
 
 import { faqs, socialChannels } from "./landing.data";
 
@@ -14,96 +23,95 @@ const iconMap = {
 	telegram: Send,
 	bale: MessageCircle,
 	instagram: InstagramIcon,
-};
+} as const;
 
 export function InfoSection() {
-	const [openIndex, setOpenIndex] = useState<number | null>(0);
-
 	return (
 		<section id="info" className="border-t bg-background">
-			<div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-5 py-20 lg:grid-cols-2">
-				{/* ================= FAQ ================= */}
-				<div>
-					<p className="mb-2 text-xs text-muted-foreground">
-						سوالات متداول
-					</p>
+			<div className="container mx-auto grid gap-8 py-20 lg:grid-cols-2">
+				{/* FAQ */}
+				<Card className="border-border/60 shadow-none">
+					<CardHeader>
+						<CardTitle>سوالات متداول</CardTitle>
 
-					<h2 className="mb-8 text-2xl font-medium tracking-tight text-foreground sm:text-[28px]">
-						قبل از شروع، اینها را بدان
-					</h2>
+						<CardDescription>
+							پاسخ رایج‌ترین سوالات قبل از خرید یا استفاده از
+							سرویس‌ها.
+						</CardDescription>
+					</CardHeader>
 
-					<div className="flex flex-col">
-						{faqs.map((faq, index) => {
-							const isOpen = openIndex === index;
+					<CardContent className="pt-2">
+						<Accordion
+							type="single"
+							collapsible
+							defaultValue="faq-0"
+							className="w-full">
+							{faqs.map((faq, index) => (
+								<AccordionItem
+									key={faq.question}
+									value={`faq-${index}`}>
+									<AccordionTrigger className="text-right">
+										{faq.question}
+									</AccordionTrigger>
 
-							return (
-								<div key={faq.question} className="border-b">
-									<button
-										onClick={() =>
-											setOpenIndex(isOpen ? null : index)
-										}
-										className="flex w-full items-center justify-between gap-4 py-5 text-right"
-										aria-expanded={isOpen}>
-										<span className="text-[15px] font-medium text-foreground">
-											{faq.question}
-										</span>
+									<AccordionContent className="leading-7 text-muted-foreground">
+										{faq.answer}
+									</AccordionContent>
+								</AccordionItem>
+							))}
+						</Accordion>
+					</CardContent>
+				</Card>
 
-										<ChevronDown
-											className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${
-												isOpen ? "rotate-180" : ""
-											}`}
-										/>
-									</button>
+				{/* Socials */}
+				<Card className="border-border/60 shadow-none">
+					<CardHeader>
+						<CardTitle>همراه ما باشید</CardTitle>
 
-									{isOpen && (
-										<p className="pb-5 text-sm leading-7 text-muted-foreground">
-											{faq.answer}
-										</p>
-									)}
-								</div>
-							);
-						})}
-					</div>
-				</div>
+						<CardDescription>
+							اخبار، اطلاعیه‌ها، تخفیف‌ها و آپدیت سرورها را زودتر
+							از همه دریافت کنید.
+						</CardDescription>
+					</CardHeader>
 
-				{/* ================= SOCIAL ================= */}
-				<div>
-					<p className="mb-2 text-xs text-muted-foreground">
-						همراه ما باشید
-					</p>
+					<CardContent>
+						<div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+							{socialChannels.map((channel) => {
+								const Icon = iconMap[channel.platform];
 
-					<h2 className="mb-8 text-2xl font-medium tracking-tight text-foreground sm:text-[28px]">
-						اخبار و آپدیت‌ها را زودتر از همه ببین
-					</h2>
+								return (
+									<Link
+										key={channel.id}
+										href={channel.href as "/"}
+										target="_blank"
+										rel="noopener noreferrer">
+										<Card className="h-full border-border/60 transition-all duration-200 hover:-translate-y-1 hover:border-primary/30 hover:shadow-md">
+											<CardContent className="flex flex-col items-center justify-center gap-4 p-6 text-center">
+												<div
+													className="flex size-12 items-center justify-center rounded-2xl"
+													style={{
+														background: channel.bg,
+													}}>
+													<Icon className="size-5 text-white" />
+												</div>
 
-					<div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-						{socialChannels.map((channel) => {
-							const Icon = iconMap[channel.platform];
+												<div>
+													<p className="font-medium">
+														{channel.label}
+													</p>
 
-							return (
-								<Link
-									key={channel.id}
-									href={channel.href as "/"}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="group flex flex-col gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-foreground/10 sm:p-5">
-									<span
-										className="flex h-9 w-9 items-center justify-center rounded-[10px]"
-										style={{ background: channel.bg }}>
-										<Icon
-											className="h-4.5 w-4.5 text-white"
-											strokeWidth={2}
-										/>
-									</span>
-
-									<p className="text-sm font-medium text-foreground">
-										{channel.label}
-									</p>
-								</Link>
-							);
-						})}
-					</div>
-				</div>
+													<p className="mt-1 text-xs text-muted-foreground">
+														عضویت
+													</p>
+												</div>
+											</CardContent>
+										</Card>
+									</Link>
+								);
+							})}
+						</div>
+					</CardContent>
+				</Card>
 			</div>
 		</section>
 	);

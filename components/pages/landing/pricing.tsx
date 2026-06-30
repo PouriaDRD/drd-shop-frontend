@@ -1,86 +1,118 @@
+"use client";
+
 import Link from "next/link";
 
-import { Check } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
+
+import {
+	Badge,
+	Button,
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui";
 
 import { plans } from "./landing.data";
 
 export function Pricing() {
 	return (
 		<section id="pricing" className="border-t bg-background">
-			<div className="mx-auto max-w-6xl px-5 py-20">
-				<div className="mb-12 max-w-lg">
-					<p className="mb-2 text-xs text-muted-foreground">پلن‌ها</p>
-					<h2 className="text-2xl font-medium tracking-tight text-foreground sm:text-[28px]">
+			<div className="container mx-auto py-20">
+				<div className="mx-auto mb-12 max-w-2xl text-center">
+					<Badge variant="secondary" className="mb-4">
+						پلن‌ها
+					</Badge>
+
+					<h2 className="text-3xl font-bold tracking-tight">
 						یک پلن، بدون شرط مخفی
 					</h2>
+
+					<p className="mt-3 text-muted-foreground">
+						تمام امکانات مورد نیاز برای اتصال سریع و پایدار، با قیمت
+						شفاف و بدون هزینه پنهان.
+					</p>
 				</div>
 
-				<div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+				<div className="grid gap-6 lg:grid-cols-3">
 					{plans.map((plan) => (
-						<div
+						<Card
 							key={plan.id}
-							className={`relative rounded-2xl p-6 ${
+							className={`relative flex h-full flex-col transition-all duration-300 ${
 								plan.featured
-									? "border-2 border-foreground bg-white dark:bg-card"
-									: "border border-card/8 bg-white dark:bg-card"
+									? "border-primary shadow-lg shadow-primary/10"
+									: "hover:border-primary/40 hover:shadow-md"
 							}`}>
 							{plan.featured && (
-								<span className="absolute -top-3 right-6 rounded-full bg-foreground px-3 py-1 text-[11px] text-background">
+								<Badge className="absolute top-3 left-4">
+									<Sparkles className="mr-1 size-3" />
 									پیشنهاد ویژه
-								</span>
+								</Badge>
 							)}
 
-							<p className="text-[15px] font-medium text-foreground">
-								{plan.name}
-							</p>
-							<p className="mt-0.5 text-xs text-muted-foreground">
-								{plan.tagline}
-							</p>
+							<CardHeader>
+								<CardTitle>{plan.name}</CardTitle>
 
-							<div className="mt-5 flex items-baseline gap-1.5">
-								<span className="text-[26px] font-medium tracking-tight text-foreground">
-									{plan.price}
-								</span>
-								<span className="text-xs text-muted-foreground">
-									{plan.pricePeriod}
-								</span>
-							</div>
-							{plan.monthlyEquivalent && (
-								<p className="mt-1 text-xs text-green-700 dark:text-green-400">
-									{plan.monthlyEquivalent}
-								</p>
-							)}
+								<CardDescription>
+									{plan.tagline}
+								</CardDescription>
 
-							<ul className="mt-6 flex flex-col gap-2.5">
-								{plan.perks.map((perk) => (
-									<li
-										key={perk}
-										className="flex items-center gap-2 text-sm text-muted-foreground">
-										<Check
-											className="h-4 w-4 shrink-0 text-green-700 dark:text-green-400"
-											strokeWidth={2.25}
-										/>
-										{perk}
-									</li>
-								))}
-							</ul>
+								<div className="pt-4">
+									<div className="flex items-end gap-2">
+										<span className="text-4xl font-bold">
+											{plan.price}
+										</span>
 
-							<Link
-								// href={`/checkout?plan=${plan.id}`}
-								href={`/`}
-								className={`mt-7 block rounded-lg py-2.5 text-center text-sm transition-opacity hover:opacity-90 ${
-									plan.featured
-										? "bg-foreground text-background"
-										: "border border-foreground/10 text-foreground"
-								}`}>
-								انتخاب پلن
-							</Link>
-						</div>
+										<span className="pb-1 text-sm text-muted-foreground">
+											{plan.pricePeriod}
+										</span>
+									</div>
+
+									{plan.monthlyEquivalent && (
+										<p className="mt-2 text-sm text-primary">
+											{plan.monthlyEquivalent}
+										</p>
+									)}
+								</div>
+							</CardHeader>
+
+							<CardContent className="flex-1">
+								<ul className="space-y-3">
+									{plan.perks.map((perk) => (
+										<li
+											key={perk}
+											className="flex items-start gap-3">
+											<div className="mt-0.5 flex size-5 items-center justify-center rounded-full bg-primary/10">
+												<Check className="size-3 text-primary" />
+											</div>
+
+											<span className="text-sm text-muted-foreground">
+												{perk}
+											</span>
+										</li>
+									))}
+								</ul>
+							</CardContent>
+
+							<CardFooter>
+								<Button
+									asChild
+									className="w-full"
+									variant={
+										plan.featured ? "default" : "outline"
+									}>
+									<Link href="/">انتخاب پلن</Link>
+								</Button>
+							</CardFooter>
+						</Card>
 					))}
 				</div>
 
-				<p className="mt-8 text-center text-xs text-[#9A9C9F]">
-					تا ۷ روز پس از خرید، امکان بازگشت وجه وجود دارد.
+				<p className="mt-10 text-center text-sm text-muted-foreground">
+					تا <strong>۷ روز</strong> پس از خرید، امکان بازگشت وجه وجود
+					دارد.
 				</p>
 			</div>
 		</section>
