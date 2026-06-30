@@ -1,12 +1,11 @@
 import { Footer, Header } from "@/components/layouts";
 import {
 	CTA,
-	FAQ,
 	Features,
 	Hero,
+	InfoSection,
 	Pricing,
 	ServerStatus,
-	SocialChannels,
 } from "@/components/pages/landing";
 import { AnnouncementsAlert } from "@/features/notifications/components";
 
@@ -19,8 +18,7 @@ export default function LandingPage() {
 			<Features />
 			<ServerStatus />
 			<Pricing />
-			<FAQ />
-			<SocialChannels />
+			<InfoSection />
 			<CTA />
 			<Footer />
 		</main>

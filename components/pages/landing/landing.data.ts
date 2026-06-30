@@ -125,7 +125,7 @@ export const navLinks = [
 	{ label: "ویژگی‌ها", href: "#features" },
 	{ label: "سرورها", href: "#servers" },
 	{ label: "پلن‌ها", href: "#pricing" },
-	{ label: "سوالات متداول", href: "#faq" },
+	{ label: "پشتیبانی", href: "#info" },
 ];
 
 export const faqs = [

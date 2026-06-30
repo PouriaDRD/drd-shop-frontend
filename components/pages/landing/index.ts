@@ -2,6 +2,7 @@ export * from "./cta";
 export * from "./faq";
 export * from "./features";
 export * from "./hero";
+export * from "./info-section";
 export * from "./landing.data";
 export * from "./network-readout";
 export * from "./pricing";
