@@ -19,7 +19,7 @@ import { plans } from "./landing.data";
 
 export function Pricing() {
 	return (
-		<section id="pricing" className="border-t bg-background px-5">
+		<section id="pricing" className="bg-background px-5">
 			<div className="container mx-auto py-20">
 				<div className="mx-auto mb-12 max-w-2xl text-center">
 					<Badge variant="secondary" className="mb-4">

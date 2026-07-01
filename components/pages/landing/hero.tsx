@@ -2,62 +2,76 @@ import Link from "next/link";
 
 import { ArrowLeft } from "lucide-react";
 
+import { Badge, Button } from "@/components/ui";
+
 import { liveServers } from "./landing.data";
 import { NetworkReadout } from "./network-readout";
 
 export function Hero() {
-	const serverNum = liveServers.length;
-
 	return (
-		<section className="relative overflow-hidden bg-background">
-			<div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-				<div>
-					<div
-						className={`mb-5 inline-flex items-center gap-2 rounded-full border
-						bg-card px-3 py-1 text-[11px] text-muted-foreground`}>
-						<span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
-						+{serverNum} سرور آنلاین در همین لحظه
-					</div>
+		<section className="relative overflow-hidden">
+			<div className="flex flex-col md:flex-row items-center justify-between gap-8 py-20">
+				<HeroContent />
 
-					<h1 className="text-[34px] font-medium leading-[1.35] tracking-tight text-foreground sm:text-[44px]">
-						وی پی انی که هرجا باشی،
-						<br />
-						<span className="text-foreground">قطع نمی‌شه!</span>
-					</h1>
-
-					<p className="mt-5 max-w-md text-[15px] leading-7 text-muted-foreground">
-						بدون افت سرعت، بدون ثبت لاگ، با زیرساختی که وضعیتش را هر
-						لحظه می‌توانی ببینی، نه فقط حرفش را بشنوی.
-					</p>
-
-					<div className="mt-8 flex flex-wrap items-center gap-3">
-						<Link
-							href="/auth/register"
-							className={`group inline-flex items-center gap-2
-							rounded-lg bg-foreground
-							px-5 py-3 text-sm text-background
-							transition-opacity hover:opacity-90`}>
-							شروع ثبت نام
-							<ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-						</Link>
-						<Link
-							href="#pricing"
-							className={`inline-flex items-center rounded-lg
-							border px-5 py-3 text-sm text-foreground
-							transition-colors hover:bg-foreground/3`}>
-							مشاهده پلن‌ها
-						</Link>
-					</div>
-
-					{/* <p className="mt-4 text-xs text-[#9A9C9F]">
-						بدون نیاز به کارت بانکی برای شروع آزمایشی
-					</p> */}
-				</div>
-
-				<div>
-					<NetworkReadout />
-				</div>
+				<HeroPreview />
 			</div>
 		</section>
+	);
+}
+
+export function HeroContent() {
+	return (
+		<div className="space-y-8 w-full">
+			<HeroBadge />
+
+			<div className="space-y-5">
+				<h1 className="font-bold leading-tight tracking-tight text-4xl md:text-4xl lg:text-5xl">
+					وی پی انی که هرجا باشی،
+					<br />
+					<span>قطع نمی‌شه!</span>
+				</h1>
+
+				<p className="max-w-md text-base leading-8 text-muted-foreground">
+					بدون افت سرعت، بدون ثبت لاگ، با زیرساختی که وضعیتش را هر
+					لحظه می‌توانی ببینی، نه فقط حرفش را بشنوی.
+				</p>
+			</div>
+
+			<HeroActions />
+		</div>
+	);
+}
+
+export function HeroBadge() {
+	return (
+		<Badge variant="secondary" className="gap-2 rounded-full px-4 py-1.5">
+			<span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+			+{liveServers.length} سرور آنلاین در همین لحظه
+		</Badge>
+	);
+}
+
+export function HeroActions() {
+	return (
+		<div className="flex flex-wrap gap-3">
+			<Button size="lg" asChild>
+				<Link href="/auth/register">
+					شروع ثبت نام
+					<ArrowLeft className="mr-2 size-4 transition-transform group-hover:-translate-x-1" />
+				</Link>
+			</Button>
+
+			<Button size="lg" variant="outline" asChild>
+				<Link href="#pricing">مشاهده پلن‌ها</Link>
+			</Button>
+		</div>
+	);
+}
+
+export function HeroPreview() {
+	return (
+		<div className="flex justify-center lg:justify-end w-full p-2">
+			<NetworkReadout />
+		</div>
 	);
 }

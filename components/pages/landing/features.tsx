@@ -13,8 +13,8 @@ const iconMap: Record<Feature["icon"], typeof Zap> = {
 
 export function Features() {
 	return (
-		<section id="features" className="border-t bg-background">
-			<div className="mx-auto max-w-6xl px-5 py-20">
+		<section id="features" className="bg-background">
+			<div className="py-20">
 				<div className="mb-12 max-w-lg">
 					<p className="mb-2 text-xs text-muted-foreground">
 						چرا دی‌آردی وی‌پی‌ان

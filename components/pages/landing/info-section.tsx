@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { MessageCircle, Send } from "lucide-react";
+import { ArrowLeft, MessageCircle, Send } from "lucide-react";
 
 import { InstagramIcon } from "@/components/icons";
 import {
@@ -15,6 +15,7 @@ import {
 	CardDescription,
 	CardHeader,
 	CardTitle,
+	Separator,
 } from "@/components/ui";
 
 import { faqs, socialChannels } from "./landing.data";
@@ -27,13 +28,12 @@ const iconMap = {
 
 export function InfoSection() {
 	return (
-		<section id="info" className="border-t bg-background">
+		<section id="info" className="bg-background">
 			<div className="container mx-auto grid gap-8 py-20 lg:grid-cols-2">
-				{/* FAQ */}
-				<Card className="border-0 ring-0 shadow-none bg-background">
+				{/* ---------------- FAQ ---------------- */}
+				<Card className="border bg-background shadow-none">
 					<CardHeader>
 						<CardTitle>سوالات متداول</CardTitle>
-
 						<CardDescription>
 							پاسخ رایج‌ترین سوالات قبل از خرید یا استفاده از
 							سرویس‌ها.
@@ -54,7 +54,7 @@ export function InfoSection() {
 										{faq.question}
 									</AccordionTrigger>
 
-									<AccordionContent className="leading-7 text-muted-foreground">
+									<AccordionContent className="text-muted-foreground leading-7">
 										{faq.answer}
 									</AccordionContent>
 								</AccordionItem>
@@ -63,53 +63,71 @@ export function InfoSection() {
 					</CardContent>
 				</Card>
 
-				{/* Socials */}
-				<Card className="border-0 ring-0 shadow-none bg-background">
+				{/* ------------- COMMUNITY CARD (REDESIGNED SOCIALS) ------------- */}
+				<Card className="relative overflow-hidden border bg-linear-to-br from-background to-muted/30">
 					<CardHeader>
 						<CardTitle>همراه ما باشید</CardTitle>
-
 						<CardDescription>
-							اخبار، اطلاعیه‌ها، تخفیف‌ها و آپدیت سرورها را زودتر
-							از همه دریافت کنید.
+							آپدیت سرورها، اخبار و اطلاعیه‌ها را سریع‌تر از همه
+							دریافت کنید.
 						</CardDescription>
 					</CardHeader>
 
-					<CardContent>
-						<div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-							{socialChannels.map((channel) => {
-								const Icon = iconMap[channel.platform];
+					<CardContent className="space-y-2">
+						{socialChannels.map((channel, index) => {
+							const Icon = iconMap[channel.platform];
 
-								return (
-									<Link
-										key={channel.id}
-										href={channel.href as "/"}
-										target="_blank"
-										rel="noopener noreferrer">
-										<Card className="h-full border-border/60 transition-all duration-200 hover:-translate-y-1 hover:border-primary/30 hover:shadow-md">
-											<CardContent className="flex flex-col items-center justify-center gap-4 p-6 text-center">
-												<div
-													className="flex size-12 items-center justify-center rounded-2xl"
-													style={{
-														background: channel.bg,
-													}}>
-													<Icon className="size-5 text-white" />
-												</div>
+							return (
+								<Link
+									key={channel.id}
+									href={channel.href as "/"}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="group block">
+									<div
+										className="
+											flex items-center justify-between
+											rounded-xl px-3 py-3
+											transition-all duration-200
+											hover:bg-muted/60
+											hover:scale-[1.01]
+										">
+										{/* Left */}
+										<div className="flex items-center gap-3">
+											<div
+												className="
+													flex size-10 items-center justify-center
+													rounded-lg text-white shadow-sm
+												"
+												style={{
+													background: channel.bg,
+												}}>
+												<Icon className="size-4" />
+											</div>
 
-												<div>
-													<p className="font-medium">
-														{channel.label}
-													</p>
+											<div>
+												<p className="text-sm font-medium">
+													{channel.label}
+												</p>
+											</div>
+										</div>
 
-													<p className="mt-1 text-xs text-muted-foreground">
-														عضویت
-													</p>
-												</div>
-											</CardContent>
-										</Card>
-									</Link>
-								);
-							})}
-						</div>
+										{/* Right */}
+										<div className="flex items-center gap-2">
+											<span className="text-xs text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
+												ورود
+											</span>
+
+											<ArrowLeft className="size-4 text-muted-foreground transition-transform group-hover:-translate-x-1" />
+										</div>
+									</div>
+
+									{index !== socialChannels.length - 1 && (
+										<Separator className="opacity-40" />
+									)}
+								</Link>
+							);
+						})}
 					</CardContent>
 				</Card>
 			</div>

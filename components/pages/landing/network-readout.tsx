@@ -1,68 +1,269 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+import { Activity, Clock3, Server, ShieldCheck, Zap } from "lucide-react";
+
+import { Badge, Card, CardContent } from "@/components/ui";
 
 import { liveServers } from "./landing.data";
 
-// The signature visual of the site: a live-feeling monospace readout
-// that reinforces "this is real infrastructure," not stock marketing copy.
+/* -------------------------------------------------------------------------- */
+/*                                    Types                                   */
+/* -------------------------------------------------------------------------- */
+
+type ServerState = {
+	ping: number;
+	load: number;
+};
+
+/* -------------------------------------------------------------------------- */
+/*                                   Utils                                    */
+/* -------------------------------------------------------------------------- */
+
+const clamp = (value: number, min: number, max: number) =>
+	Math.min(max, Math.max(min, value));
+
+const getPingColor = (ping: number) => {
+	if (ping < 80) return "text-emerald-500";
+	if (ping < 120) return "text-yellow-500";
+	return "text-red-500";
+};
+
+/* -------------------------------------------------------------------------- */
+/*                              Network Readout                               */
+/* -------------------------------------------------------------------------- */
+
 export function NetworkReadout({ compact = false }: { compact?: boolean }) {
-	const [pings, setPings] = useState(liveServers.map((s) => s.ping));
-	const [tick, setTick] = useState(0);
+	const [servers, setServers] = useState<ServerState[]>(
+		liveServers.map((server) => ({
+			ping: server.ping,
+			load: server.load,
+		})),
+	);
+
+	const [lastSync, setLastSync] = useState(new Date());
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			setPings((prev) =>
-				prev.map((p, i) => {
-					const base = liveServers[i].ping;
-					const jitter = Math.round((Math.random() + 1) * 6);
-					return Math.max(8, base + jitter);
+			setServers((current) =>
+				current.map((server, index) => {
+					const base = liveServers[index];
+
+					return {
+						ping: clamp(
+							server.ping + Math.floor(Math.random() * 9) - 4,
+							base.ping - 6,
+							base.ping + 8,
+						),
+
+						load: clamp(
+							server.load + Math.floor(Math.random() * 7) - 3,
+							10,
+							95,
+						),
+					};
 				}),
 			);
-			setTick((t) => t + 1);
-		}, 2200);
+
+			setLastSync(new Date());
+		}, 1800);
+
 		return () => clearInterval(interval);
 	}, []);
 
+	const averagePing = useMemo(() => {
+		return Math.round(
+			servers.reduce((sum, s) => sum + s.ping, 0) / servers.length,
+		);
+	}, [servers]);
+
+	const health =
+		averagePing < 35 ? "Excellent" : averagePing < 80 ? "Good" : "Moderate";
+
 	return (
-		<div
-			dir="ltr"
-			className={`rounded-xl border bg-zinc-800 dark:bg-zinc-900 font-mono ${
-				compact
-					? "px-4 py-3 text-[11px]"
-					: "px-5 py-4 text-xs sm:text-[13px]"
-			}`}>
-			<div className="mb-2 flex items-center justify-between text-muted-foreground">
+		<Card className="overflow-hidden w-full">
+			<CardContent
+				className={compact ? "space-y-4 p-5" : "space-y-6 p-6"}>
+				<NetworkHeader lastSync={lastSync} />
+
+				<NetworkSummary
+					averagePing={averagePing}
+					health={health}
+					serverCount={liveServers.length}
+				/>
+
+				<NetworkServerList servers={servers} />
+			</CardContent>
+		</Card>
+	);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              Network Header                                */
+/* -------------------------------------------------------------------------- */
+
+interface NetworkHeaderProps {
+	lastSync: Date;
+}
+
+function NetworkHeader({ lastSync }: NetworkHeaderProps) {
+	return (
+		<div className="flex items-start justify-between">
+			<div>
 				<div className="flex items-center gap-2">
-					<span className="relative flex h-2 w-2">
-						<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-60" />
-						<span className="relative inline-flex h-2 w-2 rounded-full bg-green-600" />
-					</span>
-					<span className="text-green-400">live network status</span>
-				</div>
-				<span suppressHydrationWarning>
-					uptime 99.98% · sync #{tick}
-				</span>
-			</div>
-			<div className="flex flex-col gap-1">
-				{liveServers.map((server, i) => (
-					<div
-						key={server.id}
-						className="flex items-center justify-between gap-3">
-						<span className="text-green-400">
-							{server.id}{" "}
-							<span className="text-muted-foreground">
-								/ {server.city}
-							</span>
-						</span>
-						<span className="flex items-center gap-3 tabular-nums">
-							<span className="text-muted-foreground">
-								load {server.load}%
-							</span>
-							<span className="text-green-500">{pings[i]}ms</span>
-						</span>
+					<div className="relative">
+						<div className="absolute inset-0 animate-ping rounded-full bg-emerald-500/40" />
+
+						<div className="relative size-2.5 rounded-full bg-emerald-500" />
 					</div>
-				))}
+
+					<span className="font-semibold">Network Status</span>
+
+					<Badge variant="secondary">Operational</Badge>
+				</div>
+
+				<p className="mt-2 text-sm text-muted-foreground">
+					Real-time infrastructure monitoring
+				</p>
+			</div>
+
+			<div className="text-right text-xs text-muted-foreground">
+				<div className="flex items-center justify-end gap-1">
+					<Clock3 className="size-3.5" />
+
+					{lastSync.toLocaleTimeString()}
+				</div>
+
+				<div className="mt-1">
+					Uptime{" "}
+					<span className="font-medium text-foreground">99.98%</span>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              Network Summary                               */
+/* -------------------------------------------------------------------------- */
+
+interface NetworkSummaryProps {
+	averagePing: number;
+	health: string;
+	serverCount: number;
+}
+
+function NetworkSummary({
+	averagePing,
+	health,
+	serverCount,
+}: NetworkSummaryProps) {
+	return (
+		<div className="grid grid-cols-3 gap-3">
+			<SummaryCard
+				icon={Zap}
+				label="Latency"
+				value={`${averagePing} ms`}
+			/>
+
+			<SummaryCard icon={Activity} label="Health" value={health} />
+
+			<SummaryCard
+				icon={ShieldCheck}
+				label="Servers"
+				value={serverCount}
+			/>
+		</div>
+	);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                               Summary Card                                 */
+/* -------------------------------------------------------------------------- */
+
+interface SummaryCardProps {
+	icon: React.ElementType;
+	label: string;
+	value: React.ReactNode;
+}
+
+function SummaryCard({ icon: Icon, label, value }: SummaryCardProps) {
+	return (
+		<div className="rounded-lg border p-3">
+			<div className="flex items-center gap-2 text-sm text-muted-foreground">
+				<Icon className="size-4" />
+				{label}
+			</div>
+
+			<div className="mt-2 text-xl font-semibold">{value}</div>
+		</div>
+	);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                             Network Server List                            */
+/* -------------------------------------------------------------------------- */
+
+interface NetworkServerListProps {
+	servers: ServerState[];
+}
+
+function NetworkServerList({ servers }: NetworkServerListProps) {
+	return (
+		<div className="space-y-2">
+			{liveServers.map((server, index) => (
+				<NetworkServerItem
+					key={server.id}
+					server={server}
+					state={servers[index]}
+				/>
+			))}
+		</div>
+	);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                             Network Server Item                            */
+/* -------------------------------------------------------------------------- */
+
+interface NetworkServerItemProps {
+	server: (typeof liveServers)[number];
+	state: ServerState;
+}
+
+function NetworkServerItem({ server, state }: NetworkServerItemProps) {
+	return (
+		<div className="flex items-center justify-between rounded-lg border p-3 transition-colors hover:bg-muted/50">
+			<div className="flex items-center gap-3">
+				<div className="rounded-md bg-muted p-2">
+					<Server className="size-4" />
+				</div>
+
+				<div>
+					<div className="font-medium">{server.id}</div>
+
+					<div className="text-xs text-muted-foreground">
+						{server.city}
+					</div>
+				</div>
+			</div>
+
+			<div className="flex items-center gap-8 text-sm tabular-nums">
+				<div className="text-right">
+					<div className="text-muted-foreground">Load</div>
+
+					<div className="font-medium">{state.load}%</div>
+				</div>
+
+				<div className="text-right">
+					<div className="text-muted-foreground">Ping</div>
+
+					<div
+						className={`font-semibold ${getPingColor(state.ping)}`}>
+						{state.ping} ms
+					</div>
+				</div>
 			</div>
 		</div>
 	);

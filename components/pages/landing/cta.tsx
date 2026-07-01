@@ -1,26 +1,50 @@
 import Link from "next/link";
 
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ShieldCheck } from "lucide-react";
+
+import { Badge, Button, Card, CardContent } from "@/components/ui";
 
 export function CTA() {
 	return (
-		<section className="border-t bg-[#15171A]">
-			<div className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-5 py-16 sm:flex-row sm:items-center sm:justify-between">
-				<div>
-					<h2 className="text-2xl font-medium tracking-tight text-[#FAFAF8] sm:text-[28px]">
-						همین حالا متصل شو
+		<section>
+			<Card className="relative overflow-hidden border-0 ring-0 bg-background">
+				<CardContent className="relative flex flex-col items-center px-8 py-16 text-center">
+					<Badge
+						variant="secondary"
+						className="mb-6 gap-2 rounded-full px-4 py-1.5">
+						<ShieldCheck className="size-3.5" />
+						بدون لاگ • بدون محدودیت
+					</Badge>
+
+					<h2 className="max-w-2xl text-3xl font-bold tracking-tight md:text-5xl">
+						اینترنت آزاد،
+						<br />
+						بدون دردسر.
 					</h2>
-					<p className="mt-2 max-w-sm text-sm leading-7 text-[#9CA0A6]">
-						به دنیای آزاد و بدون محدودیت
+
+					<p className="mt-5 max-w-xl text-base leading-8 text-muted-foreground">
+						در کمتر از چند دقیقه ثبت‌نام کن و به سریع‌ترین سرورهای
+						ما متصل شو. بدون تنظیمات پیچیده، بدون محدودیت.
 					</p>
-				</div>
-				<Link
-					href="/auth/register"
-					className="group inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#FAFAF8] px-6 py-3 text-sm text-[#15171A] transition-opacity hover:opacity-90">
-					شروع رایگان
-					<ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
-				</Link>
-			</div>
+
+					<div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+						<Button size="lg" asChild>
+							<Link href="/auth/register">
+								شروع رایگان
+								<ArrowLeft className="mr-2 size-4" />
+							</Link>
+						</Button>
+
+						<Button variant="ghost" size="lg" asChild>
+							<Link href="#pricing">مشاهده پلن‌ها</Link>
+						</Button>
+					</div>
+
+					<p className="mt-8 text-sm text-muted-foreground">
+						فعال‌سازی آنی • پشتیبانی ۲۴ ساعته • پرداخت امن
+					</p>
+				</CardContent>
+			</Card>
 		</section>
 	);
 }

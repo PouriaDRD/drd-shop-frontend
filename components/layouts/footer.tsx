@@ -1,87 +1,97 @@
 import Link from "next/link";
 
+import { MessageCircle, Send } from "lucide-react";
+
 import {
 	BALE_LINK,
 	INSTAGRAM_LINK,
 	TELEGRAM_LINK,
 } from "@/features/shared/constants";
 
-import { AppIcon } from "../icons";
+import { InstagramIcon } from "../icons";
+import AppLogo from "../icons/app-logo";
 import { navLinks } from "../pages/landing/landing.data";
+import { Button, Card, CardContent, Separator } from "../ui";
 
 export function Footer() {
 	return (
-		<footer className="bg-[#15171A]">
-			<div className="mx-auto max-w-6xl px-5 py-12">
-				<div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
-					<div>
-						<Link href="/" className="flex items-center gap-2">
-							<span className="flex h-7 w-7 items-center justify-center rounded-lg">
-								<AppIcon />
-							</span>
-							<span className="text-sm font-medium text-[#FAFAF8]">
-								دی‌آردی وی‌پی‌ان
-							</span>
-						</Link>
-						<p className="mt-3 max-w-xs text-xs leading-6 text-[#7A7D82]">
-							اینترنت آزاد و امن، با زیرساختی که وضعیتش شفاف است.
-						</p>
-					</div>
+		<footer>
+			<Card className="rounded-none ring-0 border-0">
+				<CardContent className="space-y-10 p-8">
+					<div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
+						{/* Brand */}
+						<div className="space-y-4">
+							<Link href="/" className="inline-flex">
+								<AppLogo
+									text="دی‌آردی وی‌پی‌ان"
+									className="flex-row-reverse"
+								/>
+							</Link>
 
-					<div className="flex gap-12">
-						<div>
-							<p className="mb-3 text-xs text-[#7A7D82]">محصول</p>
-							<ul className="flex flex-col gap-2">
-								{navLinks.map((link) => (
-									<li key={link.href}>
-										<a
-											href={link.href}
-											className="text-xs text-[#9CA0A6] hover:text-[#FAFAF8]">
-											{link.label}
-										</a>
-									</li>
-								))}
-							</ul>
-						</div>
-						<div>
-							<p className="mb-3 text-xs text-[#7A7D82]">
-								پشتیبانی
+							<p className="max-w-sm text-sm leading-7 text-muted-foreground">
+								اینترنت آزاد، سریع و امن با زیرساختی شفاف و
+								پایدار. متصل بمانید، بدون محدودیت.
 							</p>
-							<ul className="flex flex-col gap-2">
-								<li>
+						</div>
+
+						{/* Navigation */}
+						<div>
+							<h3 className="mb-4 text-sm font-semibold">
+								دسترسی سریع
+							</h3>
+
+							<nav className="flex flex-col gap-3">
+								{navLinks.map((link) => (
 									<Link
-										href={TELEGRAM_LINK}
-										target="_blank"
-										className="text-xs text-[#9CA0A6] hover:text-[#FAFAF8]">
-										تلگرام
+										key={link.href}
+										href={link.href as "/"}
+										className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+										{link.label}
 									</Link>
-								</li>
-								<li>
-									<Link
-										href={BALE_LINK}
-										target="_blank"
-										className="text-xs text-[#9CA0A6] hover:text-[#FAFAF8]">
-										بله
+								))}
+							</nav>
+						</div>
+
+						{/* Social */}
+						<div>
+							<h3 className="mb-4 text-sm font-semibold">
+								ارتباط با ما
+							</h3>
+
+							<div className="flex gap-2">
+								<Button variant="outline" size="icon" asChild>
+									<Link href={TELEGRAM_LINK} target="_blank">
+										<Send className="size-4" />
 									</Link>
-								</li>
-								<li>
-									<Link
-										href={INSTAGRAM_LINK}
-										target="_blank"
-										className="text-xs text-[#9CA0A6] hover:text-[#FAFAF8]">
-										اینستاگرام
+								</Button>
+
+								<Button variant="outline" size="icon" asChild>
+									<Link href={BALE_LINK} target="_blank">
+										<MessageCircle className="size-4" />
 									</Link>
-								</li>
-							</ul>
+								</Button>
+
+								<Button variant="outline" size="icon" asChild>
+									<Link href={INSTAGRAM_LINK} target="_blank">
+										<InstagramIcon className="size-4" />
+									</Link>
+								</Button>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<div className="mt-10 border-t border-white/8 pt-6 text-center text-xs text-[#7A7D82]">
-					© {new Date().getFullYear()} دی‌آردی وی‌پی‌ان. تمامی حقوق
-					محفوظ است.
-				</div>
-			</div>
+					<Separator />
+
+					<div className="flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground md:flex-row">
+						<p>
+							© {new Date().getFullYear()} DRD VPN. تمامی حقوق
+							محفوظ است.
+						</p>
+
+						<p dir="ltr">Made with ❤️ for a free internet.</p>
+					</div>
+				</CardContent>
+			</Card>
 		</footer>
 	);
 }

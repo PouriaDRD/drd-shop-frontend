@@ -50,7 +50,7 @@ export function AnnouncementsAlert() {
 	}
 
 	return (
-		<section className="mx-auto flex max-w-6xl flex-col gap-3 px-5 pt-16">
+		<section className="flex flex-col gap-2 w-full">
 			{visibleAnnouncements.map((announcement) => {
 				const Icon = icons[announcement.type];
 

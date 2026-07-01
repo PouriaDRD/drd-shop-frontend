@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 import { Footer, Header } from "@/components/layouts";
 import {
 	CTA,
@@ -5,22 +7,29 @@ import {
 	Hero,
 	InfoSection,
 	Pricing,
-	ServerStatus,
 } from "@/components/pages/landing";
 import { AnnouncementsAlert } from "@/features/notifications/components";
 
 export default function LandingPage() {
 	return (
-		<main>
-			<Header />
+		<Fragment>
 			<AnnouncementsAlert />
-			<Hero />
-			<Features />
-			<ServerStatus />
-			<Pricing />
-			<InfoSection />
-			<CTA />
+
+			<Header />
+
+			<main className="mx-auto flex max-w-6xl flex-col px-4 pb-8">
+				<Hero />
+
+				<Features />
+
+				<Pricing />
+
+				<CTA />
+
+				<InfoSection />
+			</main>
+
 			<Footer />
-		</main>
+		</Fragment>
 	);
 }
