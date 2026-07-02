@@ -129,7 +129,9 @@ function NetworkHeader({ lastSync }: NetworkHeaderProps) {
 			</div>
 
 			<div className="text-right text-xs text-muted-foreground">
-				<div className="flex items-center justify-end gap-1">
+				<div
+					suppressHydrationWarning
+					className="flex items-center justify-end gap-1">
 					<Clock3 className="size-3.5" />
 
 					{lastSync.toLocaleTimeString()}
@@ -234,7 +236,9 @@ interface NetworkServerItemProps {
 
 function NetworkServerItem({ server, state }: NetworkServerItemProps) {
 	return (
-		<div className="flex items-center justify-between rounded-lg border p-3 transition-colors hover:bg-muted/50">
+		<div
+			className={`flex items-center justify-between rounded-lg border p-3
+			transition-colors hover:bg-muted/50`}>
 			<div className="flex items-center gap-3">
 				<div className="rounded-md bg-muted p-2">
 					<Server className="size-4" />

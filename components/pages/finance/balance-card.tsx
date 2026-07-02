@@ -1,0 +1,40 @@
+"use client";
+
+import { useMyWallet } from "@/features/finance/mutations";
+
+import { StatBaseCard } from "./stat-base-card";
+
+export function BalanceCard() {
+	const { data, isLoading } = useMyWallet();
+
+	if (isLoading) {
+		return (
+			<StatBaseCard
+				label="موجودی کیف پول"
+				value="در حال بارگذاری..."
+				small
+			/>
+		);
+	}
+
+	if (!data?.success || !data.data) {
+		return (
+			<StatBaseCard
+				label="موجودی کیف پول"
+				value="خطا در دریافت موجودی"
+				small
+			/>
+		);
+	}
+
+	const wallet = data.data;
+
+	return (
+		<StatBaseCard
+			label="موجودی کیف پول"
+			value={wallet.balance.toLocaleString("fa-IR")}
+			value2="تومان"
+			small
+		/>
+	);
+}

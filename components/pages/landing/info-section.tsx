@@ -85,20 +85,19 @@ export function InfoSection() {
 									rel="noopener noreferrer"
 									className="group block">
 									<div
-										className="
+										className={`
 											flex items-center justify-between
 											rounded-xl px-3 py-3
 											transition-all duration-200
 											hover:bg-muted/60
 											hover:scale-[1.01]
-										">
+										`}>
 										{/* Left */}
 										<div className="flex items-center gap-3">
 											<div
-												className="
+												className={`
 													flex size-10 items-center justify-center
-													rounded-lg text-white shadow-sm
-												"
+													rounded-lg text-white shadow-sm`}
 												style={{
 													background: channel.bg,
 												}}>

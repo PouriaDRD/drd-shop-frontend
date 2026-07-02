@@ -50,7 +50,7 @@ export function useRequestOtpForm({ otpType, onSuccess }: Props) {
 				onSuccess: (res) => {
 					// Backend returned an unsuccessful response.
 					if (!res.success) {
-						toast.error("خطا در ارسال کد");
+						toast.error(res.message || "خطا در ارسال کد");
 						return;
 					}
 					// Backend returned a successful response.

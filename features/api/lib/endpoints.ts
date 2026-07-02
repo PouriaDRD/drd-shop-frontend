@@ -16,9 +16,9 @@ export const endpoints = {
 	},
 
 	finance: {
-		wallet: "finance/wallet/",
-
-		transactions: "finance/transactions/",
+		wallet: "finance/my-wallet/",
+		deposits: "finance/my-deposits/",
+		transactions: "finance/my-transactions/",
 
 		// transaction: (id: string) => `finance/transactions/${id}/`,
 	},

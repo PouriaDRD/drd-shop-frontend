@@ -71,7 +71,7 @@ export function useRegisterForm({ onSuccess }: Props) {
 		registerMutation.mutate(values, {
 			onSuccess: async (res) => {
 				if (!res.success) {
-					toast.error("خطا در ثبت نام");
+					toast.error(res.message || "خطا در ثبت نام");
 					return;
 				}
 				if (res.success) {

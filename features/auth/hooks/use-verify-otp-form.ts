@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { queryKeys } from "@/features/api/lib";
-import { getErrorMessage } from "@/features/shared/utils";
 import { useUser } from "@/features/user/context";
 
 import { createSession } from "../actions";
@@ -108,7 +107,7 @@ export default function useVerifyOtpForm({ otpType, onSuccess }: Props) {
 			{
 				onSuccess: async (res) => {
 					if (!res.success) {
-						toast.error(getErrorMessage(res.errors));
+						toast.error(res.message || "کد اشتباه است!");
 						return;
 					}
 
@@ -118,7 +117,7 @@ export default function useVerifyOtpForm({ otpType, onSuccess }: Props) {
 				},
 
 				onError: () => {
-					toast.error("خطا در تایید کد");
+					toast.error("خطا در تایید کد!");
 				},
 			},
 		);
@@ -140,7 +139,10 @@ export default function useVerifyOtpForm({ otpType, onSuccess }: Props) {
 			},
 			{
 				onSuccess: (res) => {
-					if (!res.success) return;
+					if (!res.success) {
+						toast.error(res.message || "خطا در ارسال مجدد کد!");
+						return;
+					}
 
 					if (res.success) {
 						otpStore.setExpiresIn(res.data.expires_in);

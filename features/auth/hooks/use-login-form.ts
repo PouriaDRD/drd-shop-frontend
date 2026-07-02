@@ -68,7 +68,9 @@ export function useLoginForm({ onSuccess }: Props) {
 		loginMutation.mutate(values, {
 			onSuccess: async (res) => {
 				if (!res.success) {
-					toast.error("نام کاربری / رمز عبور اشتباه است!");
+					toast.error(
+						res.message || "نام کاربری / رمز عبور اشتباه است!",
+					);
 					return;
 				}
 				if (res.success) {
