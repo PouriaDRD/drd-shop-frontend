@@ -1,12 +1,7 @@
 import { PageHeader, PageLayout } from "@/components/pages";
 import { FinanceStats } from "@/components/pages/finance";
-import {
-	Button,
-	Tabs,
-	TabsContent,
-	TabsList,
-	TabsTrigger,
-} from "@/components/ui";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui";
+import { RequestDepositDialog } from "@/features/finance/components/dialogs";
 import {
 	DepositRequestsTable,
 	TransactionTable,
@@ -22,9 +17,9 @@ function FinancePage() {
 
 			<FinanceStats />
 
-			<div className="bg-card rounded-2xl border space-y-4 mt-8">
+			<div className="bg-card rounded-2xl border space-y-4">
 				<Tabs dir="rtl" defaultValue="transactions" className="pt-4">
-					<div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
+					<div className="flex items-center justify-between gap-4">
 						{/* Tabs Header */}
 						<TabsList
 							className="grid w-fit grid-cols-2"
@@ -34,13 +29,11 @@ function FinancePage() {
 							</TabsTrigger>
 
 							<TabsTrigger value="deposit-requests">
-								درخواست‌های واریز
+								واریزی‌ها
 							</TabsTrigger>
 						</TabsList>
 						<div className="px-4">
-							<Button variant={"outline"} size={"xs"}>
-								افزایش موجودی
-							</Button>
+							<RequestDepositDialog />
 						</div>
 					</div>
 					{/* TAB 1 */}

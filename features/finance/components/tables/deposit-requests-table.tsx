@@ -29,31 +29,39 @@ export function DepositRequestsTable() {
 	if (depositRequests.length === 0) return <TableState type="empty" />;
 
 	return (
-		<Table>
-			<TableHeader>
-				<TableRow>
-					<TableHead className="text-center">#</TableHead>
+		<div className="max-h-96 overflow-auto flex">
+			<Table>
+				<TableHeader className="sticky top-0 bg-card/85 backdrop-blur-2xl">
+					<TableRow>
+						<TableHead className="text-center">#</TableHead>
 
-					<TableHead className="text-center">تاریخ</TableHead>
+						<TableHead className="text-center">تاریخ</TableHead>
 
-					<TableHead className="text-center">مبلغ (تومان)</TableHead>
+						<TableHead className="text-center">
+							مبلغ (تومان)
+						</TableHead>
 
-					<TableHead className="text-center">روش پرداخت</TableHead>
+						<TableHead className="text-center">
+							روش پرداخت
+						</TableHead>
 
-					<TableHead className="text-center">کارت کاربر</TableHead>
+						<TableHead className="text-center">
+							کارت کاربر
+						</TableHead>
 
-					<TableHead className="text-center">کد پیگیری</TableHead>
+						<TableHead className="text-center">کد پیگیری</TableHead>
 
-					<TableHead className="text-center">وضعیت</TableHead>
-				</TableRow>
-			</TableHeader>
+						<TableHead className="text-center">وضعیت</TableHead>
+					</TableRow>
+				</TableHeader>
 
-			<TableBody>
-				{depositRequests.map((item, index) => (
-					<DepositRow key={item.id} item={item} index={index} />
-				))}
-			</TableBody>
-		</Table>
+				<TableBody>
+					{depositRequests.map((item, index) => (
+						<DepositRow key={item.id} item={item} index={index} />
+					))}
+				</TableBody>
+			</Table>
+		</div>
 	);
 }
 

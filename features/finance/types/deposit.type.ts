@@ -1,3 +1,7 @@
+import { z } from "zod";
+
+import { requestDepositSchema } from "../schemas";
+
 export type DepositStatus = "pending" | "approved" | "rejected" | "canceled";
 
 export type DepositPaymentMethod = "card_to_card" | "online_gateway";
@@ -17,3 +21,5 @@ export type Deposit = {
 	note?: string | null;
 	created_at: Date;
 };
+
+export type RequestDepositFieldValues = z.infer<typeof requestDepositSchema>;

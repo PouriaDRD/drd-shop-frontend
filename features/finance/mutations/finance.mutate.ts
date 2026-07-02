@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { queryKeys } from "@/features/api/lib";
 
@@ -26,3 +26,9 @@ export const useMyTransactions = () => {
 		queryFn: financeApi.myTransactions,
 	});
 };
+
+export function useRequestDeposit() {
+	return useMutation({
+		mutationFn: (data: FormData) => financeApi.requestDepositApi(data),
+	});
+}

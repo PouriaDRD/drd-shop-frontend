@@ -31,24 +31,28 @@ export function TransactionTable() {
 	if (transactions.length === 0) return <TableState type="empty" />;
 
 	return (
-		<Table>
-			<TableHeader>
-				<TableRow>
-					<TableHead className="text-center">#</TableHead>
-					<TableHead className="text-center">تاریخ</TableHead>
-					<TableHead className="text-center">مبلغ (تومان)</TableHead>
-					<TableHead className="text-center">وضعیت</TableHead>
-					<TableHead className="text-center">نوع</TableHead>
-					<TableHead className="text-center">توضیحات</TableHead>
-				</TableRow>
-			</TableHeader>
+		<div className="max-h-96 overflow-auto flex">
+			<Table>
+				<TableHeader className="sticky top-0 bg-card/85 backdrop-blur-2xl">
+					<TableRow>
+						<TableHead className="text-center">#</TableHead>
+						<TableHead className="text-center">تاریخ</TableHead>
+						<TableHead className="text-center">
+							مبلغ (تومان)
+						</TableHead>
+						<TableHead className="text-center">وضعیت</TableHead>
+						<TableHead className="text-center">نوع</TableHead>
+						<TableHead className="text-center">توضیحات</TableHead>
+					</TableRow>
+				</TableHeader>
 
-			<TableBody>
-				{transactions.map((tx, i) => (
-					<TransactionRow key={tx.id} tx={tx} index={i} />
-				))}
-			</TableBody>
-		</Table>
+				<TableBody>
+					{transactions.map((tx, i) => (
+						<TransactionRow key={tx.id} tx={tx} index={i} />
+					))}
+				</TableBody>
+			</Table>
+		</div>
 	);
 }
 
