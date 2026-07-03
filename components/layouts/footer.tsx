@@ -23,7 +23,7 @@ export function Footer() {
 						<div className="space-y-4">
 							<Link href="/" className="inline-flex">
 								<AppLogo
-									text="دی‌آردی وی‌پی‌ان"
+									text="DRD VPN"
 									className="flex-row-reverse"
 								/>
 							</Link>

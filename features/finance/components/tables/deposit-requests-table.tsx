@@ -97,7 +97,7 @@ function DepositRow({ item, index }: { item: Deposit; index: number }) {
 						{item.sender_name}
 					</span>
 
-					<span className="text-xs">
+					<span className="text-sm">
 						{formatCardNumber(item.sender_card_number)}
 					</span>
 				</div>

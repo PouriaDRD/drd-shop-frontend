@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Home, RotateCcw, TriangleAlert } from "lucide-react";
 
 import { Button } from "@/components/ui";
+import { GridShape } from "@/features/shared/components";
 
 interface Props {
 	error: Error & { digest?: string };
@@ -21,8 +22,10 @@ export default function Error({ error, reset }: Props) {
 
 	return (
 		<main
-			className="flex min-h-dvh flex-col items-center justify-center px-6 pb-16 pt-12 text-center"
+			className={`flex min-h-dvh flex-col items-center 
+			justify-center px-6 pb-16 pt-12 text-center`}
 			dir="rtl">
+			<GridShape />
 			{/* Icon */}
 			<div className="mb-5 flex size-14 items-center justify-center rounded-2xl bg-primary/5 dark:bg-primary">
 				<TriangleAlert

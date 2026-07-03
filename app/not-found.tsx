@@ -3,12 +3,15 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui";
+import { GridShape } from "@/features/shared/components";
 
 export default function NotFound() {
 	return (
 		<main
-			className="flex min-h-dvh flex-col items-center justify-center px-6 pb-16 pt-12 text-center"
+			className={`relative flex min-h-dvh flex-col items-center 
+			justify-center px-6 pb-16 pt-12 text-center`}
 			dir="rtl">
+			<GridShape />
 			{/* Big 404 with accent zero */}
 			<div
 				aria-hidden="true"
