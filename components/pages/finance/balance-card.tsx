@@ -1,5 +1,6 @@
 "use client";
 
+import { RequestDepositDialog } from "@/features/finance/components/dialogs";
 import { useMyWallet } from "@/features/finance/mutations";
 
 import { StatBaseCard } from "./stat-base-card";
@@ -32,9 +33,9 @@ export function BalanceCard() {
 	return (
 		<StatBaseCard
 			label="موجودی کیف پول"
-			value={wallet.balance.toLocaleString("fa-IR")}
-			value2="تومان"
-			small
-		/>
+			value={wallet.balance.toLocaleString("fa-IR") + " تومان"}
+			small>
+			<RequestDepositDialog />
+		</StatBaseCard>
 	);
 }

@@ -23,12 +23,10 @@ export function RequestDepositDialog() {
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button variant="outline" size="xs">
-					افزایش موجودی
-				</Button>
+				<Button variant="outline">افزایش موجودی</Button>
 			</DialogTrigger>
 
-			<DialogContent className="w-full max-w-sm">
+			<DialogContent className="w-full max-w-sm max-h-[90dvh] overflow-auto">
 				<DialogHeader>
 					<DialogTitle className="flex items-center gap-2">
 						<Wallet className="size-5" />
@@ -43,8 +41,8 @@ export function RequestDepositDialog() {
 
 				<CardToCardInfo />
 
-				<div className="max-h-96 overflow-auto px-4">
-					<RequestDepositForm onSuccess={() => setOpen(false)} />s
+				<div className="">
+					<RequestDepositForm onSuccess={() => setOpen(false)} />
 				</div>
 			</DialogContent>
 		</Dialog>

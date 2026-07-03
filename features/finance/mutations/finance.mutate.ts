@@ -6,6 +6,15 @@ import { queryKeys } from "@/features/api/lib";
 
 import { financeApi } from "../api";
 
+export const useCards = () => {
+	return useQuery({
+		queryKey: queryKeys.finance.cards,
+		queryFn: financeApi.cards,
+		// auto refresh every 90 seconds
+		refetchInterval: 90 * 1000,
+	});
+};
+
 export const useMyWallet = () => {
 	return useQuery({
 		queryKey: queryKeys.finance.wallet,

@@ -40,14 +40,14 @@ export function RequestDepositForm({ onSuccess }: Props) {
 				<SenderNameField
 					control={form.control}
 					name="sender_name"
-					label="نام صاحب کارت"
+					label="نام صاحب کارت مبدا"
 				/>
 
 				{/* Card Number */}
 				<SenderCardNumberField
 					control={form.control}
 					name="sender_card_number"
-					label="شماره کارت"
+					label="شماره کارت مبدا"
 				/>
 
 				{/* Reference */}

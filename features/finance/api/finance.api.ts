@@ -5,10 +5,15 @@
  */
 
 import { apiClient, endpoints } from "@/features/api/lib";
+import { Card } from "@/features/shared/types";
 
 import { Deposit, Transaction, Wallet } from "../types";
 
 export const financeApi = {
+	cards: () => {
+		return apiClient.get<Card[]>(endpoints.finance.cards);
+	},
+
 	myWallet: () => {
 		return apiClient.get<Wallet>(endpoints.finance.wallet);
 	},

@@ -5,13 +5,13 @@ import { Card, CardHeader } from "@/components/ui";
 interface StatCardProps {
 	label: string;
 	value: string;
-	value2?: string;
+	children?: React.ReactNode;
 	accent?: boolean;
 	small?: boolean;
 }
 
 export function StatBaseCard(props: StatCardProps) {
-	const { label, value, value2, accent, small } = props;
+	const { label, value, children, accent, small } = props;
 
 	return (
 		<Card className="px-2 py-4">
@@ -25,11 +25,7 @@ export function StatBaseCard(props: StatCardProps) {
 					].join(" ")}>
 					{value}
 				</p>
-				{value2 && (
-					<span className="text-muted-foreground text-sm">
-						{value2}
-					</span>
-				)}
+				{children}
 			</CardHeader>
 		</Card>
 	);

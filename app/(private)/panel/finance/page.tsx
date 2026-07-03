@@ -1,7 +1,6 @@
 import { PageHeader, PageLayout } from "@/components/pages";
 import { FinanceStats } from "@/components/pages/finance";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui";
-import { RequestDepositDialog } from "@/features/finance/components/dialogs";
 import {
 	DepositRequestsTable,
 	TransactionTable,
@@ -22,7 +21,7 @@ function FinancePage() {
 					<div className="flex items-center justify-between gap-4">
 						{/* Tabs Header */}
 						<TabsList
-							className="grid w-fit grid-cols-2"
+							className="grid grid-cols-4 w-full"
 							variant={"line"}>
 							<TabsTrigger value="transactions">
 								تراکنش‌ها
@@ -31,10 +30,11 @@ function FinancePage() {
 							<TabsTrigger value="deposit-requests">
 								واریزی‌ها
 							</TabsTrigger>
+
+							<TabsTrigger value="purchases">
+								پرداخت‌ها
+							</TabsTrigger>
 						</TabsList>
-						<div className="px-4">
-							<RequestDepositDialog />
-						</div>
 					</div>
 					{/* TAB 1 */}
 					<TabsContent value="transactions" className="mt-6">
