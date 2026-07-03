@@ -7,7 +7,7 @@
 import { apiClient, endpoints } from "@/features/api/lib";
 import { Card } from "@/features/shared/types";
 
-import { Deposit, Transaction, Wallet } from "../types";
+import { Deposit, RefundToWallet, Transaction, Wallet } from "../types";
 
 export const financeApi = {
 	cards: () => {
@@ -25,6 +25,18 @@ export const financeApi = {
 	myTransactions: () => {
 		return apiClient.get<Transaction[]>(endpoints.finance.transactions);
 	},
+
+	myRefundToWallet: () => {
+		return apiClient.get<RefundToWallet[]>(
+			endpoints.finance.refundToWallet,
+		);
+	},
+
+	// myRefundToUser: () => {
+	// 	return apiClient.get<RefundToUser[]>(
+	// 		endpoints.finance.refundToUser,
+	// 	);
+	// },
 
 	async requestDepositApi(data: FormData) {
 		return apiClient.post<Deposit>(

@@ -1,53 +1,107 @@
+import {
+	ArrowLeftRight,
+	BanknoteArrowDown,
+	CreditCard,
+	User,
+	Wallet,
+} from "lucide-react";
+
 import { PageHeader, PageLayout } from "@/components/pages";
 import { FinanceStats } from "@/components/pages/finance";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui";
+import {
+	Card,
+	CardContent,
+	CardHeader,
+	CardTitle,
+	Tabs,
+	TabsContent,
+	TabsList,
+	TabsTrigger,
+} from "@/components/ui";
 import {
 	DepositRequestsTable,
+	RefundToWalletTable,
 	TransactionTable,
 } from "@/features/finance/components/tables";
 
-function FinancePage() {
+export default function FinancePage() {
 	return (
-		<PageLayout className="flex flex-col gap-4">
+		<PageLayout className="space-y-6">
 			<PageHeader
 				title="مالی"
-				description="موجودی، مدیریت مالی و آخرین تراکش ها"
+				description="مدیریت کیف پول، تراکنش‌ها و درخواست‌های مالی"
 			/>
 
 			<FinanceStats />
 
-			<div className="bg-card rounded-2xl border space-y-4">
-				<Tabs dir="rtl" defaultValue="transactions" className="pt-4">
-					<div className="flex items-center justify-between gap-4">
-						{/* Tabs Header */}
-						<TabsList
-							className="grid grid-cols-4 w-full"
-							variant={"line"}>
-							<TabsTrigger value="transactions">
-								تراکنش‌ها
-							</TabsTrigger>
+			<Card className="overflow-hidden">
+				<Tabs defaultValue="transactions" dir="rtl">
+					<CardHeader className="space-y-4 border-b">
+						<CardTitle className="text-base">سوابق مالی</CardTitle>
 
-							<TabsTrigger value="deposit-requests">
-								واریزی‌ها
-							</TabsTrigger>
+						<div className="-mx-6 overflow-x-auto px-6 overflow-y-hidden">
+							<TabsList
+								variant="line"
+								className={`inline-flex
+									w-max
+									min-w-max
+									whitespace-nowrap
+									bg-transparent
+									p-0
+									gap-1`}>
+								<TabsTrigger
+									value="transactions"
+									className="shrink-0 gap-2 px-4">
+									<ArrowLeftRight className="size-4" />
+									تراکنش‌ها
+								</TabsTrigger>
 
-							<TabsTrigger value="purchases">
-								پرداخت‌ها
-							</TabsTrigger>
-						</TabsList>
-					</div>
-					{/* TAB 1 */}
-					<TabsContent value="transactions" className="mt-6">
-						<TransactionTable />
-					</TabsContent>
-					{/* TAB 2 (placeholder for now) */}
-					<TabsContent value="deposit-requests" className="mt-6">
-						<DepositRequestsTable />
-					</TabsContent>
+								<TabsTrigger
+									value="deposit-requests"
+									className="shrink-0 gap-2 px-4">
+									<BanknoteArrowDown className="size-4" />
+									درخواست واریز
+								</TabsTrigger>
+
+								<TabsTrigger
+									value="payments"
+									className="shrink-0 gap-2 px-4">
+									<CreditCard className="size-4" />
+									پرداخت‌ها
+								</TabsTrigger>
+
+								<TabsTrigger
+									value="refund-to-wallet"
+									className="shrink-0 gap-2 px-4">
+									<Wallet className="size-4" />
+									استرداد به کیف پول
+								</TabsTrigger>
+
+								<TabsTrigger
+									value="refund_to_user"
+									className="shrink-0 gap-2 px-4">
+									<User className="size-4" />
+									استرداد به کاربر
+								</TabsTrigger>
+							</TabsList>
+						</div>
+					</CardHeader>
+
+					<CardContent className="p-0">
+						<TabsContent value="transactions" className="m-0">
+							<TransactionTable />
+						</TabsContent>
+
+						<TabsContent value="deposit-requests" className="m-0">
+							<DepositRequestsTable />
+						</TabsContent>
+
+						<TabsContent value="refund-to-wallet" className="m-0">
+							<RefundToWalletTable />
+						</TabsContent>
+					</CardContent>
 				</Tabs>
-			</div>
+			</Card>
 		</PageLayout>
 	);
 }
-
-export default FinancePage;
