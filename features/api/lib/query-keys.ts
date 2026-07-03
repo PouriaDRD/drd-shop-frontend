@@ -9,6 +9,7 @@ export const queryKeys = {
 		deposits: ["finance", "my-deposits"],
 		transactions: ["finance", "my-transactions"],
 		refundToWallet: ["finance", "my-refund-to-wallet"],
+		refundToUser: ["finance", "my-refund-to-user"],
 	},
 
 	notifications: {

@@ -4,6 +4,7 @@ import {
 	Badge,
 	Table,
 	TableBody,
+	TableCaption,
 	TableCell,
 	TableHead,
 	TableHeader,
@@ -24,9 +25,9 @@ export function RefundToWalletTable() {
 	if (isLoading) return <TableState type="loading" />;
 	if (isError || !data?.success) return <TableState type="error" />;
 
-	const depositRequests = data.data ?? [];
+	const refundList = data.data ?? [];
 
-	if (depositRequests.length === 0) return <TableState type="empty" />;
+	if (refundList.length === 0) return <TableState type="empty" />;
 
 	return (
 		<div className="max-h-96 overflow-auto flex">
@@ -48,8 +49,8 @@ export function RefundToWalletTable() {
 				</TableHeader>
 
 				<TableBody>
-					{depositRequests.map((item, index) => (
-						<DepositRow key={item.id} item={item} index={index} />
+					{refundList.map((item, index) => (
+						<RefundRow key={item.id} item={item} index={index} />
 					))}
 				</TableBody>
 			</Table>
@@ -61,7 +62,7 @@ export function RefundToWalletTable() {
    ROW
 ----------------------------- */
 
-function DepositRow({ item, index }: { item: RefundToWallet; index: number }) {
+function RefundRow({ item, index }: { item: RefundToWallet; index: number }) {
 	const date = toIranDateTime(item.created_at);
 
 	return (
@@ -122,15 +123,28 @@ const statusMap: Record<
 ----------------------------- */
 
 function TableState({ type }: { type: "loading" | "error" | "empty" }) {
-	const text = {
+	const captionMap = {
 		loading: "در حال بارگذاری...",
-		error: "خطا در دریافت اطلاعات",
-		empty: "هیچ درخواستی وجود ندارد",
+		empty: "هیچ تراکنشی وجود ندارد",
+		error: "خطا در بارگذاری اطلاعات",
 	};
 
 	return (
-		<div className="rounded-2xl border bg-card p-6 text-sm text-muted-foreground">
-			{text[type]}
-		</div>
+		<Table>
+			<TableCaption>{captionMap[type]}</TableCaption>
+			<TableHeader>
+				<TableRow>
+					<TableHead className="text-center">#</TableHead>
+
+					<TableHead className="text-center">تاریخ</TableHead>
+
+					<TableHead className="text-center">مبلغ (تومان)</TableHead>
+
+					<TableHead className="text-center">وضعیت</TableHead>
+
+					<TableHead className="text-center">توضیحات</TableHead>
+				</TableRow>
+			</TableHeader>
+		</Table>
 	);
 }

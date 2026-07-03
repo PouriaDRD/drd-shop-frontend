@@ -12,61 +12,55 @@ import {
 } from "@/components/ui";
 import { formatCardNumber, toIranDateTime } from "@/features/shared/utils";
 
-import { useMyDeposits } from "../../mutations";
-import { Deposit, DepositPaymentMethod, DepositStatus } from "../../types";
+import { useMyRefundToUser } from "../../mutations";
+import {
+	RefundToUser,
+	RefundToUserPaymentMethod,
+	RefundToUserStatus,
+} from "../../types";
 
 /* -----------------------------
    MAIN TABLE
 ----------------------------- */
 
-export function DepositRequestsTable() {
-	const { data, isLoading, isError } = useMyDeposits();
+export function RefundToUserTable() {
+	const { data, isLoading, isError } = useMyRefundToUser();
 
 	if (isLoading) return <TableState type="loading" />;
 	if (isError || !data?.success) return <TableState type="error" />;
 
-	const depositRequests = data.data ?? [];
+	const refunToUserList = data.data ?? [];
 
-	if (depositRequests.length === 0) return <TableState type="empty" />;
+	if (refunToUserList.length === 0) return <TableState type="empty" />;
 
 	return (
-		<div className="max-h-96 overflow-auto flex">
-			<Table>
-				<TableHeader className="sticky top-0 bg-card/85 backdrop-blur-2xl">
-					<TableRow>
-						<TableHead className="text-center">#</TableHead>
+		<Table>
+			<TableHeader className="sticky top-0 bg-card/85 backdrop-blur-2xl">
+				<TableRow>
+					<TableHead className="text-center">#</TableHead>
 
-						<TableHead className="text-center">تاریخ</TableHead>
+					<TableHead className="text-center">تاریخ</TableHead>
 
-						<TableHead className="text-center">
-							مبلغ (تومان)
-						</TableHead>
+					<TableHead className="text-center">مبلغ (تومان)</TableHead>
 
-						<TableHead className="text-center">
-							روش پرداخت
-						</TableHead>
+					<TableHead className="text-center">روش پرداخت</TableHead>
 
-						<TableHead className="text-center">
-							کارت کاربر
-						</TableHead>
+					<TableHead className="text-center">کارت مبدا</TableHead>
 
-						<TableHead className="text-center">کد پیگیری</TableHead>
+					<TableHead className="text-center">کد پیگیری</TableHead>
 
-						<TableHead className="text-center">
-							شماره مرجع
-						</TableHead>
+					<TableHead className="text-center">شماره مرجع</TableHead>
 
-						<TableHead className="text-center">وضعیت</TableHead>
-					</TableRow>
-				</TableHeader>
+					<TableHead className="text-center">وضعیت</TableHead>
+				</TableRow>
+			</TableHeader>
 
-				<TableBody>
-					{depositRequests.map((item, index) => (
-						<DepositRow key={item.id} item={item} index={index} />
-					))}
-				</TableBody>
-			</Table>
-		</div>
+			<TableBody>
+				{refunToUserList.map((item, index) => (
+					<RefundRow key={item.id} item={item} index={index} />
+				))}
+			</TableBody>
+		</Table>
 	);
 }
 
@@ -74,7 +68,7 @@ export function DepositRequestsTable() {
    ROW
 ----------------------------- */
 
-function DepositRow({ item, index }: { item: Deposit; index: number }) {
+function RefundRow({ item, index }: { item: RefundToUser; index: number }) {
 	const date = toIranDateTime(item.created_at);
 
 	return (
@@ -99,11 +93,11 @@ function DepositRow({ item, index }: { item: Deposit; index: number }) {
 			<TableCell className="text-center">
 				<div className="flex flex-col items-center gap-1">
 					<span className="text-sm font-medium text-foreground">
-						{item.sender_name}
+						{item.receiver_name}
 					</span>
 
 					<span className="text-sm">
-						{formatCardNumber(item.sender_card_number)}
+						{formatCardNumber(item.receiver_card_number)}
 					</span>
 				</div>
 			</TableCell>
@@ -128,7 +122,7 @@ function DepositRow({ item, index }: { item: Deposit; index: number }) {
 ----------------------------- */
 
 const statusMap: Record<
-	DepositStatus,
+	RefundToUserStatus,
 	{
 		label: string;
 		variant: "success" | "warning" | "destructive" | "outline";
@@ -153,7 +147,7 @@ const statusMap: Record<
 };
 
 const paymentMethodMap: Record<
-	DepositPaymentMethod,
+	RefundToUserPaymentMethod,
 	{
 		label: string;
 		variant: "success" | "warning" | "destructive" | "outline";
@@ -173,7 +167,7 @@ const paymentMethodMap: Record<
    STATE
 ----------------------------- */
 
-function TableState({ type }: { type: "loading" | "empty" | "error" }) {
+function TableState({ type }: { type: "loading" | "error" | "empty" }) {
 	const captionMap = {
 		loading: "در حال بارگذاری...",
 		empty: "هیچ تراکنشی وجود ندارد",
@@ -193,7 +187,7 @@ function TableState({ type }: { type: "loading" | "empty" | "error" }) {
 
 					<TableHead className="text-center">روش پرداخت</TableHead>
 
-					<TableHead className="text-center">کارت کاربر</TableHead>
+					<TableHead className="text-center">کارت مبدا</TableHead>
 
 					<TableHead className="text-center">کد پیگیری</TableHead>
 

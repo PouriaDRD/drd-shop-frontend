@@ -20,6 +20,7 @@ import {
 } from "@/components/ui";
 import {
 	DepositRequestsTable,
+	RefundToUserTable,
 	RefundToWalletTable,
 	TransactionTable,
 } from "@/features/finance/components/tables";
@@ -78,7 +79,7 @@ export default function FinancePage() {
 								</TabsTrigger>
 
 								<TabsTrigger
-									value="refund_to_user"
+									value="refund-to-user"
 									className="shrink-0 gap-2 px-4">
 									<User className="size-4" />
 									استرداد به کاربر
@@ -98,6 +99,10 @@ export default function FinancePage() {
 
 						<TabsContent value="refund-to-wallet" className="m-0">
 							<RefundToWalletTable />
+						</TabsContent>
+
+						<TabsContent value="refund-to-user" className="m-0">
+							<RefundToUserTable />
 						</TabsContent>
 					</CardContent>
 				</Tabs>

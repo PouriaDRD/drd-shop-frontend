@@ -176,21 +176,18 @@ function TableState({ type }: { type: "loading" | "empty" | "error" }) {
 	};
 
 	return (
-		<div className="bg-card rounded-2xl border p-4 space-y-4">
-			<p>آخرین تراکنش ها</p>
-
-			<Table>
-				<TableCaption>{captionMap[type]}</TableCaption>
-				<TableHeader>
-					<TableRow>
-						<TableHead className="text-center">مبلغ</TableHead>
-						<TableHead className="text-center">وضعیت</TableHead>
-						<TableHead className="text-center">نوع</TableHead>
-						<TableHead className="text-center">توضیحات</TableHead>
-						<TableHead className="text-center">تاریخ</TableHead>
-					</TableRow>
-				</TableHeader>
-			</Table>
-		</div>
+		<Table>
+			<TableCaption>{captionMap[type]}</TableCaption>
+			<TableHeader>
+				<TableRow>
+					<TableHead className="text-center">#</TableHead>
+					<TableHead className="text-center">تاریخ</TableHead>
+					<TableHead className="text-center">مبلغ (تومان)</TableHead>
+					<TableHead className="text-center">وضعیت</TableHead>
+					<TableHead className="text-center">نوع</TableHead>
+					<TableHead className="text-center">توضیحات</TableHead>
+				</TableRow>
+			</TableHeader>
+		</Table>
 	);
 }

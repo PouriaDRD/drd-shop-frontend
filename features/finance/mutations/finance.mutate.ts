@@ -36,6 +36,13 @@ export const useMyRefundToWallet = () => {
 	});
 };
 
+export const useMyRefundToUser = () => {
+	return useQuery({
+		queryKey: queryKeys.finance.refundToUser,
+		queryFn: financeApi.myRefundToUser,
+	});
+};
+
 export const useMyTransactions = () => {
 	return useQuery({
 		queryKey: queryKeys.finance.transactions,

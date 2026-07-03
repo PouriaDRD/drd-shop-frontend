@@ -22,6 +22,6 @@ export const endpoints = {
 		transactions: "finance/my-transactions/",
 		requestDeposit: "finance/request-deposit/",
 		refundToWallet: "finance/my-refund-to-wallet/",
-		// transaction: (id: string) => `finance/transactions/${id}/`,
+		refundToUser: "finance/my-refund-to-user/",
 	},
 };
