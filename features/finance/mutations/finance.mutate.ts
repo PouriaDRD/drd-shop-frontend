@@ -29,6 +29,13 @@ export const useMyDeposits = () => {
 	});
 };
 
+export const useMyPurchases = () => {
+	return useQuery({
+		queryKey: queryKeys.finance.purchases,
+		queryFn: financeApi.myPurchases,
+	});
+};
+
 export const useMyRefundToWallet = () => {
 	return useQuery({
 		queryKey: queryKeys.finance.refundToWallet,

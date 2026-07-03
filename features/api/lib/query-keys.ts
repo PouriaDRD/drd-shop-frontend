@@ -7,9 +7,10 @@ export const queryKeys = {
 		cards: ["finance", "cards"],
 		wallet: ["finance", "my-wallet"],
 		deposits: ["finance", "my-deposits"],
+		purchases: ["finance", "my-purchases"],
 		transactions: ["finance", "my-transactions"],
-		refundToWallet: ["finance", "my-refund-to-wallet"],
 		refundToUser: ["finance", "my-refund-to-user"],
+		refundToWallet: ["finance", "my-refund-to-wallet"],
 	},
 
 	notifications: {

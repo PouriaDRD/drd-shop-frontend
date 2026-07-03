@@ -10,28 +10,24 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui";
-import { formatCardNumber, toIranDateTime } from "@/features/shared/utils";
+import { toIranDateTime } from "@/features/shared/utils";
 
-import { useMyRefundToUser } from "../../mutations";
-import {
-	RefundToUser,
-	RefundToUserPaymentMethod,
-	RefundToUserStatus,
-} from "../../types";
+import { useMyPurchases } from "../../mutations";
+import { Purchases, PurchasesStatus } from "../../types";
 
 /* -----------------------------
    MAIN TABLE
 ----------------------------- */
 
-export function RefundToUserTable() {
-	const { data, isLoading, isError } = useMyRefundToUser();
+export function PurchasesTable() {
+	const { data, isLoading, isError } = useMyPurchases();
 
 	if (isLoading) return <TableState type="loading" />;
 	if (isError || !data?.success) return <TableState type="error" />;
 
-	const refundToUserList = data.data ?? [];
+	const PurchasesList = data.data ?? [];
 
-	if (refundToUserList.length === 0) return <TableState type="empty" />;
+	if (PurchasesList.length === 0) return <TableState type="empty" />;
 
 	return (
 		<Table>
@@ -43,21 +39,15 @@ export function RefundToUserTable() {
 
 					<TableHead className="text-center">مبلغ (تومان)</TableHead>
 
-					<TableHead className="text-center">روش پرداخت</TableHead>
-
-					<TableHead className="text-center">کارت مبدا</TableHead>
-
-					<TableHead className="text-center">کد پیگیری</TableHead>
-
-					<TableHead className="text-center">شماره مرجع</TableHead>
-
 					<TableHead className="text-center">وضعیت</TableHead>
+
+					<TableHead className="text-center">توضیحات</TableHead>
 				</TableRow>
 			</TableHeader>
 
 			<TableBody>
-				{refundToUserList.map((item, index) => (
-					<RefundRow key={item.id} item={item} index={index} />
+				{PurchasesList.map((item, index) => (
+					<PurchasesRow key={item.id} item={item} index={index} />
 				))}
 			</TableBody>
 		</Table>
@@ -68,7 +58,7 @@ export function RefundToUserTable() {
    ROW
 ----------------------------- */
 
-function RefundRow({ item, index }: { item: RefundToUser; index: number }) {
+function PurchasesRow({ item, index }: { item: Purchases; index: number }) {
 	const date = toIranDateTime(item.created_at);
 
 	return (
@@ -85,34 +75,12 @@ function RefundRow({ item, index }: { item: RefundToUser; index: number }) {
 			</TableCell>
 
 			<TableCell className="text-center">
-				<Badge variant={paymentMethodMap[item.payment_method].variant}>
-					{paymentMethodMap[item.payment_method].label}
-				</Badge>
-			</TableCell>
-
-			<TableCell className="text-center">
-				<div className="flex flex-col items-center gap-1">
-					<span className="text-sm font-medium text-foreground">
-						{item.receiver_name}
-					</span>
-
-					<span className="text-sm">
-						{formatCardNumber(item.receiver_card_number)}
-					</span>
-				</div>
-			</TableCell>
-
-			<TableCell className="text-center">{item.tracking_code}</TableCell>
-
-			<TableCell className="text-center">
-				{item.reference_number}
-			</TableCell>
-
-			<TableCell className="text-center">
 				<Badge variant={statusMap[item.status].variant}>
 					{statusMap[item.status].label}
 				</Badge>
 			</TableCell>
+
+			<TableCell className="text-center">{item.reason}</TableCell>
 		</TableRow>
 	);
 }
@@ -122,7 +90,7 @@ function RefundRow({ item, index }: { item: RefundToUser; index: number }) {
 ----------------------------- */
 
 const statusMap: Record<
-	RefundToUserStatus,
+	PurchasesStatus,
 	{
 		label: string;
 		variant: "success" | "warning" | "destructive" | "outline";
@@ -142,23 +110,6 @@ const statusMap: Record<
 	},
 	canceled: {
 		label: "لغو شده",
-		variant: "outline",
-	},
-};
-
-const paymentMethodMap: Record<
-	RefundToUserPaymentMethod,
-	{
-		label: string;
-		variant: "success" | "warning" | "destructive" | "outline";
-	}
-> = {
-	card_to_card: {
-		label: "کارت به کارت",
-		variant: "outline",
-	},
-	online_gateway: {
-		label: "درگاه آنلاین",
 		variant: "outline",
 	},
 };
@@ -185,15 +136,9 @@ function TableState({ type }: { type: "loading" | "error" | "empty" }) {
 
 					<TableHead className="text-center">مبلغ (تومان)</TableHead>
 
-					<TableHead className="text-center">روش پرداخت</TableHead>
-
-					<TableHead className="text-center">کارت مبدا</TableHead>
-
-					<TableHead className="text-center">کد پیگیری</TableHead>
-
-					<TableHead className="text-center">شماره مرجع</TableHead>
-
 					<TableHead className="text-center">وضعیت</TableHead>
+
+					<TableHead className="text-center">توضیحات</TableHead>
 				</TableRow>
 			</TableHeader>
 		</Table>

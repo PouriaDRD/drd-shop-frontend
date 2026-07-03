@@ -9,6 +9,7 @@ import { Card } from "@/features/shared/types";
 
 import {
 	Deposit,
+	Purchases,
 	RefundToUser,
 	RefundToWallet,
 	Transaction,
@@ -30,6 +31,10 @@ export const financeApi = {
 
 	myTransactions: () => {
 		return apiClient.get<Transaction[]>(endpoints.finance.transactions);
+	},
+
+	myPurchases: () => {
+		return apiClient.get<Purchases[]>(endpoints.finance.purchases);
 	},
 
 	myRefundToWallet: () => {

@@ -20,6 +20,7 @@ import {
 } from "@/components/ui";
 import {
 	DepositRequestsTable,
+	PurchasesTable,
 	RefundToUserTable,
 	RefundToWalletTable,
 	TransactionTable,
@@ -95,6 +96,10 @@ export default function FinancePage() {
 
 						<TabsContent value="deposit-requests" className="m-0">
 							<DepositRequestsTable />
+						</TabsContent>
+
+						<TabsContent value="payments" className="m-0">
+							<PurchasesTable />
 						</TabsContent>
 
 						<TabsContent value="refund-to-wallet" className="m-0">

@@ -19,9 +19,10 @@ export const endpoints = {
 		cards: "finance/cards/",
 		wallet: "finance/my-wallet/",
 		deposits: "finance/my-deposits/",
+		purchases: "finance/my-purchases/",
 		transactions: "finance/my-transactions/",
 		requestDeposit: "finance/request-deposit/",
-		refundToWallet: "finance/my-refund-to-wallet/",
 		refundToUser: "finance/my-refund-to-user/",
+		refundToWallet: "finance/my-refund-to-wallet/",
 	},
 };
