@@ -25,4 +25,9 @@ export const endpoints = {
 		refundToUser: "finance/my-refund-to-user/",
 		refundToWallet: "finance/my-refund-to-wallet/",
 	},
+
+	shop: {
+		products: "shop/products/",
+		productDetails: (id: string) => `shop/products/${id}/`,
+	},
 };

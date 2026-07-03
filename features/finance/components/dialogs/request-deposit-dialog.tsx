@@ -17,8 +17,17 @@ import { CardToCardInfo } from "@/features/shared/components";
 
 import { RequestDepositForm } from "../forms";
 
-export function RequestDepositDialog() {
+interface Props {
+	onSuccess?: () => void;
+}
+
+export function RequestDepositDialog({ onSuccess }: Props) {
 	const [open, setOpen] = useState(false);
+
+	const handleOnSuccess = () => {
+		setOpen(false);
+		onSuccess?.();
+	};
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
@@ -42,7 +51,7 @@ export function RequestDepositDialog() {
 				<CardToCardInfo />
 
 				<div className="">
-					<RequestDepositForm onSuccess={() => setOpen(false)} />
+					<RequestDepositForm onSuccess={handleOnSuccess} />
 				</div>
 			</DialogContent>
 		</Dialog>

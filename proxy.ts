@@ -32,5 +32,5 @@ export async function proxy(request: NextRequest) {
 
 // Apply middleware to specific routes only
 export const config = {
-	matcher: ["/panel/:path*"],
+	matcher: ["/panel/:path*", "/checkout/:path*"],
 };

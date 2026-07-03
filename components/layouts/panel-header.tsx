@@ -1,4 +1,5 @@
 import { ThemeSwitcher } from "@/features/preferences/components";
+import { CartButton } from "@/features/shop/components/cart";
 
 import AppLogo from "../icons/app-logo";
 
@@ -10,6 +11,7 @@ export function PanelHeader() {
 			border-b backdrop-blur-2xl px-4 py-2.5`}>
 			<div className="flex items-center gap-4">
 				<ThemeSwitcher />
+				<CartButton />
 			</div>
 			<AppLogo />
 		</header>

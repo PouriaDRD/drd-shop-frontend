@@ -5,7 +5,11 @@ import { useMyWallet } from "@/features/finance/mutations";
 
 import { StatBaseCard } from "./stat-base-card";
 
-export function BalanceCard() {
+interface Props {
+	onSuccess?: () => void;
+}
+
+export function BalanceCard({ onSuccess }: Props) {
 	const { data, isLoading } = useMyWallet();
 
 	if (isLoading) {
@@ -35,7 +39,7 @@ export function BalanceCard() {
 			label="موجودی کیف پول"
 			value={wallet.balance.toLocaleString("fa-IR") + " تومان"}
 			small>
-			<RequestDepositDialog />
+			<RequestDepositDialog onSuccess={onSuccess} />
 		</StatBaseCard>
 	);
 }

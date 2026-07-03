@@ -5,6 +5,6 @@ export * from "./hero";
 export * from "./info-section";
 export * from "./landing.data";
 export * from "./network-readout";
-export * from "./pricing";
 export * from "./server-status";
 export * from "./social-channels";
+export * from "./vpn-plans";

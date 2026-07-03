@@ -1,14 +1,9 @@
 import { Fragment } from "react";
 
 import { Footer, Header } from "@/components/layouts";
-import {
-	CTA,
-	Features,
-	Hero,
-	InfoSection,
-	Pricing,
-} from "@/components/pages/landing";
+import { CTA, Features, Hero, InfoSection } from "@/components/pages/landing";
 import { AnnouncementsAlert } from "@/features/notifications/components";
+import { Products } from "@/features/shop/components";
 
 export default function LandingPage() {
 	return (
@@ -22,7 +17,7 @@ export default function LandingPage() {
 
 				<Features />
 
-				<Pricing />
+				<Products />
 
 				<CTA />
 

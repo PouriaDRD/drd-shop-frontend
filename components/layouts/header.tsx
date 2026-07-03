@@ -6,6 +6,7 @@ import { Menu } from "lucide-react";
 
 import { ThemeSwitcher } from "@/features/preferences/components";
 import { AppVersion } from "@/features/shared/components";
+import { CartButton } from "@/features/shop/components/cart";
 
 import AppLogo from "../icons/app-logo";
 import { navLinks } from "../pages/landing/landing.data";
@@ -24,8 +25,11 @@ export function Header() {
 	return (
 		<header className="sticky top-0 z-50 bg-background/95 backdrop-blur-xl w-full mx-auto max-w-6xl px-4">
 			<div className="flex flex-row-reverse h-18 items-center justify-between w-full">
-				<HeaderLogo />
-
+				<div className="flex items-center gap-3 md:gap-4">
+					<CartButton />
+					<ThemeSwitcher />
+					<HeaderLogo />
+				</div>
 				<HeaderNav />
 
 				<HeaderActions />
@@ -38,9 +42,8 @@ export function Header() {
 export function HeaderLogo() {
 	return (
 		<div className="flex flex-row items-center justify-center gap-4">
-			<ThemeSwitcher />
 			<Link href="/" className="shrink-0">
-				<AppLogo />
+				<AppLogo hideLogoTextOnMobile />
 			</Link>
 		</div>
 	);
@@ -78,8 +81,6 @@ export function HeaderActions() {
 export function MobileMenu() {
 	return (
 		<div className="flex items-center gap-2 md:hidden">
-			<ThemeSwitcher size="icon-sm" variant="outline" />
-
 			<Sheet>
 				<SheetTrigger asChild>
 					<Button size="icon" variant="ghost">

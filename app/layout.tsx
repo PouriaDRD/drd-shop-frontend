@@ -28,8 +28,8 @@ const keywords = [
 
 export const metadata: Metadata = {
 	title: {
-		default: "دی‌آردی وی‌پی‌ان",
-		template: "دی‌آردی وی‌پی‌ان | %s",
+		default: "دی‌آردی شاپ",
+		template: "دی‌آردی شاپ | %s",
 	},
 	description: "ساخته شده توسط پوریا دارندی",
 

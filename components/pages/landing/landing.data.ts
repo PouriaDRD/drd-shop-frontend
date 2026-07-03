@@ -123,8 +123,8 @@ export const plans: Plan[] = [
 
 export const navLinks = [
 	{ label: "ویژگی‌ها", href: "#features" },
-	{ label: "سرورها", href: "#servers" },
-	{ label: "پلن‌ها", href: "#pricing" },
+	// { label: "سرورها", href: "#servers" },
+	{ label: "محصولات", href: "#products" },
 	{ label: "پشتیبانی", href: "#info" },
 ];
 

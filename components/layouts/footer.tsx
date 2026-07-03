@@ -23,7 +23,7 @@ export function Footer() {
 						<div className="space-y-4">
 							<Link href="/" className="inline-flex">
 								<AppLogo
-									text="DRD VPN"
+									text="DRD Shop"
 									className="flex-row-reverse"
 								/>
 							</Link>
@@ -84,7 +84,7 @@ export function Footer() {
 
 					<div className="flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground md:flex-row">
 						<p>
-							© {new Date().getFullYear()} DRD VPN. تمامی حقوق
+							© {new Date().getFullYear()} DRD Shop. تمامی حقوق
 							محفوظ است.
 						</p>
 

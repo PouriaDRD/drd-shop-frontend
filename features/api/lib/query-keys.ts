@@ -16,4 +16,9 @@ export const queryKeys = {
 	notifications: {
 		announcements: ["announcements"],
 	},
+
+	shop: {
+		products: ["shop", "products"],
+		productDetails: (id: string) => ["shop", "products", id],
+	},
 };
