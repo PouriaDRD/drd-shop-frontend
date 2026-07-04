@@ -7,6 +7,12 @@ import { queryKeys } from "@/features/api/lib";
 import { shopApi } from "../api";
 import { CartItem } from "../types";
 
+export const useCheckout = () => {
+	return useMutation({
+		mutationFn: shopApi.checkout,
+	});
+};
+
 export const useMyCart = () => {
 	return useQuery({
 		queryKey: queryKeys.shop.cart,

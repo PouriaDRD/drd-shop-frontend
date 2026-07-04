@@ -9,6 +9,11 @@ import { apiClient, endpoints } from "@/features/api/lib";
 import { Cart, CartItem, Product, ProductDetail } from "../types";
 
 export const shopApi = {
+	checkout: () => {
+		// TODO: returns order
+		return apiClient.post<Cart>(endpoints.shop.checkout);
+	},
+
 	getMyCart: () => {
 		return apiClient.get<Cart>(endpoints.shop.cart);
 	},

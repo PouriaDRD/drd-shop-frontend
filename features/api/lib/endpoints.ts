@@ -28,6 +28,7 @@ export const endpoints = {
 
 	shop: {
 		cart: "shop/my-cart/",
+		checkout: "shop/checkout/",
 		products: "shop/products/",
 		productDetails: (id: string) => `shop/products/${id}/`,
 		// items

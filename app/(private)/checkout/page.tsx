@@ -11,13 +11,15 @@ import { StatBaseCard } from "@/components/pages/finance/stat-base-card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { CartEmpty, CartItemCard } from "@/features/shop/components/cart";
-import { useCart } from "@/features/shop/hooks";
+import { useCart, useHandleCheckout } from "@/features/shop/hooks";
 import { useUser } from "@/features/user/context";
 
 export default function CheckoutPage() {
 	const router = useRouter();
 	const { user } = useUser();
 	const { cart, cartItems, isLoading } = useCart();
+	const { handleOnCheckout, isPending: isCheckoutPending } =
+		useHandleCheckout({});
 
 	const cartSuccess = cart && cartItems.length > 0;
 
@@ -58,10 +60,12 @@ export default function CheckoutPage() {
 				</div>
 
 				{/* ITEMS */}
-				<div className="flex flex-col gap-3">
-					{cartItems.map((item) => (
-						<CartItemCard key={item.plan_id} item={item} />
-					))}
+				<div className="overflow-auto max-h-96">
+					<div className="flex flex-col gap-4 p-4">
+						{cartItems.map((item) => (
+							<CartItemCard key={item.plan_id} item={item} />
+						))}
+					</div>
 				</div>
 
 				<Separator />
@@ -77,8 +81,12 @@ export default function CheckoutPage() {
 						{/* CHECKOUT */}
 						<Button
 							className="w-full"
+							onClick={handleOnCheckout}
 							disabled={
-								lowBalance || isLoading || totalCartPrice <= 0
+								lowBalance ||
+								isLoading ||
+								totalCartPrice <= 0 ||
+								isCheckoutPending
 							}>
 							{lowBalance ? "موجودی کافی نیست" : `پرداخت`}
 						</Button>

@@ -1,3 +1,7 @@
+"use client";
+
+import { Activity } from "react";
+
 import { cn } from "@/features/shared/utils";
 
 import { AppIcon } from "./app-icon";
@@ -9,25 +13,28 @@ interface Props {
 	hideLogoTextOnMobile?: boolean;
 }
 
-function AppLogo({
-	className,
-	text,
-	hideLogoText,
-	hideLogoTextOnMobile,
-}: Props) {
+function AppLogo(props: Props) {
+	const {
+		className,
+		text,
+		hideLogoText,
+		hideLogoTextOnMobile = true,
+	} = props;
 	return (
 		<div
 			className={cn(
 				"flex items-center justify-center text-center gap-2",
 				className,
 			)}>
-			{!hideLogoText && (
+			<Activity mode={hideLogoText ? "hidden" : "visible"}>
 				<span
-					className={`text-xl md:text-2xl font-bold text-center pt-1 
-					${hideLogoTextOnMobile ? "hidden md:block" : ""}`}>
+					className={cn(
+						"text-xl md:text-2xl text-center pt-1 font-bold",
+						`${hideLogoTextOnMobile && "hidden md:block"}`,
+					)}>
 					{text || "DRD Shop"}
 				</span>
-			)}
+			</Activity>
 			<div className="size-8 md:size-8">
 				<AppIcon className="size-full" />
 			</div>
