@@ -1,44 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 import { ShoppingCart } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-import { useCartStore } from "../../stores";
+import { useCart } from "../../hooks";
 
 import { CartSheet } from "./cart-sheet";
 
 export function CartButton() {
-	const items = useCartStore((state) => state.items);
+	const { cartItems, isLoading } = useCart();
 
-	const count = items.reduce((sum, item) => sum + item.quantity, 0);
+	const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
 	const [open, setOpen] = useState(false);
 
 	const onClick = () => setOpen(true);
 
 	return (
-		<>
+		<Fragment>
 			<Button
+				size="icon-sm"
 				variant="outline"
-				size="icon"
 				className="relative"
+				disabled={isLoading}
 				onClick={onClick}>
-				<ShoppingCart className="size-5" />
+				<ShoppingCart className="size-4" />
 
-				{count > 0 && (
+				{totalItems > 0 && (
 					<Badge
-						className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px]"
+						className={`absolute -right-1 -top-1 flex h-5 min-w-5
+						items-center justify-center rounded-full px-1 text-[10px]`}
 						variant="default">
-						{count.toLocaleString("fa-IR")}
+						{totalItems.toLocaleString("fa-IR")}
 					</Badge>
 				)}
 			</Button>
 
-			<CartSheet open={open} onOpenChange={setOpen} />
-		</>
+			<CartSheet items={cartItems} open={open} onOpenChange={setOpen} />
+		</Fragment>
 	);
 }

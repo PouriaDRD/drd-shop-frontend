@@ -8,6 +8,7 @@ import { TooltipProvider } from "@/components/ui";
 import { QCProvider } from "@/features/api/contexts";
 import { ThemeProvider } from "@/features/preferences/contexts";
 import { AppToaster } from "@/features/shared/contexts";
+import { UserProvider } from "@/features/user/context";
 
 import "./globals.css";
 
@@ -53,7 +54,9 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
 						enableSystem
 						disableTransitionOnChange>
 						<AppToaster />
-						<TooltipProvider>{children}</TooltipProvider>
+						<TooltipProvider>
+							<UserProvider>{children}</UserProvider>
+						</TooltipProvider>
 					</ThemeProvider>
 				</QCProvider>
 			</body>

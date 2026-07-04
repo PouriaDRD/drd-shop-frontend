@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { CartStore } from "../types";
+import { CartItem, CartStore } from "../types";
 
 export const useCartStore = create<CartStore>()(
 	persist(
@@ -10,13 +10,13 @@ export const useCartStore = create<CartStore>()(
 
 			addItem: (item) => {
 				const exists = get().items.find(
-					(i) => i.planId === item.planId,
+					(i) => i.plan_id === item.plan_id,
 				);
 
 				if (exists) {
 					set({
 						items: get().items.map((i) =>
-							i.planId === item.planId
+							i.plan_id === item.plan_id
 								? {
 										...i,
 										quantity: i.quantity + item.quantity,
@@ -33,20 +33,49 @@ export const useCartStore = create<CartStore>()(
 				});
 			},
 
-			removeItem: (planId) =>
+			setItems: (items: CartItem[]) =>
+				set(() => ({
+					items,
+				})),
+
+			updateItemData: (plan_id, data) =>
 				set({
-					items: get().items.filter((i) => i.planId !== planId),
+					items: get().items.map((i) =>
+						i.plan_id === plan_id
+							? {
+									...i,
+									...data,
+								}
+							: i,
+					),
 				}),
 
-			updateQuantity: (planId, quantity) => {
+			removeItem: (plan_id) =>
+				set({
+					items: get().items.filter((i) => i.plan_id !== plan_id),
+				}),
+
+			updateItemId: (plan_id, item_id) =>
+				set({
+					items: get().items.map((i) =>
+						i.plan_id === plan_id
+							? {
+									...i,
+									id: item_id,
+								}
+							: i,
+					),
+				}),
+
+			updateQuantity: (plan_id, quantity) => {
 				if (quantity <= 0) {
-					get().removeItem(planId);
+					get().removeItem(plan_id);
 					return;
 				}
 
 				set({
 					items: get().items.map((i) =>
-						i.planId === planId
+						i.plan_id === plan_id
 							? {
 									...i,
 									quantity,
@@ -56,12 +85,12 @@ export const useCartStore = create<CartStore>()(
 				});
 			},
 
-			increaseQuantity: (planId) => {
-				const item = get().items.find((i) => i.planId === planId);
+			increaseQuantity: (plan_id) => {
+				const item = get().items.find((i) => i.plan_id === plan_id);
 				if (!item) return;
 				set({
 					items: get().items.map((i) =>
-						i.planId === planId
+						i.plan_id === plan_id
 							? {
 									...i,
 									quantity: i.quantity + 1,
@@ -71,12 +100,12 @@ export const useCartStore = create<CartStore>()(
 				});
 			},
 
-			decreaseQuantity: (planId) => {
-				const item = get().items.find((i) => i.planId === planId);
+			decreaseQuantity: (plan_id) => {
+				const item = get().items.find((i) => i.plan_id === plan_id);
 				if (!item) return;
 				set({
 					items: get().items.map((i) =>
-						i.planId === planId
+						i.plan_id === plan_id
 							? {
 									...i,
 									quantity: i.quantity - 1,
@@ -91,16 +120,18 @@ export const useCartStore = create<CartStore>()(
 					items: [],
 				}),
 
-			hasItem: (planId) => get().items.some((i) => i.planId === planId),
+			hasItem: (plan_id) =>
+				get().items.some((i) => i.plan_id === plan_id),
 
-			getItem: (planId) => get().items.find((i) => i.planId === planId),
+			getItem: (plan_id) =>
+				get().items.find((i) => i.plan_id === plan_id),
 
 			totalItems: () =>
 				get().items.reduce((sum, item) => sum + item.quantity, 0),
 
 			totalPrice: () =>
 				get().items.reduce(
-					(sum, item) => sum + item.price * item.quantity,
+					(sum, item) => sum + item.total_price * item.quantity,
 					0,
 				),
 		}),

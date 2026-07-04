@@ -12,7 +12,9 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/features/shared/utils";
+import { useUser } from "@/features/user/context";
 
+import { useCartActions } from "../hooks";
 import { useCartStore } from "../stores";
 import { Plan } from "../types";
 import { deviceLabel, getFeature } from "../utils";
@@ -20,23 +22,23 @@ import { deviceLabel, getFeature } from "../utils";
 type PlanCardProps = {
 	plan: Plan;
 	productId: string;
-	productSlug: string;
 	featured?: boolean;
 };
 
-export function PlanCard({
-	plan,
-	featured,
-	productId,
-	productSlug,
-}: PlanCardProps) {
-	const item = useCartStore((state) =>
-		state.items.find((i) => i.planId === plan.id),
-	);
+export function PlanCard({ plan, featured, productId }: PlanCardProps) {
+	const { isAuthenticated } = useUser();
+	const {
+		addItem,
+		isAddingItem,
+		decreaseQuantity,
+		increaseQuantity,
+		isDecreasingQuantity,
+		isIncreasingQuantity,
+	} = useCartActions();
 
-	const addItem = useCartStore((state) => state.addItem);
-	const increaseQuantity = useCartStore((state) => state.increaseQuantity);
-	const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
+	const item = useCartStore((state) =>
+		state.items.find((i) => i.plan_id === plan.id),
+	);
 
 	const traffic = getFeature(plan, "ترافیک");
 	const days = getFeature(plan, "روز");
@@ -62,18 +64,36 @@ export function PlanCard({
 		},
 	];
 
-	const handleSelect = () => {
+	const handleOnAddItem = () => {
 		addItem({
-			planId: plan.id,
-			productId,
-			productSlug,
-			title: plan.title,
-			description: plan.description,
-			price: plan.price,
-			features: plan.features,
+			plan_title: plan.title,
+			plan_id: plan.id,
+			product_id: productId,
 			quantity: 1,
+			unit_price: plan.price,
+			total_price: plan.price * 1,
 		});
 	};
+
+	const handleIncreaseQuantity = () => {
+		increaseQuantity(plan.id);
+	};
+
+	const handleDecreaseQuantity = () => {
+		decreaseQuantity(plan.id);
+	};
+
+	const isDisable =
+		isDecreasingQuantity ||
+		isIncreasingQuantity ||
+		isAddingItem ||
+		!isAuthenticated;
+
+	const buttonText = !isAuthenticated
+		? "ابتدا وارد شوید"
+		: !plan.is_available
+			? "ناموجود"
+			: "افزودن به سبد خرید";
 
 	return (
 		<Card
@@ -136,16 +156,17 @@ export function PlanCard({
 					<Button
 						className="w-full"
 						variant={featured ? "default" : "outline"}
-						disabled={!plan.is_available}
-						onClick={handleSelect}>
-						{plan.is_available ? "افزودن به سبد خرید" : "ناموجود"}
+						disabled={!plan.is_available || isDisable}
+						onClick={handleOnAddItem}>
+						{buttonText}
 					</Button>
 				) : (
 					<div className="flex w-full items-center justify-between rounded-lg border p-1">
 						<Button
 							size="icon"
 							variant="outline"
-							onClick={() => decreaseQuantity(plan.id)}>
+							disabled={isDisable}
+							onClick={handleDecreaseQuantity}>
 							<Minus className="size-4" />
 						</Button>
 
@@ -156,7 +177,8 @@ export function PlanCard({
 						<Button
 							size="icon"
 							variant="outline"
-							onClick={() => increaseQuantity(plan.id)}>
+							disabled={isDisable}
+							onClick={handleIncreaseQuantity}>
 							<Plus className="size-4" />
 						</Button>
 					</div>

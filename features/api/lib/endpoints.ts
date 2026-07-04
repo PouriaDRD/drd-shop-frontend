@@ -27,7 +27,12 @@ export const endpoints = {
 	},
 
 	shop: {
+		cart: "shop/my-cart/",
 		products: "shop/products/",
 		productDetails: (id: string) => `shop/products/${id}/`,
+		// items
+		addItem: "shop/my-cart/add-item/",
+		updateItem: (id: string) => `shop/my-cart/update-item/${id}/`,
+		removeItem: (id: string) => `shop/my-cart/remove-item/${id}/`,
 	},
 };

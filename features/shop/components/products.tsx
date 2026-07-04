@@ -79,7 +79,6 @@ export function Products({ className }: Props) {
 							<ProductPlans
 								id={product.id}
 								productId={product.id}
-								productSlug={product.slug}
 							/>
 						</TabsContent>
 					))}

@@ -11,14 +11,9 @@ import { PlanCard } from "./plan-card ";
 type ProductPlansProps = {
 	id: string;
 	productId: string;
-	productSlug: string;
 };
 
-export function ProductPlans({
-	id,
-	productId,
-	productSlug,
-}: ProductPlansProps) {
+export function ProductPlans({ id, productId }: ProductPlansProps) {
 	const { data, isLoading, isError } = useProductDetail(id);
 
 	if (isLoading) return <ProductPlansSkeleton />;
@@ -70,7 +65,6 @@ export function ProductPlans({
 									key={plan.id}
 									plan={plan}
 									productId={productId}
-									productSlug={productSlug}
 									featured={isFeatured(plan, groupPlans)}
 								/>
 							))}

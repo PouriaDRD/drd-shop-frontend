@@ -18,6 +18,7 @@ export const queryKeys = {
 	},
 
 	shop: {
+		cart: ["shop", "my-cart"],
 		products: ["shop", "products"],
 		productDetails: (id: string) => ["shop", "products", id],
 	},

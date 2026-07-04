@@ -6,27 +6,33 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/features/shared/utils";
 
-import { useCartStore } from "../../stores";
+import { useCartActions } from "../../hooks";
 import { type CartItem } from "../../types";
 
 type CartItemProps = {
 	item: CartItem;
 };
 
-export function CartItem({ item }: CartItemProps) {
-	const increaseQuantity = useCartStore((state) => state.increaseQuantity);
-	const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
-	const removeItem = useCartStore((state) => state.removeItem);
-
-	const totalPrice = item.price * item.quantity;
+export function CartItemCard({ item }: CartItemProps) {
+	const {
+		removeItem,
+		isRemovingItem,
+		decreaseQuantity,
+		increaseQuantity,
+		isDecreasingQuantity,
+		isIncreasingQuantity,
+	} = useCartActions();
 
 	const handleDecrease = () => {
 		if (item.quantity <= 1) {
-			removeItem(item.planId);
+			removeItem(item.plan_id);
 			return;
 		}
-		decreaseQuantity(item.planId);
+		decreaseQuantity(item.plan_id);
 	};
+
+	const isDisable =
+		isDecreasingQuantity || isIncreasingQuantity || isRemovingItem;
 
 	return (
 		<Card
@@ -35,14 +41,14 @@ export function CartItem({ item }: CartItemProps) {
 			)}>
 			{/* INFO */}
 			<div className="flex flex-col gap-1">
-				<p className="text-sm font-medium">{item.title}</p>
+				<p className="text-sm font-medium">{item.plan_title}</p>
 
 				<p className="text-xs text-muted-foreground">
-					{item.price.toLocaleString("fa-IR")} تومان
+					{item.unit_price.toLocaleString("fa-IR")} تومان
 				</p>
 
 				<p className="text-xs text-primary">
-					جمع: {totalPrice.toLocaleString("fa-IR")} تومان
+					جمع: {item.total_price.toLocaleString("fa-IR")} تومان
 				</p>
 			</div>
 
@@ -52,6 +58,7 @@ export function CartItem({ item }: CartItemProps) {
 					<Button
 						size="icon"
 						variant="ghost"
+						disabled={isDisable}
 						onClick={handleDecrease}>
 						<Minus className="size-4" />
 					</Button>
@@ -63,7 +70,8 @@ export function CartItem({ item }: CartItemProps) {
 					<Button
 						size="icon"
 						variant="ghost"
-						onClick={() => increaseQuantity(item.planId)}>
+						disabled={isDisable}
+						onClick={() => increaseQuantity(item.plan_id)}>
 						<Plus className="size-4" />
 					</Button>
 				</div>
@@ -71,7 +79,8 @@ export function CartItem({ item }: CartItemProps) {
 				<Button
 					size="icon"
 					variant="destructive"
-					onClick={() => removeItem(item.planId)}>
+					disabled={isDisable}
+					onClick={() => removeItem(item.plan_id)}>
 					<Trash2 className="size-4" />
 				</Button>
 			</div>

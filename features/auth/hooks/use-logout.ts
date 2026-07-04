@@ -4,19 +4,21 @@ import { useState } from "react";
 
 import { toast } from "sonner";
 
+import { useCartStore } from "@/features/shop/stores";
 import { useUser } from "@/features/user/context";
 
 import { logoutAction } from "../actions";
 
 export function useLogout() {
 	const [isLoading, setIsLoading] = useState(false);
-
+	const cartStore = useCartStore();
 	const { clearUser } = useUser();
 
 	const handleLogout = async () => {
 		setIsLoading(true);
 		try {
 			// clear user session
+			cartStore.clear();
 			await logoutAction();
 			clearUser();
 			// redirect to login page

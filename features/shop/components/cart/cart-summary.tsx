@@ -11,7 +11,7 @@ export function CartSummary() {
 		return items.reduce(
 			(acc, item) => {
 				acc.totalItems += item.quantity;
-				acc.totalPrice += item.price * item.quantity;
+				acc.totalPrice += item.unit_price * item.quantity;
 				return acc;
 			},
 			{ totalItems: 0, totalPrice: 0 },

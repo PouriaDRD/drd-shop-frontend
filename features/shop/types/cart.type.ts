@@ -1,19 +1,19 @@
-import { PlanFeature } from "./product.type";
+export type Cart = {
+	id: string;
+	subtotal: number;
+	discount: number;
+	total_price: number;
+	items: CartItem[];
+};
 
 export interface CartItem {
-	productId: string;
-	productSlug: string;
-
-	planId: string;
-
-	title: string;
-	description?: string | null;
-
-	price: number;
-
+	id?: string;
+	plan_id: string;
+	plan_title: string;
+	product_id: string;
 	quantity: number;
-
-	features: PlanFeature[];
+	unit_price: number;
+	total_price: number;
 }
 
 export interface CartStore {
@@ -21,19 +21,25 @@ export interface CartStore {
 
 	addItem: (item: CartItem) => void;
 
-	removeItem: (planId: string) => void;
+	setItems: (items: CartItem[]) => void;
 
-	updateQuantity: (planId: string, quantity: number) => void;
+	updateItemData: (plan_id: string, data: Partial<CartItem>) => void;
 
-	increaseQuantity: (planId: string) => void;
+	removeItem: (plan_id: string) => void;
 
-	decreaseQuantity: (planId: string) => void;
+	updateItemId: (plan_id: string, item_id: string) => void;
+
+	updateQuantity: (plan_id: string, quantity: number) => void;
+
+	increaseQuantity: (plan_id: string) => void;
+
+	decreaseQuantity: (plan_id: string) => void;
 
 	clear: () => void;
 
-	hasItem: (planId: string) => boolean;
+	hasItem: (plan_id: string) => boolean;
 
-	getItem: (planId: string) => CartItem | undefined;
+	getItem: (plan_id: string) => CartItem | undefined;
 
 	totalItems: () => number;
 

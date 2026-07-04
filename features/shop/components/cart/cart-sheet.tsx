@@ -14,22 +14,20 @@ import {
 	SheetTitle,
 } from "@/components/ui/sheet";
 
-import { useCartStore } from "../../stores";
+import { CartItem } from "../../types";
 
 import { CartEmpty } from "./cart-empty";
-import { CartItem } from "./cart-item";
+import { CartItemCard } from "./cart-item";
 import { CartSummary } from "./cart-summary";
 
 type CartSheetProps = {
+	items: CartItem[];
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
 };
 
-export function CartSheet({ open, onOpenChange }: CartSheetProps) {
-	const items = useCartStore((state) => state.items);
-	const clear = useCartStore((state) => state.clear);
-
-	const totalItems = items.reduce((s, i) => s + i.quantity, 0);
+export function CartSheet({ items, open, onOpenChange }: CartSheetProps) {
+	const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
 
 	return (
 		<Sheet open={open} onOpenChange={onOpenChange}>
@@ -53,14 +51,16 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
 				<Separator />
 
 				{/* CONTENT */}
-				<div className="flex flex-1 flex-col gap-3 overflow-y-auto p-4">
-					{items.length === 0 ? (
-						<CartEmpty />
-					) : (
-						items.map((item) => (
-							<CartItem key={item.planId} item={item} />
-						))
-					)}
+				<div className="max-h-full overflow-auto">
+					<div className="flex flex-1 flex-col gap-3 overflow-y-auto p-4">
+						{items.length === 0 ? (
+							<CartEmpty />
+						) : (
+							items.map((item) => (
+								<CartItemCard key={item.plan_id} item={item} />
+							))
+						)}
+					</div>
 				</div>
 
 				{/* FOOTER */}
@@ -70,13 +70,6 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
 							<CartSummary />
 
 							<div className="flex flex-col gap-2">
-								<Button
-									variant="outline"
-									className="w-full"
-									onClick={clear}>
-									پاک کردن
-								</Button>
-
 								<Link href="/checkout">
 									<Button className="w-full">
 										ادامه خرید
