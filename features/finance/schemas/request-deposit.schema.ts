@@ -14,14 +14,24 @@ export const requestDepositSchema = z.object({
 	// 	.default("card_to_card"),
 
 	reference_number: z
-		.string()
+		.string("شماره مرجع اجباری است")
 		.transform((v) => normalizeToEnglish(v))
-		.pipe(z.string().min(1).max(255)),
+		.pipe(
+			z
+				.string("شماره مرجع اجباری است")
+				.min(1, "شماره مرجع اجباری است")
+				.max(255, "شماره مرجع  بیش از حد مجاز است"),
+		),
 
 	tracking_code: z
-		.string()
+		.string("کد رهگیری اجباری است ")
 		.transform((v) => normalizeToEnglish(v))
-		.pipe(z.string().min(1).max(255)),
+		.pipe(
+			z
+				.string("کد رهگیری اجباری است ")
+				.min(1, "کد رهگیری را وارد کنید.")
+				.max(255, "کد رهگیری بیش از حد مجاز است."),
+		),
 
 	sender_name: z
 		.string("نام صاحب کارت را وارد کنید.")

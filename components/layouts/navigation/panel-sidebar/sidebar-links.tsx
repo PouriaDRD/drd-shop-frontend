@@ -11,14 +11,14 @@ import {
 import { isLinkActive } from "@/features/shared/utils";
 import { User } from "@/features/user/types";
 
-import { MOBILE_LINKS, NavigationLink } from "../links.nav";
+import { NavigationLink, SIDEBAR_LINKS } from "../links.nav";
 
 interface Props {
 	user: User;
 }
 
 export default function SidebarLinks({ user }: Props) {
-	const allowedItems = MOBILE_LINKS.filter((item) => {
+	const allowedItems = SIDEBAR_LINKS.filter((item) => {
 		// No allowedRoles = accessible to all
 		if (!item.allowedRoles) return true;
 

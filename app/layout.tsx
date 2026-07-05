@@ -1,13 +1,14 @@
 import { PropsWithChildren } from "react";
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 
 import { TooltipProvider } from "@/components/ui";
 import { QCProvider } from "@/features/api/contexts";
 import { ThemeProvider } from "@/features/preferences/contexts";
 import { AppToaster } from "@/features/shared/contexts";
+import { cn } from "@/features/shared/utils";
 import { UserProvider } from "@/features/user/context";
 
 import "./globals.css";
@@ -44,9 +45,13 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
 			lang="fa-IR"
 			suppressHydrationWarning
 			data-scroll-behavior="smooth"
-			className={`h-full antialiased font-iran-yekan-x ss02
-			${geistSans.variable} ${geistMono.variable} ${peyda.variable} ${iranYekanX.variable}`}>
-			<body>
+			className={cn(
+				`${peyda.variable}`,
+				//  ${iranYekanX.variable}}`,
+				// `${geistSans.variable} ${geistMono.variable}`,
+				`h-full antialiased`,
+			)}>
+			<body className="font-peyda">
 				<QCProvider>
 					<ThemeProvider
 						attribute="class"
@@ -64,15 +69,15 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
 	);
 }
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
-});
+// const geistSans = Geist({
+// 	variable: "--font-geist-sans",
+// 	subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+// 	variable: "--font-geist-mono",
+// 	subsets: ["latin"],
+// });
 
 const peyda = localFont({
 	src: [
@@ -125,18 +130,18 @@ const peyda = localFont({
 	variable: "--font-peyda",
 });
 
-const iranYekanX = localFont({
-	src: [
-		{
-			weight: "normal",
-			style: "normal",
-			path: "./assets/fonts/IRANYekanX/IRANYekanX-Regular.woff",
-		},
-		{
-			weight: "bold",
-			style: "normal",
-			path: "./assets/fonts/IRANYekanX/IRANYekanX-Bold.woff",
-		},
-	],
-	variable: "--font-iran-yekan-x",
-});
+// const iranYekanX = localFont({
+// 	src: [
+// 		{
+// 			weight: "normal",
+// 			style: "normal",
+// 			path: "./assets/fonts/IRANYekanX/IRANYekanX-Regular.woff",
+// 		},
+// 		{
+// 			weight: "bold",
+// 			style: "normal",
+// 			path: "./assets/fonts/IRANYekanX/IRANYekanX-Bold.woff",
+// 		},
+// 	],
+// 	variable: "--font-iran-yekan-x",
+// });

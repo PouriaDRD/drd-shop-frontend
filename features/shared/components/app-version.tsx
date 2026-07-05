@@ -17,7 +17,7 @@ const AppVersion = (props: AppVersionProps) => {
 				props.className,
 			)}>
 			<span>نسخه</span>
-			<span className="font-mono">{appVersion}</span>
+			<span>{appVersion}</span>
 		</div>
 	);
 };

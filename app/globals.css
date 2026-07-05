@@ -19,26 +19,6 @@
 	scroll-padding-top: 60px;
 }
 
-@layer utilities {
-	.glass-effect {
-		backdrop-filter: blur(20px) saturate(150%);
-		-webkit-backdrop-filter: blur(20px) saturate(150%);
-	}
-
-	.app-px {
-		/* @apply px-4 sm:px-16 md:px-28 lg:px-40 xl:px-52; */
-		@apply px-4 md:px-16 lg:px-24 xl:px-48 2xl:px-80;
-	}
-}
-
-.r2l {
-	direction: rtl;
-}
-
-.l2r {
-	direction: ltr;
-}
-
 .ss02 {
 	font-feature-settings: "ss02";
 	-moz-font-feature-settings: "ss02";
@@ -170,8 +150,5 @@
 	button:not(:disabled),
 	[role="button"]:not(:disabled) {
 		cursor: pointer;
-	}
-	html {
-		@apply font-sans;
 	}
 }

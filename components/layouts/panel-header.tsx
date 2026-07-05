@@ -1,7 +1,14 @@
+"use client";
+
+import Link from "next/link";
+
+import { HeadsetIcon } from "lucide-react";
+
 import { ThemeSwitcher } from "@/features/preferences/components";
 import { CartButton } from "@/features/shop/components/cart";
 
 import AppLogo from "../icons/app-logo";
+import { Button } from "../ui";
 
 export function PanelHeader() {
 	return (
@@ -12,6 +19,11 @@ export function PanelHeader() {
 			<div className="flex items-center gap-4">
 				<ThemeSwitcher />
 				<CartButton />
+				<Link href={"/panel/support"}>
+					<Button variant={"outline"} size={"icon-sm"}>
+						<HeadsetIcon />
+					</Button>
+				</Link>
 			</div>
 			<AppLogo />
 		</header>

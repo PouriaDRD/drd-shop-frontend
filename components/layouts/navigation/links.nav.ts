@@ -1,10 +1,10 @@
 import { Route } from "next";
 
 import {
-	HeadsetIcon,
 	LayoutDashboard,
 	LucideIcon,
-	ShoppingBasket,
+	ShoppingBag,
+	ShoppingCart,
 	WalletIcon,
 } from "lucide-react";
 
@@ -25,21 +25,21 @@ export const SIDEBAR_LINKS: NavigationLink[] = [
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 	{
+		name: "سفارشات",
+		href: "/panel/orders",
+		Icon: ShoppingBag,
+		allowedRoles: ["admin", "superuser", "user"],
+	},
+	{
 		name: "بازارچه",
 		href: "/panel/bazaar",
-		Icon: ShoppingBasket,
+		Icon: ShoppingCart,
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 	{
 		name: "مالی",
 		href: "/panel/finance",
 		Icon: WalletIcon,
-		allowedRoles: ["admin", "superuser", "user"],
-	},
-	{
-		name: "پشتیبانی",
-		href: "/panel/support",
-		Icon: HeadsetIcon,
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 ];
@@ -52,21 +52,21 @@ export const MOBILE_LINKS: NavigationLink[] = [
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 	{
+		name: "سفارشات",
+		href: "/panel/orders",
+		Icon: ShoppingBag,
+		allowedRoles: ["admin", "superuser", "user"],
+	},
+	{
 		name: "بازارچه",
 		href: "/panel/bazaar",
-		Icon: ShoppingBasket,
+		Icon: ShoppingCart,
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 	{
 		name: "مالی",
 		href: "/panel/finance",
 		Icon: WalletIcon,
-		allowedRoles: ["admin", "superuser", "user"],
-	},
-	{
-		name: "پشتیبانی",
-		href: "/panel/support",
-		Icon: HeadsetIcon,
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 ];

@@ -138,7 +138,7 @@ export function CardToCardInfo() {
 					className="
 						rounded-lg border bg-muted/40
 						px-3 py-3 sm:px-4
-						text-center font-mono
+						text-center
 						text-base sm:text-lg
 						tracking-[0.18em]
 						break-all

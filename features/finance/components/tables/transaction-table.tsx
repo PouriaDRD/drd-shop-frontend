@@ -112,7 +112,7 @@ const TX_TYPE_MAP: Record<
 
 	purchase: {
 		label: "خرید",
-		color: "warning",
+		color: "info",
 	},
 
 	refund_to_wallet: {

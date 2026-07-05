@@ -29,7 +29,7 @@ function AppLogo(props: Props) {
 			<Activity mode={hideLogoText ? "hidden" : "visible"}>
 				<span
 					className={cn(
-						"text-xl md:text-2xl text-center pt-1 font-bold",
+						"text-xl md:text-2xl text-center pt-0.5 font-bold",
 						`${hideLogoTextOnMobile && "hidden md:block"}`,
 					)}>
 					{text || "DRD Shop"}

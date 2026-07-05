@@ -31,7 +31,7 @@ function Countdown({ countdown, onResend }: Props) {
 				)}
 				<span
 					className={cn(
-						"font-mono text-sm font-semibold tabular-nums",
+						"text-sm font-semibold tabular-nums",
 						canResend ? "text-muted-foreground" : "",
 					)}>
 					{formatted}

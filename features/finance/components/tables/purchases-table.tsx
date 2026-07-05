@@ -97,8 +97,8 @@ const statusMap: Record<
 	}
 > = {
 	pending: {
-		label: "در انتظار",
-		variant: "warning",
+		label: "درحال بررسی",
+		variant: "outline",
 	},
 	approved: {
 		label: "تایید شده",

@@ -52,7 +52,7 @@ export function PlanCard({ plan, featured, productId }: PlanCardProps) {
 		},
 		{
 			icon: Calendar,
-			label: days ? `${days} روز` : "بدون محدودیت زمانی",
+			label: days ? `${days} روزه` : "بدون محدودیت زمانی",
 		},
 		{
 			icon: MapPin,

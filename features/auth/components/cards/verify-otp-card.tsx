@@ -32,7 +32,7 @@ export default function VerifyOtpCard({ otpType }: Props) {
 
 				<CardDescription>
 					کد به{" "}
-					<span dir="ltr" className="font-mono font-bold">
+					<span dir="ltr" className="font-bold">
 						{email}
 					</span>{" "}
 					ارسال شد!

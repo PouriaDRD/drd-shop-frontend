@@ -79,7 +79,7 @@ function MenuItem({ href, Icon, name }: NavigationLink) {
 
 function MobileNavigationSkeleton() {
 	return (
-		<nav className="sticky bottom-0 z-50 w-full border-t border-border/95 bg-sidebar/95 backdrop-blur-xl">
+		<nav className="sticky md:hidden bottom-0 z-50 w-full border-t border-border/95 bg-sidebar/95 backdrop-blur-xl">
 			<div
 				className="grid items-center px-4 py-2"
 				style={{

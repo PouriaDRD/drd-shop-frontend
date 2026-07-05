@@ -1,5 +1,7 @@
 "use client";
 
+import { useMemo } from "react";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import DateObject from "react-date-object";
@@ -34,7 +36,9 @@ export function useRequestDepositForm({ onSuccess }: Props) {
 	const queryClient = useQueryClient();
 	const mutation = useRequestDeposit();
 
-	const today = new DateObject({ calendar: persian });
+	const today = useMemo(() => {
+		return new DateObject({ calendar: persian });
+	}, []);
 
 	const form = useForm<RequestDepositFieldValues>({
 		resolver: zodResolver(requestDepositSchema),
