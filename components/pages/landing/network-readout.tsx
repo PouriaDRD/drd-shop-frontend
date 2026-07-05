@@ -248,7 +248,7 @@ function NetworkServerItem({ server, state }: NetworkServerItemProps) {
 					<div className="font-medium">{server.id}</div>
 
 					<div className="text-xs text-muted-foreground">
-						{server.city}
+						{server.country} - {server.city}
 					</div>
 				</div>
 			</div>

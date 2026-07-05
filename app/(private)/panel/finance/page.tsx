@@ -1,3 +1,5 @@
+"use client";
+
 import {
 	ArrowLeftRight,
 	BanknoteArrowDown,
@@ -62,7 +64,7 @@ export default function FinancePage() {
 									value="deposit-requests"
 									className="shrink-0 gap-2 px-4">
 									<BanknoteArrowDown className="size-4" />
-									درخواست واریز
+									واریزی‌ها
 								</TabsTrigger>
 
 								<TabsTrigger

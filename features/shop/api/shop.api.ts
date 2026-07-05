@@ -6,7 +6,14 @@
 
 import { apiClient, endpoints } from "@/features/api/lib";
 
-import { Cart, CartItem, Product, ProductDetail } from "../types";
+import {
+	Cart,
+	CartItem,
+	Order,
+	Product,
+	ProductDetail,
+	VpnService,
+} from "../types";
 
 export const shopApi = {
 	checkout: () => {
@@ -52,5 +59,15 @@ export const shopApi = {
 			id: string;
 			deleted: boolean;
 		}>(endpoints.shop.removeItem(item_id));
+	},
+
+	// orders
+	getMyOrders: () => {
+		return apiClient.get<Order[]>(endpoints.shop.myOrders);
+	},
+
+	// vpn services
+	getMyVpnServices: () => {
+		return apiClient.get<VpnService[]>(endpoints.shop.myVpnServices);
 	},
 };

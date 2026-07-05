@@ -1,3 +1,5 @@
+"use client";
+
 import { PageHeader, PageLayout } from "@/components/pages";
 import { Products } from "@/features/shop/components";
 

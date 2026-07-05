@@ -21,5 +21,7 @@ export const queryKeys = {
 		cart: ["shop", "my-cart"],
 		products: ["shop", "products"],
 		productDetails: (id: string) => ["shop", "products", id],
+		myOrders: ["shop", "my-orders"],
+		myVpnServices: ["shop", "my-vpn-services"],
 	},
 };

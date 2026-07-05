@@ -51,7 +51,7 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
 				// `${geistSans.variable} ${geistMono.variable}`,
 				`h-full antialiased`,
 			)}>
-			<body className="font-peyda">
+			<body className="font-peyda" suppressHydrationWarning>
 				<QCProvider>
 					<ThemeProvider
 						attribute="class"

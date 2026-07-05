@@ -1,3 +1,5 @@
+"use client";
+
 import { PageHeader, PageLayout } from "@/components/pages";
 
 function SupportPage() {

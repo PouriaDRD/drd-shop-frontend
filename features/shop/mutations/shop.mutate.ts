@@ -70,3 +70,27 @@ export const useRemoveItem = () => {
 		mutationFn: (item_id: string) => shopApi.removeItem(item_id),
 	});
 };
+
+/**
+ * Get my orders
+ */
+export const useMyOrders = () => {
+	return useQuery({
+		queryKey: queryKeys.shop.myOrders,
+		queryFn: shopApi.getMyOrders,
+		// auto refresh every 120 seconds
+		refetchInterval: 120 * 1000,
+	});
+};
+
+/**
+ * Get my vpn services
+ */
+export const useMyVpnServices = () => {
+	return useQuery({
+		queryKey: queryKeys.shop.myVpnServices,
+		queryFn: shopApi.getMyVpnServices,
+		// auto refresh every 120 seconds
+		refetchInterval: 120 * 1000,
+	});
+};

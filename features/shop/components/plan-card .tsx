@@ -102,7 +102,9 @@ export function PlanCard({ plan, featured, productId }: PlanCardProps) {
 				!plan.is_available && "opacity-50",
 			)}>
 			{featured && (
-				<Badge className="absolute left-4 top-4">پیشنهاد ویژه</Badge>
+				<Badge className="absolute left-4 top-4" variant={"info"}>
+					پیشنهاد ویژه
+				</Badge>
 			)}
 
 			<CardHeader className="pb-4">

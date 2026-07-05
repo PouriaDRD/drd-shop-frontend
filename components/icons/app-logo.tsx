@@ -13,13 +13,8 @@ interface Props {
 	hideLogoTextOnMobile?: boolean;
 }
 
-function AppLogo(props: Props) {
-	const {
-		className,
-		text,
-		hideLogoText,
-		hideLogoTextOnMobile = true,
-	} = props;
+export default function AppLogo(props: Props) {
+	const { className, hideLogoText, hideLogoTextOnMobile = true } = props;
 	return (
 		<div
 			className={cn(
@@ -28,18 +23,17 @@ function AppLogo(props: Props) {
 			)}>
 			<Activity mode={hideLogoText ? "hidden" : "visible"}>
 				<span
+					suppressHydrationWarning
 					className={cn(
-						"text-xl md:text-2xl text-center pt-0.5 font-bold",
+						"font-bold text-xl md:text-2xl text-center pt-1",
 						`${hideLogoTextOnMobile && "hidden md:block"}`,
 					)}>
-					{text || "DRD Shop"}
+					DRD Shop
 				</span>
 			</Activity>
-			<div className="size-8 md:size-8">
+			<div className="size-7 md:size-8">
 				<AppIcon className="size-full" />
 			</div>
 		</div>
 	);
 }
-
-export default AppLogo;

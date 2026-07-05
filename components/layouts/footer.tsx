@@ -22,10 +22,7 @@ export function Footer() {
 						{/* Brand */}
 						<div className="space-y-4">
 							<Link href="/" className="inline-flex">
-								<AppLogo
-									text="DRD Shop"
-									className="flex-row-reverse"
-								/>
+								<AppLogo className="flex-row-reverse" />
 							</Link>
 
 							<p className="max-w-sm text-sm leading-7 text-muted-foreground">

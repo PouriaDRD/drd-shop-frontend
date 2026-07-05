@@ -62,7 +62,7 @@ export function HeroActions() {
 			</Button>
 
 			<Button size="lg" variant="outline" asChild>
-				<Link href="#pricing">مشاهده پلن‌ها</Link>
+				<Link href="#products">مشاهده پلن‌ها</Link>
 			</Button>
 		</div>
 	);

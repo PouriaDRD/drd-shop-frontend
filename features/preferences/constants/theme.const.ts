@@ -15,7 +15,7 @@ export const THEMES: Theme[] = [
 	},
 	{
 		value: "system",
-		label: "سیستم",
+		label: "هماهنگ با سیستم",
 		icon: LaptopIcon,
 	},
 ];

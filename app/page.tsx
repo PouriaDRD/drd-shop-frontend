@@ -2,7 +2,7 @@ import { Fragment } from "react";
 
 import { Footer, Header } from "@/components/layouts";
 import { CTA, Features, Hero, InfoSection } from "@/components/pages/landing";
-import { AnnouncementsAlert } from "@/features/notifications/components";
+import { AnnouncementsAlert } from "@/features/notifications/components/alerts";
 import { Products } from "@/features/shop/components";
 
 export default function LandingPage() {

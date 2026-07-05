@@ -49,7 +49,7 @@ export const useHandleCheckout = ({ onSuccess }: Props) => {
 					toast.success("پرداخت با موفقیت انجام شد!");
 					cartStore.clear();
 					onSuccess?.();
-					router.push("/panel/finance");
+					router.push("/panel/orders");
 				}
 			},
 			onError: () => {

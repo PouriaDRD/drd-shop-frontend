@@ -10,24 +10,25 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui";
-import { formatCardNumber, toIranDateTime } from "@/features/shared/utils";
+import { toIranDateTime } from "@/features/shared/utils";
 
-import { useMyDeposits } from "../../mutations";
-import { Deposit, DepositPaymentMethod, DepositStatus } from "../../types";
+import { useMyOrders } from "../../mutations";
+import { Order, OrderStatus } from "../../types";
+import { OrderDetailDialog } from "../dialogs";
 
 /* -----------------------------
    MAIN TABLE
 ----------------------------- */
 
-export function DepositRequestsTable() {
-	const { data, isLoading, isError } = useMyDeposits();
+export function MyOrdersTable() {
+	const { data, isLoading, isError } = useMyOrders();
 
 	if (isLoading) return <TableState type="loading" />;
 	if (isError || !data?.success) return <TableState type="error" />;
 
-	const depositRequests = data.data ?? [];
+	const refundList = data.data ?? [];
 
-	if (depositRequests.length === 0) return <TableState type="empty" />;
+	if (refundList.length === 0) return <TableState type="empty" />;
 
 	return (
 		<div className="max-h-96 overflow-auto flex">
@@ -42,23 +43,15 @@ export function DepositRequestsTable() {
 							مبلغ (تومان)
 						</TableHead>
 
-						<TableHead className="text-center">
-							روش پرداخت
-						</TableHead>
-
 						<TableHead className="text-center">وضعیت</TableHead>
 
-						<TableHead className="text-center">
-							کارت کاربر
-						</TableHead>
-
-						<TableHead className="text-center">پیگیری</TableHead>
+						<TableHead className="text-center">عملیات</TableHead>
 					</TableRow>
 				</TableHeader>
 
 				<TableBody>
-					{depositRequests.map((item, index) => (
-						<DepositRow key={item.id} item={item} index={index} />
+					{refundList.map((item, index) => (
+						<RefundRow key={item.id} item={item} index={index} />
 					))}
 				</TableBody>
 			</Table>
@@ -70,7 +63,7 @@ export function DepositRequestsTable() {
    ROW
 ----------------------------- */
 
-function DepositRow({ item, index }: { item: Deposit; index: number }) {
+function RefundRow({ item, index }: { item: Order; index: number }) {
 	const date = toIranDateTime(item.created_at);
 
 	return (
@@ -83,13 +76,7 @@ function DepositRow({ item, index }: { item: Deposit; index: number }) {
 			</TableCell>
 
 			<TableCell className="text-center">
-				{item.amount.toLocaleString("fa-IR")}
-			</TableCell>
-
-			<TableCell className="text-center">
-				<Badge variant={paymentMethodMap[item.payment_method].variant}>
-					{paymentMethodMap[item.payment_method].label}
-				</Badge>
+				{item.total_price.toLocaleString("fa-IR")}
 			</TableCell>
 
 			<TableCell className="text-center">
@@ -99,20 +86,7 @@ function DepositRow({ item, index }: { item: Deposit; index: number }) {
 			</TableCell>
 
 			<TableCell className="text-center">
-				<div className="flex flex-col items-center gap-1">
-					<span className="text-sm font-medium text-foreground">
-						{item.sender_name}
-					</span>
-
-					<span className="text-sm">
-						{formatCardNumber(item.sender_card_number)}
-					</span>
-				</div>
-			</TableCell>
-
-			<TableCell className="text-center flex flex-col gap-2">
-				<span>مرجع: {item.reference_number}</span>
-				<span>رهگیری: {item.tracking_code}</span>
+				<OrderDetailDialog orderItem={item.items} />
 			</TableCell>
 		</TableRow>
 	);
@@ -123,7 +97,7 @@ function DepositRow({ item, index }: { item: Deposit; index: number }) {
 ----------------------------- */
 
 const statusMap: Record<
-	DepositStatus,
+	OrderStatus,
 	{
 		label: string;
 		variant: "success" | "warning" | "destructive" | "outline";
@@ -133,11 +107,11 @@ const statusMap: Record<
 		label: "در انتظار",
 		variant: "warning",
 	},
-	approved: {
-		label: "تایید شده",
+	paid: {
+		label: "پرداخت شده",
 		variant: "success",
 	},
-	rejected: {
+	failed: {
 		label: "رد شده",
 		variant: "destructive",
 	},
@@ -147,28 +121,11 @@ const statusMap: Record<
 	},
 };
 
-const paymentMethodMap: Record<
-	DepositPaymentMethod,
-	{
-		label: string;
-		variant: "success" | "warning" | "destructive" | "outline";
-	}
-> = {
-	card_to_card: {
-		label: "کارت به کارت",
-		variant: "outline",
-	},
-	online_gateway: {
-		label: "درگاه آنلاین",
-		variant: "outline",
-	},
-};
-
 /* -----------------------------
    STATE
 ----------------------------- */
 
-function TableState({ type }: { type: "loading" | "empty" | "error" }) {
+function TableState({ type }: { type: "loading" | "error" | "empty" }) {
 	const captionMap = {
 		loading: "در حال بارگذاری...",
 		empty: "هیچ تراکنشی وجود ندارد",
@@ -186,13 +143,9 @@ function TableState({ type }: { type: "loading" | "empty" | "error" }) {
 
 					<TableHead className="text-center">مبلغ (تومان)</TableHead>
 
-					<TableHead className="text-center">روش پرداخت</TableHead>
-
 					<TableHead className="text-center">وضعیت</TableHead>
 
-					<TableHead className="text-center">کارت کاربر</TableHead>
-
-					<TableHead className="text-center">پیگیری</TableHead>
+					<TableHead className="text-center">عملیات</TableHead>
 				</TableRow>
 			</TableHeader>
 		</Table>

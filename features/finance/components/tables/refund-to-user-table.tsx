@@ -45,13 +45,11 @@ export function RefundToUserTable() {
 
 					<TableHead className="text-center">روش پرداخت</TableHead>
 
+					<TableHead className="text-center">وضعیت</TableHead>
+
 					<TableHead className="text-center">کارت مبدا</TableHead>
 
-					<TableHead className="text-center">کد پیگیری</TableHead>
-
-					<TableHead className="text-center">شماره مرجع</TableHead>
-
-					<TableHead className="text-center">وضعیت</TableHead>
+					<TableHead className="text-center">پیگیری</TableHead>
 				</TableRow>
 			</TableHeader>
 
@@ -91,6 +89,12 @@ function RefundRow({ item, index }: { item: RefundToUser; index: number }) {
 			</TableCell>
 
 			<TableCell className="text-center">
+				<Badge variant={statusMap[item.status].variant}>
+					{statusMap[item.status].label}
+				</Badge>
+			</TableCell>
+
+			<TableCell className="text-center">
 				<div className="flex flex-col items-center gap-1">
 					<span className="text-sm font-medium text-foreground">
 						{item.receiver_name}
@@ -102,16 +106,9 @@ function RefundRow({ item, index }: { item: RefundToUser; index: number }) {
 				</div>
 			</TableCell>
 
-			<TableCell className="text-center">{item.tracking_code}</TableCell>
-
-			<TableCell className="text-center">
-				{item.reference_number}
-			</TableCell>
-
-			<TableCell className="text-center">
-				<Badge variant={statusMap[item.status].variant}>
-					{statusMap[item.status].label}
-				</Badge>
+			<TableCell className="text-center flex flex-col gap-2">
+				<span>مرجع: {item.reference_number}</span>
+				<span>رهگیری: {item.tracking_code}</span>
 			</TableCell>
 		</TableRow>
 	);
@@ -187,13 +184,11 @@ function TableState({ type }: { type: "loading" | "error" | "empty" }) {
 
 					<TableHead className="text-center">روش پرداخت</TableHead>
 
+					<TableHead className="text-center">وضعیت</TableHead>
+
 					<TableHead className="text-center">کارت مبدا</TableHead>
 
-					<TableHead className="text-center">کد پیگیری</TableHead>
-
-					<TableHead className="text-center">شماره مرجع</TableHead>
-
-					<TableHead className="text-center">وضعیت</TableHead>
+					<TableHead className="text-center">پیگیری</TableHead>
 				</TableRow>
 			</TableHeader>
 		</Table>

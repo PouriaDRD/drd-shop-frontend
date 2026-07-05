@@ -87,7 +87,7 @@ function TransactionRow({ tx, index }: { tx: Transaction; index: number }) {
 				<Badge variant={type.color}>{type.label}</Badge>
 			</TableCell>
 
-			<TableCell className="text-center truncate max-w-24">
+			<TableCell className="text-center whitespace-normal wrap-break-word max-w-24">
 				{tx.description}
 			</TableCell>
 		</TableRow>
