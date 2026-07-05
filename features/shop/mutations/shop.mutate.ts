@@ -15,7 +15,7 @@ export const useCheckout = () => {
 
 export const useMyCart = () => {
 	return useQuery({
-		queryKey: queryKeys.shop.cart,
+		queryKey: queryKeys.billing.cart,
 		queryFn: shopApi.getMyCart,
 		// auto refresh every 20 seconds
 		refetchInterval: 20 * 1000,
@@ -24,7 +24,7 @@ export const useMyCart = () => {
 
 export const useProducts = () => {
 	return useQuery({
-		queryKey: queryKeys.shop.products,
+		queryKey: queryKeys.commerce.products,
 		queryFn: shopApi.getProducts,
 		// auto refresh every 120 seconds
 		refetchInterval: 120 * 1000,
@@ -33,7 +33,7 @@ export const useProducts = () => {
 
 export const useProductDetail = (id: string) => {
 	return useQuery({
-		queryKey: queryKeys.shop.productDetails(id),
+		queryKey: queryKeys.commerce.productDetails(id),
 		queryFn: () => shopApi.getProductDetails(id),
 	});
 };
@@ -76,7 +76,7 @@ export const useRemoveItem = () => {
  */
 export const useMyOrders = () => {
 	return useQuery({
-		queryKey: queryKeys.shop.myOrders,
+		queryKey: queryKeys.billing.myOrders,
 		queryFn: shopApi.getMyOrders,
 		// auto refresh every 120 seconds
 		refetchInterval: 120 * 1000,
@@ -88,7 +88,7 @@ export const useMyOrders = () => {
  */
 export const useMyVpnServices = () => {
 	return useQuery({
-		queryKey: queryKeys.shop.myVpnServices,
+		queryKey: queryKeys.commerce.myV2rayServices,
 		queryFn: shopApi.getMyVpnServices,
 		// auto refresh every 120 seconds
 		refetchInterval: 120 * 1000,

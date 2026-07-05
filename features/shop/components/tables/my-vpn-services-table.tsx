@@ -14,7 +14,7 @@ import { toIranDateTime } from "@/features/shared/utils";
 
 import { useMyVpnServices } from "../../mutations";
 import { VpnService } from "../../types";
-import { VPNServiceDialog } from "../dialogs";
+import { V2rayVPNDialog } from "../dialogs";
 
 /* -----------------------------
    MAIN TABLE
@@ -95,7 +95,7 @@ function ServiceRow({ item, index }: { item: VpnService; index: number }) {
 			</TableCell>
 
 			<TableCell className="text-center">
-				<VPNServiceDialog service={item} />
+				<V2rayVPNDialog service={item} />
 			</TableCell>
 		</TableRow>
 	);

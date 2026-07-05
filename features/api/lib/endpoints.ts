@@ -26,18 +26,20 @@ export const endpoints = {
 		refundToWallet: "finance/my-refund-to-wallet/",
 	},
 
-	shop: {
-		cart: "shop/my-cart/",
-		checkout: "shop/checkout/",
-		products: "shop/products/",
-		productDetails: (id: string) => `shop/products/${id}/`,
+	billing: {
+		cart: "billing/my-cart/",
+		checkout: "billing/checkout/",
+
+		myOrders: "billing/my-orders/",
 		// items
-		addItem: "shop/my-cart/add-item/",
-		updateItem: (id: string) => `shop/my-cart/update-item/${id}/`,
-		removeItem: (id: string) => `shop/my-cart/remove-item/${id}/`,
-		// orders
-		myOrders: "shop/my-orders/",
-		// vpn services
-		myVpnServices: "shop/my-vpn-services/",
+		addItem: "billing/my-cart/add-item/",
+		updateItem: (id: string) => `billing/my-cart/update-item/${id}/`,
+		removeItem: (id: string) => `billing/my-cart/remove-item/${id}/`,
+	},
+
+	commerce: {
+		products: "commerce/products/",
+		productDetails: (id: string) => `commerce/products/${id}/`,
+		myV2rayServices: "commerce/my-v2ray-vpn-services/",
 	},
 };

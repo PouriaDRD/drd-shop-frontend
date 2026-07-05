@@ -29,7 +29,7 @@ export function useCartActions() {
 				}
 				await Promise.all([
 					queryClient.invalidateQueries({
-						queryKey: queryKeys.shop.cart,
+						queryKey: queryKeys.billing.cart,
 					}),
 				]);
 			},
@@ -37,7 +37,7 @@ export function useCartActions() {
 				cartStore.removeItem(item.plan_id);
 				await Promise.all([
 					queryClient.invalidateQueries({
-						queryKey: queryKeys.shop.cart,
+						queryKey: queryKeys.billing.cart,
 					}),
 				]);
 			},
@@ -62,7 +62,7 @@ export function useCartActions() {
 					}
 					await Promise.all([
 						queryClient.invalidateQueries({
-							queryKey: queryKeys.shop.cart,
+							queryKey: queryKeys.billing.cart,
 						}),
 					]);
 				},
@@ -70,7 +70,7 @@ export function useCartActions() {
 					cartStore.decreaseQuantity(plan_id);
 					await Promise.all([
 						queryClient.invalidateQueries({
-							queryKey: queryKeys.shop.cart,
+							queryKey: queryKeys.billing.cart,
 						}),
 					]);
 				},
@@ -95,7 +95,7 @@ export function useCartActions() {
 					}
 					await Promise.all([
 						queryClient.invalidateQueries({
-							queryKey: queryKeys.shop.cart,
+							queryKey: queryKeys.billing.cart,
 						}),
 					]);
 				},
@@ -103,7 +103,7 @@ export function useCartActions() {
 					cartStore.addItem(item);
 					await Promise.all([
 						queryClient.invalidateQueries({
-							queryKey: queryKeys.shop.cart,
+							queryKey: queryKeys.billing.cart,
 						}),
 					]);
 				},
@@ -123,7 +123,7 @@ export function useCartActions() {
 						}
 						await Promise.all([
 							queryClient.invalidateQueries({
-								queryKey: queryKeys.shop.cart,
+								queryKey: queryKeys.billing.cart,
 							}),
 						]);
 					},
@@ -131,7 +131,7 @@ export function useCartActions() {
 						cartStore.increaseQuantity(plan_id);
 						await Promise.all([
 							queryClient.invalidateQueries({
-								queryKey: queryKeys.shop.cart,
+								queryKey: queryKeys.billing.cart,
 							}),
 						]);
 					},
@@ -153,7 +153,7 @@ export function useCartActions() {
 				}
 				await Promise.all([
 					queryClient.invalidateQueries({
-						queryKey: queryKeys.shop.cart,
+						queryKey: queryKeys.billing.cart,
 					}),
 				]);
 			},
@@ -161,7 +161,7 @@ export function useCartActions() {
 				cartStore.addItem(item);
 				await Promise.all([
 					queryClient.invalidateQueries({
-						queryKey: queryKeys.shop.cart,
+						queryKey: queryKeys.billing.cart,
 					}),
 				]);
 			},

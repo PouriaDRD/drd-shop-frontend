@@ -17,11 +17,14 @@ export const queryKeys = {
 		announcements: ["announcements"],
 	},
 
-	shop: {
-		cart: ["shop", "my-cart"],
-		products: ["shop", "products"],
-		productDetails: (id: string) => ["shop", "products", id],
-		myOrders: ["shop", "my-orders"],
-		myVpnServices: ["shop", "my-vpn-services"],
+	billing: {
+		cart: ["billing", "my-cart"],
+		myOrders: ["billing", "my-orders"],
+	},
+
+	commerce: {
+		products: ["commerce", "products"],
+		productDetails: (id: string) => ["commerce", "products", id],
+		myV2rayServices: ["commerce", "my-v2ray-services"],
 	},
 };

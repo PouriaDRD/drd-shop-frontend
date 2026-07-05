@@ -19,7 +19,7 @@ type Props<T extends FieldValues> = {
 export function AmountField<T extends FieldValues>({
 	control,
 	name,
-	label = "مبلغ",
+	label = "مبلغ واریزی (به تومان)",
 }: Props<T>) {
 	return (
 		<Controller

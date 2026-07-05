@@ -30,7 +30,7 @@ export const useHandleCheckout = ({ onSuccess }: Props) => {
 				if (data.success) {
 					await Promise.all([
 						queryClient.invalidateQueries({
-							queryKey: queryKeys.shop.cart,
+							queryKey: queryKeys.billing.cart,
 						}),
 						queryClient.invalidateQueries({
 							queryKey: queryKeys.finance.wallet,
@@ -43,6 +43,12 @@ export const useHandleCheckout = ({ onSuccess }: Props) => {
 						}),
 						queryClient.invalidateQueries({
 							queryKey: queryKeys.accounts.me,
+						}),
+						queryClient.invalidateQueries({
+							queryKey: queryKeys.billing.myOrders,
+						}),
+						queryClient.invalidateQueries({
+							queryKey: queryKeys.commerce.myV2rayServices,
 						}),
 					]);
 

@@ -18,19 +18,21 @@ import {
 export const shopApi = {
 	checkout: () => {
 		// TODO: returns order
-		return apiClient.post<Cart>(endpoints.shop.checkout);
+		return apiClient.post<Cart>(endpoints.billing.checkout);
 	},
 
 	getMyCart: () => {
-		return apiClient.get<Cart>(endpoints.shop.cart);
+		return apiClient.get<Cart>(endpoints.billing.cart);
 	},
 
 	getProducts: () => {
-		return apiClient.get<Product[]>(endpoints.shop.products);
+		return apiClient.get<Product[]>(endpoints.commerce.products);
 	},
 
 	getProductDetails: (id: string) => {
-		return apiClient.get<ProductDetail>(endpoints.shop.productDetails(id));
+		return apiClient.get<ProductDetail>(
+			endpoints.commerce.productDetails(id),
+		);
 	},
 
 	// items
@@ -38,7 +40,7 @@ export const shopApi = {
 		return apiClient.post<{
 			cart: Cart;
 			item: CartItem;
-		}>(endpoints.shop.addItem, {
+		}>(endpoints.billing.addItem, {
 			plan_id: item.plan_id,
 			product_id: item.product_id,
 			quantity: item.quantity,
@@ -49,7 +51,7 @@ export const shopApi = {
 		return apiClient.patch<{
 			cart: Cart;
 			item: CartItem;
-		}>(endpoints.shop.updateItem(item_id), {
+		}>(endpoints.billing.updateItem(item_id), {
 			quantity: new_quantity,
 		});
 	},
@@ -58,16 +60,16 @@ export const shopApi = {
 		return apiClient.delete<{
 			id: string;
 			deleted: boolean;
-		}>(endpoints.shop.removeItem(item_id));
+		}>(endpoints.billing.removeItem(item_id));
 	},
 
 	// orders
 	getMyOrders: () => {
-		return apiClient.get<Order[]>(endpoints.shop.myOrders);
+		return apiClient.get<Order[]>(endpoints.billing.myOrders);
 	},
 
 	// vpn services
 	getMyVpnServices: () => {
-		return apiClient.get<VpnService[]>(endpoints.shop.myVpnServices);
+		return apiClient.get<VpnService[]>(endpoints.commerce.myV2rayServices);
 	},
 };

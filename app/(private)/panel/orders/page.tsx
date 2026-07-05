@@ -23,7 +23,7 @@ export default function OrdersPage() {
 			/>
 			<Card>
 				<CardHeader className="space-y-4 border-b">
-					<CardTitle>لیست سرویس‌های VPN</CardTitle>
+					<CardTitle>لیست سرویس‌های V2ray</CardTitle>
 				</CardHeader>
 
 				<MyVPNServicesTable />

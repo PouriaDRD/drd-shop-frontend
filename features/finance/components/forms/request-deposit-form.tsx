@@ -33,7 +33,7 @@ export function RequestDepositForm({ onSuccess }: Props) {
 				<AmountField
 					control={form.control}
 					name="amount"
-					label="مبلغ واریز"
+					label="مبلغ واریزی (به تومان)"
 				/>
 
 				{/* Sender Name */}
