@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { HeadsetIcon } from "lucide-react";
 
+import { MyNotificationsButton } from "@/features/notifications/components/my-notifications-button";
 import { ThemeSwitcher } from "@/features/preferences/components";
 import { CartButton } from "@/features/shop/components/cart";
 
@@ -19,6 +20,7 @@ export function PanelHeader() {
 			<div className="flex items-center gap-4">
 				<ThemeSwitcher />
 				<CartButton />
+				<MyNotificationsButton />
 				<Link href={"/panel/support"}>
 					<Button variant={"outline"} size={"icon-sm"}>
 						<HeadsetIcon />

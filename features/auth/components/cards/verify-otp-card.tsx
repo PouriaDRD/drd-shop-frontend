@@ -30,12 +30,16 @@ export default function VerifyOtpCard({ otpType }: Props) {
 
 				<CardTitle>تایید کد</CardTitle>
 
-				<CardDescription>
+				<CardDescription className="text-center">
 					کد به{" "}
 					<span dir="ltr" className="font-bold">
 						{email}
 					</span>{" "}
 					ارسال شد!
+					<p>
+						اگر کد را دریافت نکردید ، دوباره تلاش کنید و یا پوشه
+						اسپم را چک کنید!
+					</p>
 				</CardDescription>
 			</CardHeader>
 

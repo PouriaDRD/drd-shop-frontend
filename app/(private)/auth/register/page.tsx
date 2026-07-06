@@ -18,7 +18,9 @@ function RegisterPage() {
 		return (
 			<PageLayout className="flex items-center justify-center relative">
 				<GridShape />
-				<p className="text-sm text-muted-foreground">
+				<p
+					suppressHydrationWarning
+					className="text-sm text-muted-foreground">
 					در حال بارگذاری...
 				</p>
 			</PageLayout>
@@ -54,7 +56,9 @@ export default RegisterPage;
 function AlreadyRegistered() {
 	return (
 		<div className="flex flex-col items-center gap-4 text-center bg-card shadow p-6 rounded-2xl">
-			<p className="text-sm text-muted-foreground">
+			<p
+				suppressHydrationWarning
+				className="text-sm text-muted-foreground">
 				شما قبلاً وارد شده‌اید و نیازی به ثبت‌نام ندارید.
 			</p>
 

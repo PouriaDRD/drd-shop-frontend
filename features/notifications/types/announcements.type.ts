@@ -1,8 +1,10 @@
+export type AnnouncementType = "info" | "success" | "warning" | "error";
+
 export type Announcement = {
 	id: string;
 	title: string;
 	description: string;
-	type: "info" | "success" | "warning" | "error";
+	type: AnnouncementType;
 	button_text: string;
 	button_url: string;
 	starts_at: string;

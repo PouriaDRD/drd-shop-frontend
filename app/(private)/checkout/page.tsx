@@ -72,7 +72,11 @@ export default function CheckoutPage() {
 
 				{/* SUMMARY */}
 				<div className="flex items-start justify-between">
-					<p className="text-sm text-muted-foreground">جمع کل</p>
+					<p
+						suppressHydrationWarning
+						className="text-sm text-muted-foreground">
+						جمع کل
+					</p>
 
 					<div className="flex flex-col items-center justify-center gap-4">
 						<p className="text-lg font-semibold">

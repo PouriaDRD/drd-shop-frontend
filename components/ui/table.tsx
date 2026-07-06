@@ -21,6 +21,7 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
 function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
 	return (
 		<thead
+			suppressHydrationWarning
 			data-slot="table-header"
 			className={cn("[&_tr]:border-b", className)}
 			{...props}
@@ -67,6 +68,7 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
 function TableHead({ className, ...props }: React.ComponentProps<"th">) {
 	return (
 		<th
+			suppressHydrationWarning
 			data-slot="table-head"
 			className={cn(
 				"h-12 px-3 text-start align-middle font-medium whitespace-nowrap text-foreground has-[[role=checkbox]]:pe-0",
@@ -97,6 +99,7 @@ function TableCaption({
 	return (
 		<caption
 			data-slot="table-caption"
+			suppressHydrationWarning
 			className={cn("mt-4 text-sm text-muted-foreground", className)}
 			{...props}
 		/>

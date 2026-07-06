@@ -15,6 +15,7 @@ export const queryKeys = {
 
 	notifications: {
 		announcements: ["announcements"],
+		myNotifications: ["notifications", "my-notifications"],
 	},
 
 	billing: {

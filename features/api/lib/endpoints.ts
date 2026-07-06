@@ -13,6 +13,8 @@ export const endpoints = {
 
 	notifications: {
 		announcements: "notifications/announcements/",
+		myNotifications: "notifications/",
+		markAllAsRead: "notifications/mark-all-as-read/",
 	},
 
 	finance: {
