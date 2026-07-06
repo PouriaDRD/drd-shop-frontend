@@ -1,6 +1,7 @@
 "use client";
 
 import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 import { queryKeys } from "@/features/api/lib";
 
@@ -23,6 +24,9 @@ export function useCartActions() {
 		addItemMutation.mutate(item, {
 			onSuccess: async (data) => {
 				if (!data.success) {
+					toast.error("خطا در اضافه کردن محصول", {
+						description: data.message,
+					});
 					cartStore.removeItem(item.plan_id);
 				} else {
 					cartStore.updateItemData(item.plan_id, data.data.item);
@@ -33,7 +37,9 @@ export function useCartActions() {
 					}),
 				]);
 			},
+
 			onError: async () => {
+				toast.error("خطا در اضافه کردن محصول");
 				cartStore.removeItem(item.plan_id);
 				await Promise.all([
 					queryClient.invalidateQueries({
@@ -56,6 +62,9 @@ export function useCartActions() {
 			{
 				onSuccess: async (data) => {
 					if (!data.success) {
+						toast.error("خطا در اضافه کردن محصول", {
+							description: data.message,
+						});
 						cartStore.decreaseQuantity(plan_id);
 					} else {
 						cartStore.updateItemData(item.plan_id, data.data.item);
@@ -67,6 +76,7 @@ export function useCartActions() {
 					]);
 				},
 				onError: async () => {
+					toast.error("خطا در اضافه کردن محصول");
 					cartStore.decreaseQuantity(plan_id);
 					await Promise.all([
 						queryClient.invalidateQueries({
@@ -89,6 +99,9 @@ export function useCartActions() {
 			removeItemMutation.mutate(item.id!, {
 				onSuccess: async (data) => {
 					if (!data.success) {
+						toast.error("خطا در حذف کردن محصول", {
+							description: data.message,
+						});
 						cartStore.addItem(item);
 					} else {
 						cartStore.removeItem(item.plan_id);
@@ -100,6 +113,7 @@ export function useCartActions() {
 					]);
 				},
 				onError: async () => {
+					toast.error("خطا در حذف کردن محصول");
 					cartStore.addItem(item);
 					await Promise.all([
 						queryClient.invalidateQueries({
@@ -114,6 +128,9 @@ export function useCartActions() {
 				{
 					onSuccess: async (data) => {
 						if (!data.success) {
+							toast.error("خطا در حذف کردن محصول", {
+								description: data.message,
+							});
 							cartStore.increaseQuantity(plan_id);
 						} else {
 							cartStore.updateItemData(
@@ -128,6 +145,7 @@ export function useCartActions() {
 						]);
 					},
 					onError: async () => {
+						toast.error("خطا در حذف کردن محصول");
 						cartStore.increaseQuantity(plan_id);
 						await Promise.all([
 							queryClient.invalidateQueries({
@@ -149,6 +167,9 @@ export function useCartActions() {
 		removeItemMutation.mutate(item.id!, {
 			onSuccess: async (data) => {
 				if (!data.success) {
+					toast.error("خطا در حذف کردن محصول", {
+						description: data.message,
+					});
 					cartStore.addItem(item);
 				}
 				await Promise.all([
@@ -158,6 +179,7 @@ export function useCartActions() {
 				]);
 			},
 			onError: async () => {
+				toast.error("خطا در حذف کردن محصول");
 				cartStore.addItem(item);
 				await Promise.all([
 					queryClient.invalidateQueries({

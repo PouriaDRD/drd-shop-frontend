@@ -55,7 +55,7 @@ export function V2rayVPNDialog({ service }: Props) {
 			<DialogTrigger asChild>
 				<Button size="sm" variant="outline">
 					<Eye className="size-4" />
-					مشاهده لینک‌ها
+					لینک‌ها
 				</Button>
 			</DialogTrigger>
 
