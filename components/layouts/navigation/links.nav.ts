@@ -25,9 +25,9 @@ export const SIDEBAR_LINKS: NavigationLink[] = [
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 	{
-		name: "سفارشات",
-		href: "/panel/orders",
-		Icon: ShoppingBag,
+		name: "مالی",
+		href: "/panel/finance",
+		Icon: WalletIcon,
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 	{
@@ -37,9 +37,9 @@ export const SIDEBAR_LINKS: NavigationLink[] = [
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 	{
-		name: "مالی",
-		href: "/panel/finance",
-		Icon: WalletIcon,
+		name: "سفارشات",
+		href: "/panel/orders",
+		Icon: ShoppingBag,
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 ];
@@ -52,9 +52,9 @@ export const MOBILE_LINKS: NavigationLink[] = [
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 	{
-		name: "سفارشات",
-		href: "/panel/orders",
-		Icon: ShoppingBag,
+		name: "مالی",
+		href: "/panel/finance",
+		Icon: WalletIcon,
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 	{
@@ -64,9 +64,9 @@ export const MOBILE_LINKS: NavigationLink[] = [
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 	{
-		name: "مالی",
-		href: "/panel/finance",
-		Icon: WalletIcon,
+		name: "سفارشات",
+		href: "/panel/orders",
+		Icon: ShoppingBag,
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 ];

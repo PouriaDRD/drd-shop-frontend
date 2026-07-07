@@ -74,3 +74,12 @@ export function useRequestDeposit() {
 		mutationFn: (data: FormData) => financeApi.requestDepositApi(data),
 	});
 }
+
+export function usePurchaseStatistics() {
+	return useQuery({
+		queryKey: queryKeys.finance.purchaseStatistics,
+		queryFn: financeApi.myPurchaseStatistics,
+		// auto refresh every 120 seconds
+		refetchInterval: 120 * 1000,
+	});
+}

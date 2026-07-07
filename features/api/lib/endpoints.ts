@@ -27,6 +27,7 @@ export const endpoints = {
 		requestDeposit: "finance/request-deposit/",
 		refundToUser: "finance/my-refund-to-user/",
 		refundToWallet: "finance/my-refund-to-wallet/",
+		purchaseStatistics: "finance/purchase-statistics/",
 	},
 
 	billing: {

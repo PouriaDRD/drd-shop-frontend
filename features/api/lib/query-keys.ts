@@ -15,6 +15,7 @@ export const queryKeys = {
 		transactions: ["finance", "my-transactions"],
 		refundToUser: ["finance", "my-refund-to-user"],
 		refundToWallet: ["finance", "my-refund-to-wallet"],
+		purchaseStatistics: ["finance", "purchase-statistics"],
 	},
 
 	notifications: {

@@ -55,4 +55,11 @@ export const financeApi = {
 			true, // isMultipart
 		);
 	},
+
+	myPurchaseStatistics: () => {
+		return apiClient.get<{
+			total_purchase_amount: number;
+			last_30_days_purchase_amount: number;
+		}>(endpoints.finance.purchaseStatistics);
+	},
 };
