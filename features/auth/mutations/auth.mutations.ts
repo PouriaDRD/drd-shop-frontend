@@ -1,4 +1,6 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+
+import { queryKeys } from "@/features/api/lib";
 
 import { authApi } from "../api";
 
@@ -25,3 +27,12 @@ export function useVerifyOtp() {
 		mutationFn: authApi.verifyOtp,
 	});
 }
+
+export const useMyLoginHistory = () => {
+	return useQuery({
+		queryKey: queryKeys.auth.myLoginHistory,
+		queryFn: authApi.myLoginHistory,
+		// auto refresh every 120 seconds
+		refetchInterval: 120 * 1000,
+	});
+};

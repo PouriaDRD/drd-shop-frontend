@@ -6,6 +6,8 @@ import {
 	DetailsCard,
 	StatsRow,
 } from "@/components/pages/dashboard";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { LoginHistoryTable } from "@/features/auth/components/tables";
 import { useUser } from "@/features/user/context";
 
 export default function PanelDashboardPage() {
@@ -36,6 +38,13 @@ export default function PanelDashboardPage() {
 			<div className="grid grid-cols-1 gap-4">
 				<DetailsCard user={user} />
 			</div>
+
+			<Card className="overflow-hidden">
+				<CardHeader className="space-y-4 border-b">
+					<CardTitle className="text-base">تاریخچه ورود</CardTitle>
+				</CardHeader>
+				<LoginHistoryTable />
+			</Card>
 		</PageLayout>
 	);
 }

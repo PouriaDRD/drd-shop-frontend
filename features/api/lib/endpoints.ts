@@ -1,5 +1,6 @@
 export const endpoints = {
 	auth: {
+		myLoginHistory: "authentication/my-login-history/",
 		login: "authentication/login/",
 		register: "authentication/register/",
 		requestOtp: "authentication/request-otp/",
