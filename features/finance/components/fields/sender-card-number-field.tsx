@@ -34,8 +34,10 @@ export function SenderCardNumberField<T extends FieldValues>({
 						type="text"
 						dir="ltr"
 						id="sender-card-number"
+						inputMode="numeric"
 						aria-invalid={fieldState.invalid}
 						placeholder="شماره کارت"
+						className="placeholder:text-right"
 					/>
 
 					{fieldState.error && (

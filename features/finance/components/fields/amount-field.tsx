@@ -34,6 +34,7 @@ export function AmountField<T extends FieldValues>({
 						dir="ltr"
 						inputMode="numeric"
 						placeholder="100,000"
+						className="placeholder:text-right"
 						aria-invalid={fieldState.invalid}
 						value={
 							field.value

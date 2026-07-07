@@ -16,7 +16,11 @@ export function StatBaseCard(props: StatCardProps) {
 	return (
 		<Card className="px-2 py-4">
 			<CardHeader>
-				<p className="text-xs text-muted-foreground mb-1.5">{label}</p>
+				<p
+					suppressHydrationWarning
+					className="text-xs text-muted-foreground mb-1.5">
+					{label}
+				</p>
 				<p
 					className={[
 						"font-medium",

@@ -71,7 +71,7 @@ export function CardToCardInfo() {
 	};
 
 	return (
-		<Card className="p-0">
+		<Card className="p-0" dir="rtl">
 			<CardContent className="space-y-4 py-4">
 				{/* HEADER */}
 				<div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">

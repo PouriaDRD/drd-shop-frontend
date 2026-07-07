@@ -36,6 +36,7 @@ export function TrackingCodeField<T extends FieldValues>({
 						id="tracking-code"
 						aria-invalid={fieldState.invalid}
 						placeholder="کد پیگیری"
+						className="placeholder:text-right"
 					/>
 
 					{fieldState.error && (

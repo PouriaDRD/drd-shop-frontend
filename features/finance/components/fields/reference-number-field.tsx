@@ -36,6 +36,7 @@ export function ReferenceNumberField<T extends FieldValues>({
 						id="reference-number"
 						aria-invalid={fieldState.invalid}
 						placeholder="شماره مرجع"
+						className="placeholder:text-right"
 					/>
 
 					{fieldState.error && (

@@ -12,6 +12,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
+	ScrollArea,
 } from "@/components/ui";
 import { CardToCardInfo } from "@/features/shared/components";
 
@@ -35,7 +36,7 @@ export function RequestDepositDialog({ onSuccess }: Props) {
 				<Button variant="outline">افزایش موجودی</Button>
 			</DialogTrigger>
 
-			<DialogContent className="w-full max-w-sm max-h-[90dvh] overflow-auto">
+			<DialogContent className="w-full max-w-sm">
 				<DialogHeader>
 					<DialogTitle className="flex items-center gap-2">
 						<Wallet className="size-5" />
@@ -47,12 +48,13 @@ export function RequestDepositDialog({ onSuccess }: Props) {
 						درخواست را تکمیل کنید.
 					</DialogDescription>
 				</DialogHeader>
+				<ScrollArea className="max-h-[70dvh]">
+					<div className="space-y-8 p-4">
+						<CardToCardInfo />
 
-				<CardToCardInfo />
-
-				<div className="">
-					<RequestDepositForm onSuccess={handleOnSuccess} />
-				</div>
+						<RequestDepositForm onSuccess={handleOnSuccess} />
+					</div>
+				</ScrollArea>
 			</DialogContent>
 		</Dialog>
 	);

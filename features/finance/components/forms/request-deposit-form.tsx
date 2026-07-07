@@ -27,7 +27,7 @@ export function RequestDepositForm({ onSuccess }: Props) {
 	});
 
 	return (
-		<form onSubmit={submit} className="space-y-6">
+		<form dir="rtl" onSubmit={submit} className="space-y-6">
 			<FieldGroup className="grid grid-cols-1 gap-4 md:grid-cols-2">
 				{/* Amount */}
 				<AmountField
@@ -96,7 +96,6 @@ export function RequestDepositForm({ onSuccess }: Props) {
 					/>
 				</div>
 			</FieldGroup>
-
 			{/* Submit */}
 			<div className="flex justify-end pt-2">
 				<Button type="submit" disabled={isPending} className="min-w-40">
