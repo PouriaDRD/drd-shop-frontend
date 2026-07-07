@@ -10,7 +10,7 @@ import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useMarkAllNotificationsAsReadMutation } from "@/features/notifications/hooks";
-import { useMyNotificationsQuery } from "@/features/notifications/mutations/notifications.mutate";
+import { useMyNotificationsQuery } from "@/features/notifications/mutations";
 import {
 	Notification,
 	// NotificationType

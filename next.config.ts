@@ -14,15 +14,20 @@ const nextConfig: NextConfig = {
 	images: {
 		remotePatterns: [
 			{
-				protocol: "https",
-				hostname: "127.0.0.1",
+				protocol: "http",
+				hostname: "localhost",
+				port: "8000",
+				pathname: "/media/**",
 			},
 			{
-				protocol: "https",
-				hostname: "localhost",
+				protocol: "http",
+				hostname: "127.0.0.1",
+				port: "8000",
+				pathname: "/media/**",
 			},
 		],
 	},
+
 	turbopack: {
 		root: path.join(__dirname, ".."),
 	},

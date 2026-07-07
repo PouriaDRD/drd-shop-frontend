@@ -33,4 +33,9 @@ export const queryKeys = {
 		productDetails: (id: string) => ["commerce", "products", id],
 		myV2rayServices: ["commerce", "my-v2ray-services"],
 	},
+
+	support: {
+		myTickets: ["support", "my-tickets"],
+		ticketDetails: (id: string) => ["support", "my-tickets", id],
+	},
 };

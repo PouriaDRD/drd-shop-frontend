@@ -46,4 +46,10 @@ export const endpoints = {
 		productDetails: (id: string) => `commerce/products/${id}/`,
 		myV2rayServices: "commerce/my-v2ray-vpn-services/",
 	},
+
+	support: {
+		myTickets: "support/my-tickets/",
+		ticketDetails: (id: string) => `support/my-tickets/${id}/`,
+		replyTicket: (id: string) => `support/my-tickets/${id}/reply/`,
+	},
 };
