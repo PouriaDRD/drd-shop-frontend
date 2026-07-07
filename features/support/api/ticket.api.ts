@@ -24,4 +24,13 @@ export const supportApi = {
 			true, // isMultipart
 		);
 	},
+
+	createTicket(data: FormData) {
+		return apiClient.post(
+			endpoints.support.createTicket,
+			data,
+			undefined,
+			true, // isMultipart
+		);
+	},
 };

@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { MessageCircleDashedIcon, ShieldIcon, User2Icon } from "lucide-react";
 
+import { ScrollArea } from "@/components/ui";
 import {
 	Attachment,
 	AttachmentContent,
@@ -77,7 +78,7 @@ export function TicketConversation({ ticket_id }: Props) {
 	return (
 		<MessageScrollerProvider>
 			<Card className="h-162.5">
-				<CardContent className="overflow-hidden p-0">
+				<CardContent className="overflow-hidden p-0 flex-1 h-full">
 					<MessageScroller>
 						<MessageScrollerViewport>
 							<MessageScrollerContent className="p-6">
@@ -131,50 +132,58 @@ function TicketMessageItem({ message }: MessageProps) {
 				</MessageHeader>
 
 				<MessageGroup>
-					{message.attachments && message.attachments.length > 0 && (
-						<AttachmentGroup>
-							{message.attachments.map((attachment) => {
-								const isImage = isImageFile(attachment.file);
+					<ScrollArea className="max-h-24">
+						{message.attachments &&
+							message.attachments.length > 0 && (
+								<AttachmentGroup className="flex flex-col items-end  w-full">
+									{message.attachments.map((attachment) => {
+										const isImage = isImageFile(
+											attachment.file,
+										);
 
-								return (
-									<Attachment
-										key={attachment.id}
-										size="default">
-										{isImage && (
-											<AttachmentMedia>
-												<Image
-													src={attachment.file}
-													alt="فایل پیوست"
-													width={64}
-													height={64}
-													unoptimized
-												/>
-											</AttachmentMedia>
-										)}
+										return (
+											<Attachment
+												key={attachment.id}
+												size="default">
+												{isImage && (
+													<AttachmentMedia>
+														<Image
+															src={
+																attachment.file
+															}
+															alt="فایل پیوست"
+															width={64}
+															height={64}
+															unoptimized
+														/>
+													</AttachmentMedia>
+												)}
 
-										<AttachmentContent>
-											<AttachmentTitle>
-												فایل پیوست
-											</AttachmentTitle>
+												<AttachmentContent>
+													<AttachmentTitle>
+														فایل پیوست
+													</AttachmentTitle>
 
-											<AttachmentDescription>
-												دانلود فایل
-											</AttachmentDescription>
-										</AttachmentContent>
+													<AttachmentDescription>
+														دانلود فایل
+													</AttachmentDescription>
+												</AttachmentContent>
 
-										<AttachmentTrigger asChild>
-											<Link
-												href={attachment.file as "/"}
-												target="_blank"
-												rel="noopener noreferrer"
-											/>
-										</AttachmentTrigger>
-									</Attachment>
-								);
-							})}
-						</AttachmentGroup>
-					)}
-
+												<AttachmentTrigger asChild>
+													<Link
+														href={
+															attachment.file as "/"
+														}
+														target="_blank"
+														rel="noopener noreferrer"
+													/>
+												</AttachmentTrigger>
+											</Attachment>
+										);
+									})}
+								</AttachmentGroup>
+							)}
+					</ScrollArea>
 					<div
 						className={`rounded-xl px-4 py-3 whitespace-pre-wrap
 						${

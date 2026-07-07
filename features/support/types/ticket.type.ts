@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { ticketReplySchema } from "../schemas";
+import { ticketCreateSchema, ticketReplySchema } from "../schemas";
 
 export type TicketStatus = "open" | "closed" | "answered";
 
@@ -40,3 +40,4 @@ export type Attachment = {
 };
 
 export type TicketReplyFormData = z.infer<typeof ticketReplySchema>;
+export type TicketCreateFormData = z.infer<typeof ticketCreateSchema>;

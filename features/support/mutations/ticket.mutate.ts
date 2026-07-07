@@ -56,3 +56,17 @@ export function useTicketReply(ticketId: string) {
 		},
 	});
 }
+
+export function useCreateTicket() {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: (data: FormData) => supportApi.createTicket(data),
+
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({
+				queryKey: queryKeys.support.myTickets,
+			});
+		},
+	});
+}

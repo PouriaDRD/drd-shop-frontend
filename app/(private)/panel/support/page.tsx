@@ -2,6 +2,7 @@
 
 import { PageHeader, PageLayout } from "@/components/pages";
 import { Card, CardHeader, CardTitle } from "@/components/ui";
+import { TicketCreateDialog } from "@/features/support/components/dialogs/ticket-create-dialog";
 import { TicketTable } from "@/features/support/components/tables";
 
 function SupportPage() {
@@ -13,8 +14,10 @@ function SupportPage() {
 			/>
 
 			<Card className="overflow-hidden">
-				<CardHeader className="space-y-4 border-b">
+				<CardHeader className="flex flex-row justify-between gap-4 border-b">
 					<CardTitle className="text-base">تیکت ها</CardTitle>
+
+					<TicketCreateDialog />
 				</CardHeader>
 				<TicketTable />
 			</Card>
