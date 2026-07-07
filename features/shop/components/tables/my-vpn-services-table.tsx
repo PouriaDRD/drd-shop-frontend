@@ -109,7 +109,9 @@ function ServiceRow({ item, index }: { item: VpnService; index: number }) {
 					variant={
 						item.stats?.status === "expired"
 							? "destructive"
-							: "success"
+							: item.stats?.status === "active"
+								? "success"
+								: "outline"
 					}>
 					{statusMap[item.stats?.status ?? "unknown"]}
 				</Badge>
