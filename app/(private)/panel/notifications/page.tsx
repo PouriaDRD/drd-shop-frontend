@@ -4,14 +4,17 @@ import { Bell, CheckCheck } from "lucide-react";
 import { toast } from "sonner";
 
 import { PageHeader, PageLayout } from "@/components/pages";
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useMarkAllNotificationsAsReadMutation } from "@/features/notifications/hooks";
 import { useMyNotificationsQuery } from "@/features/notifications/mutations/notifications.mutate";
-import { Notification, NotificationType } from "@/features/notifications/types";
+import {
+	Notification,
+	// NotificationType
+} from "@/features/notifications/types";
 import { toIranDateTime } from "@/features/shared/utils";
 
 export default function NotificationsPage() {
@@ -135,18 +138,20 @@ function NotificationItem({ notification }: NotificationItemProps) {
 	return (
 		<div
 			className={`
-				group relative flex gap-4 px-5 py-4 transition-colors
+				group relative flex gap-4 px-5 py-4
+				transition-colors
 				hover:bg-muted/40
 				${!notification.is_read ? "bg-muted/20" : ""}
 			`}>
 			{/* Left accent bar */}
-			<div
+			{/* <div
 				className={`
-					absolute left-0 top-0 h-full w-0.75 rounded-r-full
+					absolute left-0 top-0 h-full w-0.75
+					rounded-r-full
 					transition-colors
 					${notification.is_read ? "bg-transparent" : "bg-primary"}
 				`}
-			/>
+			/> */}
 
 			{/* Status dot */}
 			<div className="mt-1 flex flex-col items-center">
@@ -166,7 +171,7 @@ function NotificationItem({ notification }: NotificationItemProps) {
 					</h3>
 
 					<div className="flex items-center gap-2">
-						<NotificationTypeBadge type={notification.type} />
+						{/* <NotificationTypeBadge type={notification.type} /> */}
 						<span className="shrink-0 text-xs text-muted-foreground">
 							{dateTime.datetimeWithMonthName}
 						</span>
@@ -183,37 +188,37 @@ function NotificationItem({ notification }: NotificationItemProps) {
 
 /* ---------------- BADGE ---------------- */
 
-type NotificationTypeBadgeProps = {
-	type: NotificationType;
-};
+// type NotificationTypeBadgeProps = {
+// 	type: NotificationType;
+// };
 
-function NotificationTypeBadge({ type }: NotificationTypeBadgeProps) {
-	switch (type) {
-		case "success":
-			return (
-				<Badge className="border border-emerald-500/20 bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500/10">
-					موفق
-				</Badge>
-			);
+// function NotificationTypeBadge({ type }: NotificationTypeBadgeProps) {
+// 	switch (type) {
+// 		case "success":
+// 			return (
+// 				<Badge className="border border-emerald-500/20 bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500/10">
+// 					موفق
+// 				</Badge>
+// 			);
 
-		case "warning":
-			return (
-				<Badge className="border border-yellow-500/20 bg-yellow-500/10 text-yellow-600 hover:bg-yellow-500/10">
-					هشدار
-				</Badge>
-			);
+// 		case "warning":
+// 			return (
+// 				<Badge className="border border-yellow-500/20 bg-yellow-500/10 text-yellow-600 hover:bg-yellow-500/10">
+// 					هشدار
+// 				</Badge>
+// 			);
 
-		case "error":
-			return (
-				<Badge className="border border-red-500/20 bg-red-500/10 text-red-600 hover:bg-red-500/10">
-					خطا
-				</Badge>
-			);
+// 		case "error":
+// 			return (
+// 				<Badge className="border border-red-500/20 bg-red-500/10 text-red-600 hover:bg-red-500/10">
+// 					خطا
+// 				</Badge>
+// 			);
 
-		default:
-			return <Badge variant="secondary">اطلاع رسانی</Badge>;
-	}
-}
+// 		default:
+// 			return <Badge variant="secondary">اطلاع رسانی</Badge>;
+// 	}
+// }
 
 /* ---------------- EMPTY ---------------- */
 

@@ -82,6 +82,7 @@ export async function clearSession(): Promise<void> {
 
 	cookieStore.delete("acs");
 	cookieStore.delete("rfs");
+	cookieStore.delete("csrftoken");
 }
 
 /**
