@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { queryKeys } from "@/features/api/lib";
 
@@ -29,3 +29,30 @@ export const useTicketDetails = (id: string) => {
 		refetchInterval: 10 * 1000,
 	});
 };
+
+/**
+ * Reply to ticket
+ */
+export function useTicketReply(ticketId: string) {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: (data: FormData) =>
+			supportApi.replyTicket({
+				ticketId,
+				data,
+			}),
+
+		onSuccess: async () => {
+			await Promise.all([
+				queryClient.invalidateQueries({
+					queryKey: queryKeys.support.ticketDetails(ticketId),
+				}),
+
+				queryClient.invalidateQueries({
+					queryKey: queryKeys.support.myTickets,
+				}),
+			]);
+		},
+	});
+}

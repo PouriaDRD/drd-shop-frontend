@@ -1,100 +1,48 @@
 "use client";
 
-import { useCallback } from "react";
-
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Paperclip, Send, X } from "lucide-react";
-import { useForm } from "react-hook-form";
 
 import { Button, Textarea } from "@/components/ui";
 
-import { useTicketReply } from "../../hooks";
-import { ticketReplySchema } from "../../schemas";
-import { TicketReplyFormData } from "../../types";
+import { useTicketReplyForm } from "../../hooks";
 
 interface Props {
 	ticketId: string;
 	isClosed: boolean;
+	onSuccess?: () => void;
 }
 
-export function TicketReplyForm({ ticketId, isClosed }: Props) {
-	const mutation = useTicketReply(ticketId);
-
-	const {
-		register,
-		handleSubmit,
-		setValue,
-		getValues,
-		reset,
-		formState: { errors },
-	} = useForm<TicketReplyFormData>({
-		resolver: zodResolver(ticketReplySchema),
-
-		defaultValues: {
-			message: "",
-			attachments: [],
-		},
-	});
-
-	const submit = useCallback(
-		(values: TicketReplyFormData) => {
-			const formData = new FormData();
-
-			formData.append("message", values.message);
-
-			values.attachments.forEach((file) => {
-				formData.append("attachments", file);
-			});
-
-			mutation.mutate(formData, {
-				onSuccess() {
-					reset();
-				},
-			});
-		},
-		[mutation, reset],
-	);
-
-	const onSubmit = handleSubmit(submit);
+export function TicketReplyForm({ ticketId, isClosed, onSuccess }: Props) {
+	const { form, submit, files, addFiles, removeFile, isPending } =
+		useTicketReplyForm({
+			ticketId,
+			onSuccess,
+		});
 
 	function onFilesChange(e: React.ChangeEvent<HTMLInputElement>) {
 		const selected = Array.from(e.target.files ?? []);
 
-		const current = getValues("attachments") ?? [];
-
-		setValue("attachments", [...current, ...selected], {
-			shouldValidate: true,
-		});
+		addFiles(selected);
 
 		e.target.value = "";
 	}
 
-	function removeFile(index: number) {
-		const current = getValues("attachments");
-
-		setValue(
-			"attachments",
-			current.filter((_, i) => i !== index),
-			{
-				shouldValidate: true,
-			},
-		);
-	}
-
-	const files = getValues("attachments") ?? [];
-
 	return (
-		<form onSubmit={onSubmit} className="w-full space-y-4">
+		<form
+			dir="rtl"
+			id="reply-ticket-from"
+			onSubmit={submit}
+			className="space-y-4 w-full">
 			<Textarea
 				placeholder="پیام خود را بنویسید..."
 				rows={4}
-				{...register("message")}
-				disabled={isClosed || mutation.isPending}
+				disabled={isClosed || isPending}
+				{...form.register("message")}
 			/>
 
-			{errors.message && (
+			{form.formState.errors.message && (
 				<p className="text-sm text-destructive">
-					{errors.message.message}
+					{form.formState.errors.message.message}
 				</p>
 			)}
 
@@ -126,27 +74,27 @@ export function TicketReplyForm({ ticketId, isClosed }: Props) {
 				</div>
 			)}
 
-			{errors.attachments && (
+			{form.formState.errors.attachments && (
 				<p className="text-sm text-destructive">
-					{errors.attachments.message}
+					{form.formState.errors.attachments.message}
 				</p>
 			)}
 
-			<div className="flex justify-between">
+			<div className="flex justify-between w-full">
 				<label>
 					<input
 						type="file"
 						multiple
 						className="hidden"
+						disabled={isClosed || isPending}
 						onChange={onFilesChange}
-						disabled={isClosed || mutation.isPending}
 					/>
 
 					<Button
 						type="button"
 						variant="outline"
 						asChild
-						disabled={isClosed || mutation.isPending}>
+						disabled={isClosed || isPending}>
 						<span>
 							<Paperclip className="size-4" />
 							فایل
@@ -154,10 +102,13 @@ export function TicketReplyForm({ ticketId, isClosed }: Props) {
 					</Button>
 				</label>
 
-				<Button type="submit" disabled={mutation.isPending || isClosed}>
+				<Button
+					type="submit"
+					disabled={isClosed || isPending}
+					form="reply-ticket-from">
 					<Send className="size-4" />
 
-					{mutation.isPending ? "درحال ارسال..." : "ارسال"}
+					{isPending ? "درحال ارسال..." : "ارسال"}
 				</Button>
 			</div>
 		</form>
