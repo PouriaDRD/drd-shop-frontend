@@ -179,7 +179,7 @@ function TicketMessageItem({ message }: MessageProps) {
 						className={`rounded-xl px-4 py-3 whitespace-pre-wrap
 						${
 							!message.is_staff_reply
-								? "bg-primary text-primary-foreground"
+								? "bg-primary/10 text-primary dark:bg-primary dark:text-primary-foreground"
 								: "bg-muted text-muted-foreground"
 						}
 						`}>
