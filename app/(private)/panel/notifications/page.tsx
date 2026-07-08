@@ -31,7 +31,7 @@ export default function NotificationsPage() {
 				isError={isError}
 			/>
 
-			<Card className="overflow-hidden">
+			<Card className="overflow-hidden p-0">
 				<ScrollArea className="max-h-162.5" dir="rtl">
 					<NotificationList
 						notifications={notifications}
@@ -115,7 +115,7 @@ function NotificationList({
 	if (notifications.length === 0) return <NotificationEmpty />;
 
 	return (
-		<div className="divide-y space-y-4">
+		<div className="divide-y">
 			{notifications.map((notification) => (
 				<NotificationItem
 					key={notification.id}
