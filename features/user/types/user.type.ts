@@ -14,5 +14,6 @@ export type User = {
 	created_at: Date;
 	referral_code: string;
 	total_referrals: number;
+	total_paid: number;
 	wallet: Wallet;
 };

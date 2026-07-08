@@ -6,6 +6,7 @@ import {
 	CalendarDays,
 	Check,
 	Copy,
+	DollarSignIcon,
 	Link,
 	Users,
 	VerifiedIcon,
@@ -94,7 +95,7 @@ export function DetailsCard({ user }: Props) {
 			<CardContent className="space-y-6">
 				{/* Stats */}
 
-				<div className="grid grid-cols-2 gap-3">
+				<div className="grid grid-cols-2 md:grid-cols-3 gap-4">
 					<div className="rounded-xl border bg-muted/30 p-4 space-y-2">
 						<div className="flex items-center gap-2 text-muted-foreground">
 							<Users className="size-4" />
@@ -108,13 +109,7 @@ export function DetailsCard({ user }: Props) {
 					</div>
 
 					<div className="rounded-xl border bg-muted/30 p-4 space-y-2">
-						<div
-							className="
-								flex
-								items-center
-								gap-2
-								text-muted-foreground
-							">
+						<div className=" flex items-center gap-2 text-muted-foreground">
 							<CalendarDays className="size-4" />
 
 							<span className="text-xs">آخرین ورود</span>
@@ -122,6 +117,20 @@ export function DetailsCard({ user }: Props) {
 
 						<p className="text-xs font-medium">
 							{lastLogin.dateWithMonthName}
+						</p>
+					</div>
+
+					<div className="rounded-xl border bg-muted/30 p-4 space-y-2">
+						<div className=" flex items-center gap-2 text-muted-foreground">
+							<DollarSignIcon className="size-4" />
+
+							<span className="text-xs">
+								درآمد به واسطه دعوت دوستان
+							</span>
+						</div>
+
+						<p className="text-xs font-medium">
+							{user.total_paid.toLocaleString("fa-IR")} تومان
 						</p>
 					</div>
 				</div>
