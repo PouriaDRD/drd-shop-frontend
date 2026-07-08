@@ -2,7 +2,7 @@ import { Button, Dialog, DialogContent, DialogTrigger } from "@/components/ui";
 
 import { OtpCard } from "../cards";
 
-export default function ConfirmEmailDialog() {
+export function ConfirmEmailDialog() {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>

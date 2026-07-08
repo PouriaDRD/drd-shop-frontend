@@ -20,7 +20,7 @@ interface Props {
 	collapsed: boolean;
 }
 
-export default function LogoutDialog({ collapsed }: Props) {
+export function LogoutDialog({ collapsed }: Props) {
 	const { handleLogout, isLoading } = useLogout();
 
 	return (

@@ -12,5 +12,7 @@ export type User = {
 	status: UserStatus;
 	last_login: Date;
 	created_at: Date;
+	referral_code: string;
+	total_referrals: number;
 	wallet: Wallet;
 };

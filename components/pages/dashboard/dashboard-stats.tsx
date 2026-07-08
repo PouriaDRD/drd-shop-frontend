@@ -22,6 +22,7 @@ export function DashboardStats({ user }: Props) {
 				small>
 				{lastLogin.time}
 			</StatBaseCard>
+
 			<StatBaseCard
 				label="تاریخ عضویت"
 				value={createdAt.dateWithMonthName}
