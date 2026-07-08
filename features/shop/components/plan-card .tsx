@@ -72,6 +72,8 @@ export function PlanCard({ plan, featured, productId }: PlanCardProps) {
 			quantity: 1,
 			unit_price: plan.price,
 			total_price: plan.price * 1,
+			is_renewal: false,
+			service_id: null,
 		});
 	};
 
@@ -87,7 +89,8 @@ export function PlanCard({ plan, featured, productId }: PlanCardProps) {
 		isDecreasingQuantity ||
 		isIncreasingQuantity ||
 		isAddingItem ||
-		!isAuthenticated;
+		!isAuthenticated ||
+		item?.is_renewal;
 
 	const buttonText = !isAuthenticated
 		? "ابتدا وارد شوید"

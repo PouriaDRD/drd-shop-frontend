@@ -20,6 +20,8 @@ export const useCartStore = create<CartStore>()(
 								? {
 										...i,
 										quantity: i.quantity + item.quantity,
+										is_renewal: item.is_renewal,
+										service_id: item.service_id,
 									}
 								: i,
 						),

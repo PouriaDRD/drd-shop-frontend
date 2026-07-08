@@ -14,6 +14,8 @@ export interface CartItem {
 	quantity: number;
 	unit_price: number;
 	total_price: number;
+	is_renewal?: boolean;
+	service_id?: string | null;
 }
 
 export interface CartStore {

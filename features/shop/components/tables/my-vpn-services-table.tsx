@@ -1,7 +1,10 @@
 "use client";
 
+import { RefreshCwIcon } from "lucide-react";
+
 import {
 	Badge,
+	Button,
 	Table,
 	TableBody,
 	TableCaption,
@@ -12,8 +15,9 @@ import {
 } from "@/components/ui";
 import { toIranDateTime } from "@/features/shared/utils";
 
+import { useCartActions } from "../../hooks";
 import { useMyVpnServices } from "../../mutations";
-import { VpnService } from "../../types";
+import { CartStore, VpnService } from "../../types";
 import { V2rayVPNDialog } from "../dialogs";
 
 /* -----------------------------
@@ -22,6 +26,7 @@ import { V2rayVPNDialog } from "../dialogs";
 
 export function MyVPNServicesTable() {
 	const { data, isLoading, isError } = useMyVpnServices();
+	const { addItem, isAddingItem, cartStore } = useCartActions();
 
 	if (isLoading) return <TableState type="loading" />;
 	if (isError || !data?.success) return <TableState type="error" />;
@@ -29,6 +34,19 @@ export function MyVPNServicesTable() {
 	const services = data.data ?? [];
 
 	if (services.length === 0) return <TableState type="empty" />;
+
+	const handleOnAddItem = (service: VpnService) => {
+		addItem({
+			plan_title: service.plan_title,
+			plan_id: service.plan_id,
+			product_id: service.product_id,
+			quantity: 1,
+			unit_price: 0,
+			total_price: 0,
+			is_renewal: true,
+			service_id: service.id,
+		});
+	};
 
 	return (
 		<div className="flex max-h-96 overflow-auto">
@@ -50,7 +68,14 @@ export function MyVPNServicesTable() {
 
 				<TableBody>
 					{services.map((item, index) => (
-						<ServiceRow key={item.id} item={item} index={index} />
+						<ServiceRow
+							key={item.id}
+							item={item}
+							index={index}
+							cartStore={cartStore}
+							isAddingItem={isAddingItem}
+							handleOnAddItem={handleOnAddItem}
+						/>
 					))}
 				</TableBody>
 			</Table>
@@ -62,7 +87,22 @@ export function MyVPNServicesTable() {
    ROW
 ----------------------------- */
 
-function ServiceRow({ item, index }: { item: VpnService; index: number }) {
+function ServiceRow({
+	item,
+	index,
+	isAddingItem,
+	cartStore,
+	handleOnAddItem,
+}: {
+	item: VpnService;
+	index: number;
+	cartStore: CartStore;
+	isAddingItem: boolean;
+	handleOnAddItem: (service: VpnService) => void;
+}) {
+	const cartItem = cartStore.getItem(item.plan_id);
+	const isRenewal = cartItem?.is_renewal;
+
 	const expiresAt = toIranDateTime(item.expires_at);
 	const created = toIranDateTime(item.created_at);
 
@@ -117,7 +157,15 @@ function ServiceRow({ item, index }: { item: VpnService; index: number }) {
 				</Badge>
 			</TableCell>
 
-			<TableCell className="text-center">
+			<TableCell className="text-center space-x-2">
+				<Button
+					className=""
+					variant={"outline"}
+					disabled={isAddingItem || isRenewal}
+					onClick={() => handleOnAddItem(item)}>
+					<RefreshCwIcon className="size-3.5" />
+					تمدید
+				</Button>
 				<V2rayVPNDialog service={item} />
 			</TableCell>
 		</TableRow>

@@ -33,7 +33,7 @@ export function CouponForm({ canSubmit, onSuccess }: Props) {
 					type="text"
 					dir="ltr"
 					autoComplete="off"
-					className="placeholder:text-right w-full"
+					className="placeholder:text-right w-fit"
 					placeholder="کد تخفیف"
 					aria-label="کد تخفیف"
 					disabled={success}

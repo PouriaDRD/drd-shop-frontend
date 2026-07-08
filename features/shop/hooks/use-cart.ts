@@ -15,7 +15,6 @@ export function useCart() {
 
 	useEffect(() => {
 		if (!cart) return;
-
 		setItems(cartItems);
 	}, [cart, cartItems, setItems]);
 

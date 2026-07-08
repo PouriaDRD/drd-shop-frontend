@@ -58,7 +58,7 @@ export function CartItemCard({ item }: CartItemProps) {
 					<Button
 						size="icon"
 						variant="ghost"
-						disabled={isDisable}
+						disabled={isDisable || item.is_renewal}
 						onClick={handleDecrease}>
 						<Minus className="size-4" />
 					</Button>
@@ -70,7 +70,7 @@ export function CartItemCard({ item }: CartItemProps) {
 					<Button
 						size="icon"
 						variant="ghost"
-						disabled={isDisable}
+						disabled={isDisable || item.is_renewal}
 						onClick={() => increaseQuantity(item.plan_id)}>
 						<Plus className="size-4" />
 					</Button>

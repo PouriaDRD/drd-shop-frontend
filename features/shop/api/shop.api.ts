@@ -44,6 +44,8 @@ export const shopApi = {
 			plan_id: item.plan_id,
 			product_id: item.product_id,
 			quantity: item.quantity,
+			is_renewal: item.is_renewal ?? false,
+			service_id: item.service_id ?? null,
 		});
 	},
 
