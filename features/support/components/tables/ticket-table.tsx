@@ -13,7 +13,7 @@ import {
 import { toIranDateTime } from "@/features/shared/utils";
 
 import { useMyTickets } from "../../mutations";
-import { Ticket, TicketStatus } from "../../types";
+import { Ticket, TicketCategory, TicketStatus } from "../../types";
 import { TicketDetailsDialog } from "../dialogs";
 
 /* =========================
@@ -39,6 +39,8 @@ export function TicketTable() {
 						<TableHead className="text-center">#</TableHead>
 
 						<TableHead className="text-center">موضوع</TableHead>
+
+						<TableHead className="text-center">دسته بندی</TableHead>
 
 						<TableHead className="text-center">وضعیت</TableHead>
 
@@ -77,6 +79,7 @@ function TicketRow({ ticket, index }: { ticket: Ticket; index: number }) {
 	const updated = toIranDateTime(ticket.updated_at);
 
 	const status = TICKET_STATUS_MAP[ticket.status];
+	const category = TICKET_Category_MAP[ticket.category];
 
 	return (
 		<TableRow className="text-muted-foreground">
@@ -84,6 +87,10 @@ function TicketRow({ ticket, index }: { ticket: Ticket; index: number }) {
 
 			<TableCell className="max-w-56 text-center whitespace-normal wrap-break-word">
 				{ticket.title}
+			</TableCell>
+
+			<TableCell className="text-center">
+				<Badge variant={category.color}>{category.label}</Badge>
 			</TableCell>
 
 			<TableCell className="text-center">
@@ -137,6 +144,38 @@ const TICKET_STATUS_MAP: Record<
 };
 
 /* =========================
+   STATUS MAP
+========================= */
+
+const TICKET_Category_MAP: Record<
+	TicketCategory,
+	{
+		label: string;
+		color: "success" | "info" | "outline" | "warning" | "destructive";
+	}
+> = {
+	general: {
+		label: "عمومی",
+		color: "outline",
+	},
+
+	order: {
+		label: "سفارشات",
+		color: "info",
+	},
+
+	payment: {
+		label: "مالی",
+		color: "success",
+	},
+
+	technical: {
+		label: "فنی",
+		color: "warning",
+	},
+};
+
+/* =========================
    STATE
 ========================= */
 
@@ -158,6 +197,8 @@ function TableState({ type }: { type: "loading" | "empty" | "error" }) {
 					<TableHead className="text-center">#</TableHead>
 
 					<TableHead className="text-center">موضوع</TableHead>
+
+					<TableHead className="text-center">دسته بندی</TableHead>
 
 					<TableHead className="text-center">وضعیت</TableHead>
 

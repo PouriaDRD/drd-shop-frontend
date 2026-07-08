@@ -77,8 +77,12 @@ export function TicketConversation({ ticket_id }: Props) {
 
 	return (
 		<MessageScrollerProvider>
-			<Card className="h-162.5">
-				<CardContent className="overflow-hidden p-0 flex-1 h-full">
+			<Card className="h-162.5 pt-0 gap-0">
+				<CardContent
+					className={`
+					overflow-hidden p-0 flex-1
+					bg-[url('/images/chat-bg.jpg')]
+					bg-cover bg-center bg-no-repeat h-full`}>
 					<MessageScroller>
 						<MessageScrollerViewport>
 							<MessageScrollerContent className="p-6">
@@ -118,7 +122,7 @@ function TicketMessageItem({ message }: MessageProps) {
 
 	return (
 		<Message align={message.is_staff_reply ? "end" : "start"}>
-			<MessageAvatar className="aspect-square">
+			<MessageAvatar className="aspect-square border">
 				{message.is_staff_reply ? (
 					<ShieldIcon className="size-4" />
 				) : (
@@ -128,14 +132,16 @@ function TicketMessageItem({ message }: MessageProps) {
 
 			<MessageContent>
 				<MessageHeader>
-					{message.is_staff_reply ? "پشتیبانی" : "شما"}
+					<span className="text-white">
+						{message.is_staff_reply ? "پشتیبانی" : "شما"}
+					</span>
 				</MessageHeader>
 
 				<MessageGroup>
-					<ScrollArea className="max-h-24">
+					<ScrollArea className="max-h-60">
 						{message.attachments &&
 							message.attachments.length > 0 && (
-								<AttachmentGroup className="flex flex-col items-end  w-full">
+								<AttachmentGroup className="flex flex-col items-end w-full">
 									{message.attachments.map((attachment) => {
 										const isImage = isImageFile(
 											attachment.file,
@@ -143,10 +149,13 @@ function TicketMessageItem({ message }: MessageProps) {
 
 										return (
 											<Attachment
+												dir="rtl"
 												key={attachment.id}
-												size="default">
+												size="default"
+												orientation={"vertical"}
+												className="bg-white hover:bg-white!">
 												{isImage && (
-													<AttachmentMedia>
+													<AttachmentMedia className="border">
 														<Image
 															src={
 																attachment.file
@@ -188,16 +197,22 @@ function TicketMessageItem({ message }: MessageProps) {
 						className={`rounded-xl px-4 py-3 whitespace-pre-wrap
 						${
 							!message.is_staff_reply
-								? "bg-primary/10 text-primary dark:bg-primary dark:text-primary-foreground"
-								: "bg-muted text-muted-foreground"
+								? "bg-teal-700 text-white w-fit"
+								: "bg-white text-black"
 						}
 						`}>
 						{message.message}
 					</div>
 				</MessageGroup>
 
-				<MessageFooter>
-					{date.dateWithMonthName} • {date.time}
+				<MessageFooter
+					className={`flex flex-col gap-1 text-white
+					${message.is_staff_reply ? "items-end" : "items-start"}
+					`}>
+					<span className="font-bold">{date.time}</span>
+					<span className="text-[10px]">
+						{date.dateWithMonthName}
+					</span>
 				</MessageFooter>
 			</MessageContent>
 		</Message>

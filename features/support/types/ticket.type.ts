@@ -15,6 +15,7 @@ export const Ticket_Category_TYPES = [
 export type Ticket = {
 	id: string;
 	title: string;
+	category:TicketCategory;
 	status: TicketStatus;
 	updated_at: Date;
 	created_at: Date;

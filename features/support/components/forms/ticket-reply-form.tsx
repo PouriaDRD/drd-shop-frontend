@@ -81,6 +81,14 @@ export function TicketReplyForm({ ticketId, isClosed, onSuccess }: Props) {
 			)}
 
 			<div className="flex justify-between w-full">
+				<Button
+					type="submit"
+					disabled={isClosed || isPending}
+					form="reply-ticket-from">
+					<Send className="size-4" />
+
+					{isPending ? "درحال ارسال..." : "ارسال"}
+				</Button>
 				<label>
 					<input
 						type="file"
@@ -101,15 +109,6 @@ export function TicketReplyForm({ ticketId, isClosed, onSuccess }: Props) {
 						</span>
 					</Button>
 				</label>
-
-				<Button
-					type="submit"
-					disabled={isClosed || isPending}
-					form="reply-ticket-from">
-					<Send className="size-4" />
-
-					{isPending ? "درحال ارسال..." : "ارسال"}
-				</Button>
 			</div>
 		</form>
 	);
