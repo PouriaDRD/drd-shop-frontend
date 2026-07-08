@@ -22,6 +22,7 @@ export function StatBaseCard(props: StatCardProps) {
 					{label}
 				</p>
 				<p
+					suppressHydrationWarning
 					className={[
 						"font-medium",
 						accent ? "text-primary text-2xl" : "text-foreground",
