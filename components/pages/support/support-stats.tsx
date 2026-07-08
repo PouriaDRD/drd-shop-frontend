@@ -14,7 +14,7 @@ export function SupportStats({ tickets }: Props) {
 	const openTickets = tickets?.filter((ticket) => ticket.status === "open");
 
 	const closedTickets = tickets?.filter(
-		(ticket) => ticket.status === "closed",
+		(ticket) => ticket.status === "closed" || ticket.status === "answered",
 	);
 
 	return (
