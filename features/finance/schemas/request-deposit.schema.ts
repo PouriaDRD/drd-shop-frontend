@@ -3,6 +3,8 @@ import { z } from "zod";
 
 import { normalizeToEnglish, toEnglishDigits } from "@/features/shared/utils";
 
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+
 export const requestDepositSchema = z.object({
 	amount: z
 		.number("مبلغ را وارد کنید.")
@@ -62,9 +64,11 @@ export const requestDepositSchema = z.object({
 		.string("زمان تراکنش را وارد کنید.")
 		.min(1, "زمان تراکنش را وارد کنید."),
 
-	receipt_image: z.instanceof(File, {
-		message: "تصویر رسید را انتخاب کنید.",
-	}),
+	receipt_image: z
+		.instanceof(File)
+		.refine((file) => file.size <= MAX_FILE_SIZE, {
+			message: "حجم هر فایل باید کمتر از 110 مگابایت باشد.",
+		}),
 
 	note: z.string().trim().optional().nullable(),
 });
