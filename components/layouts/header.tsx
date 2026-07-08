@@ -35,6 +35,7 @@ export function Header() {
 					<ThemeSwitcher />
 					<HeaderLogo />
 				</div>
+
 				<HeaderNav />
 
 				<HeaderActions isAuthenticated={isAuthenticated} />
@@ -61,9 +62,8 @@ export function HeaderNav() {
 				<Link
 					suppressHydrationWarning
 					key={link.href}
-					href={link.href as "/"}
-					className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
-					{link.label}
+					href={link.href as "/"}>
+					<Button variant={"ghost"}>{link.label}</Button>
 				</Link>
 			))}
 		</nav>

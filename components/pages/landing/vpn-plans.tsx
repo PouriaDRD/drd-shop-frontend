@@ -111,7 +111,7 @@ export function VpnPlans() {
 				</div>
 
 				<p className="mt-10 text-center text-sm text-muted-foreground">
-					تا <strong>۷ روز</strong> پس از خرید، امکان بازگشت وجه وجود
+					تا <strong>3 روز</strong> پس از خرید، امکان بازگشت وجه وجود
 					دارد.
 				</p>
 			</div>

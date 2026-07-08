@@ -74,7 +74,7 @@ export function ProductPlans({ id, productId }: ProductPlansProps) {
 			})}
 
 			<p className="mt-8 text-center text-xs text-muted-foreground">
-				تا <strong className="text-foreground">۷ روز</strong> پس از
+				تا <strong className="text-foreground">3 روز</strong> پس از
 				خرید، امکان بازگشت وجه وجود دارد.
 			</p>
 		</Tabs>
