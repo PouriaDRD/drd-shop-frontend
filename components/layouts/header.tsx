@@ -1,5 +1,7 @@
 "use client";
 
+import { Activity } from "react";
+
 import Link from "next/link";
 
 import { Menu } from "lucide-react";
@@ -7,6 +9,7 @@ import { Menu } from "lucide-react";
 import { ThemeSwitcher } from "@/features/preferences/components";
 import { AppVersion } from "@/features/shared/components";
 import { CartButton } from "@/features/shop/components/cart";
+import { useUser } from "@/features/user/context";
 
 import AppLogo from "../icons/app-logo";
 import { navLinks } from "../pages/landing/landing.data";
@@ -22,6 +25,8 @@ import {
 } from "../ui";
 
 export function Header() {
+	const { isAuthenticated } = useUser();
+
 	return (
 		<header className="sticky top-0 z-50 bg-background/95 backdrop-blur-xl w-full mx-auto max-w-6xl px-4">
 			<div className="flex flex-row-reverse h-18 items-center justify-between w-full">
@@ -32,7 +37,7 @@ export function Header() {
 				</div>
 				<HeaderNav />
 
-				<HeaderActions />
+				<HeaderActions isAuthenticated={isAuthenticated} />
 
 				<MobileMenu />
 			</div>
@@ -65,16 +70,28 @@ export function HeaderNav() {
 	);
 }
 
-export function HeaderActions() {
+export function HeaderActions({
+	isAuthenticated,
+}: {
+	isAuthenticated: boolean;
+}) {
 	return (
 		<div className="hidden items-center gap-2 md:flex flex-row-reverse">
-			<Button variant="ghost" asChild>
-				<Link href="/auth/login">ورود</Link>
-			</Button>
+			<Activity mode={isAuthenticated ? "visible" : "hidden"}>
+				<Button asChild variant="ghost">
+					<Link href="/panel/dashboard">ورود به پنل</Link>
+				</Button>
+			</Activity>
 
-			<Button asChild>
-				<Link href="/auth/register">ثبت نام</Link>
-			</Button>
+			<Activity mode={isAuthenticated ? "hidden" : "visible"}>
+				<Button variant="ghost" asChild>
+					<Link href="/auth/login">ورود</Link>
+				</Button>
+
+				<Button asChild>
+					<Link href="/auth/register">ثبت نام</Link>
+				</Button>
+			</Activity>
 		</div>
 	);
 }

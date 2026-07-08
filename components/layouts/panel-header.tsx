@@ -27,7 +27,9 @@ export function PanelHeader() {
 					</Button>
 				</Link>
 			</div>
-			<AppLogo />
+			<Link href={"/"}>
+				<AppLogo />
+			</Link>
 		</header>
 	);
 }
