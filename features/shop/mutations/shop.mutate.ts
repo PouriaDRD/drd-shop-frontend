@@ -94,3 +94,13 @@ export const useMyVpnServices = () => {
 		refetchInterval: 120 * 1000,
 	});
 };
+
+/**
+ * Apply coupon
+ */
+
+export const useApplyCoupon = () => {
+	return useMutation({
+		mutationFn: (coupon_code: string) => shopApi.applyCoupon(coupon_code),
+	});
+};

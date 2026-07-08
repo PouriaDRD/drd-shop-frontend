@@ -11,6 +11,7 @@ import { StatBaseCard } from "@/components/pages/stat-base-card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { CartEmpty, CartItemCard } from "@/features/shop/components/cart";
+import { CouponForm } from "@/features/shop/components/forms";
 import { useCart, useHandleCheckout } from "@/features/shop/hooks";
 import { useUser } from "@/features/user/context";
 
@@ -74,6 +75,10 @@ export default function CheckoutPage() {
 
 				<Separator />
 
+				<CouponForm canSubmit={cart.discount > 0} />
+
+				<Separator />
+
 				{/* SUMMARY */}
 				<div className="flex items-start justify-between">
 					<p
@@ -84,6 +89,32 @@ export default function CheckoutPage() {
 
 					<div className="flex flex-col items-center justify-center gap-4">
 						<p className="text-lg font-semibold">
+							{cart.subtotal.toLocaleString("fa-IR")} تومان
+						</p>
+					</div>
+				</div>
+				<div className="flex items-start justify-between">
+					<p
+						suppressHydrationWarning
+						className="text-sm text-muted-foreground">
+						مقدار تخفیف
+					</p>
+
+					<div className="flex flex-col items-center justify-center gap-4">
+						<p className="text-lg font-semibold">
+							{cart.discount.toLocaleString("fa-IR")} تومان
+						</p>
+					</div>
+				</div>
+				<div className="flex items-start justify-between">
+					<p
+						suppressHydrationWarning
+						className="text-sm text-muted-foreground">
+						مقدار قابل پرداخت
+					</p>
+
+					<div className="flex flex-col items-center justify-center gap-4">
+						<p className="text-lg font-semibold text-left w-full">
 							{totalCartPrice.toLocaleString("fa-IR")} تومان
 						</p>
 						{/* CHECKOUT */}

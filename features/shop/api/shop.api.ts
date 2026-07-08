@@ -72,4 +72,13 @@ export const shopApi = {
 	getMyVpnServices: () => {
 		return apiClient.get<VpnService[]>(endpoints.commerce.myV2rayServices);
 	},
+
+	// Coupon
+	applyCoupon: (coupon_code: string) => {
+		return apiClient.post<{
+			success: boolean;
+		}>(endpoints.commerce.applyCoupon, {
+			code: coupon_code,
+		});
+	},
 };

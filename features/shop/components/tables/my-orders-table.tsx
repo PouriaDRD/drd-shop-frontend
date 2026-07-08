@@ -40,7 +40,15 @@ export function MyOrdersTable() {
 						<TableHead className="text-center">تاریخ</TableHead>
 
 						<TableHead className="text-center">
-							مبلغ (تومان)
+							جمع کل (تومان)
+						</TableHead>
+
+						<TableHead className="text-center">
+							تخفیف (تومان)
+						</TableHead>
+
+						<TableHead className="text-center">
+							هزینه پرداختی (تومان)
 						</TableHead>
 
 						<TableHead className="text-center">وضعیت</TableHead>
@@ -73,6 +81,14 @@ function RefundRow({ item, index }: { item: Order; index: number }) {
 			<TableCell className="text-center">
 				<div>{date.dateWithMonthName}</div>
 				<div className="text-xs">{date.time}</div>
+			</TableCell>
+
+			<TableCell className="text-center">
+				{item.subtotal.toLocaleString("fa-IR")}
+			</TableCell>
+
+			<TableCell className="text-center">
+				{item.discount_amount.toLocaleString("fa-IR")}
 			</TableCell>
 
 			<TableCell className="text-center">
@@ -141,8 +157,15 @@ function TableState({ type }: { type: "loading" | "error" | "empty" }) {
 
 					<TableHead className="text-center">تاریخ</TableHead>
 
-					<TableHead className="text-center">مبلغ (تومان)</TableHead>
+					<TableHead className="text-center">
+						جمع کل (تومان)
+					</TableHead>
 
+					<TableHead className="text-center">تخفیف (تومان)</TableHead>
+
+					<TableHead className="text-center">
+						هزینه پرداختی (تومان)
+					</TableHead>
 					<TableHead className="text-center">وضعیت</TableHead>
 
 					<TableHead className="text-center">عملیات</TableHead>

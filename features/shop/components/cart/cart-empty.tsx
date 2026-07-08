@@ -18,8 +18,12 @@ export function CartEmpty({ onAction }: Props) {
 				</div>
 
 				<div className="space-y-1">
-					<p className="text-sm font-medium">سبد خرید خالی است</p>
-					<p className="text-xs text-muted-foreground">
+					<p suppressHydrationWarning className="text-sm font-medium">
+						سبد خرید خالی است
+					</p>
+					<p
+						suppressHydrationWarning
+						className="text-xs text-muted-foreground">
 						هنوز هیچ محصولی اضافه نکردی
 					</p>
 				</div>

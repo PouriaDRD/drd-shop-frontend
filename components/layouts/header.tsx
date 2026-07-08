@@ -54,6 +54,7 @@ export function HeaderNav() {
 		<nav className="hidden items-center gap-2 md:flex">
 			{navLinks.map((link) => (
 				<Link
+					suppressHydrationWarning
 					key={link.href}
 					href={link.href as "/"}
 					className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
