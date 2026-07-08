@@ -57,7 +57,7 @@ export function DetailsCard({ user }: Props) {
 	};
 
 	return (
-		<Card className="overflow-hidden">
+		<Card className="overflow-hidden pb-0 md:pb-6">
 			{/* Header */}
 
 			<CardHeader className="flex flex-row items-center justify-between">
