@@ -134,6 +134,11 @@ const TX_TYPE_MAP: Record<
 		label: "اصلاحیه",
 		color: "info",
 	},
+
+	referral_reward: {
+		label: "واریز پاداش",
+		color: "success",
+	},
 };
 
 const TX_STATUS_MAP: Record<

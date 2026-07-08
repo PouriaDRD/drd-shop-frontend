@@ -9,6 +9,7 @@ export const useRegisterStore = create<RegisterStoreState>()(
 	persist(
 		(set) => ({
 			email: "",
+			referral_code: "",
 			password: "",
 			password_confirm: "",
 
@@ -17,6 +18,7 @@ export const useRegisterStore = create<RegisterStoreState>()(
 			reset: () =>
 				set({
 					email: "",
+					referral_code: "",
 					password: "",
 					password_confirm: "",
 				}),
@@ -42,6 +44,7 @@ export const useRegisterStore = create<RegisterStoreState>()(
 			// Only save these states to storage (Not Password)
 			partialize: (state) => ({
 				email: state.email,
+				referral_code: state.referral_code,
 			}),
 			onRehydrateStorage: () => (state) => {
 				state?.setHasHydrated(true);

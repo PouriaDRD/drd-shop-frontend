@@ -10,7 +10,8 @@ export type TransactionType =
 	| "refund_to_wallet"
 	| "refund_to_user"
 	| "withdraw"
-	| "adjustment";
+	| "adjustment"
+	| "referral_reward";
 
 export type Transaction = {
 	id: number;

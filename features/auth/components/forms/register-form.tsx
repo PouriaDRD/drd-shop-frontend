@@ -3,7 +3,12 @@
 import { Button, FieldGroup, Spinner } from "@/components/ui";
 
 import { useRegisterForm } from "../../hooks";
-import { EmailField, PasswordConfirmField, PasswordField } from "../fields";
+import {
+	EmailField,
+	PasswordConfirmField,
+	PasswordField,
+	ReferralCodeField,
+} from "../fields";
 
 interface Props {
 	onSuccess?: () => void;
@@ -21,6 +26,13 @@ function RegisterForm({ onSuccess }: Props) {
 			<FieldGroup>
 				{/* Email Name */}
 				<EmailField control={form.control} name="email" label="ایمیل" />
+
+				{/* Referral Code */}
+				<ReferralCodeField
+					control={form.control}
+					name="referral_code"
+					label="کد معرف"
+				/>
 
 				{/* Password */}
 				<PasswordField
