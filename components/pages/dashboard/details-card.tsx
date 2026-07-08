@@ -121,12 +121,10 @@ export function DetailsCard({ user }: Props) {
 					</div>
 
 					<div className="rounded-xl border bg-muted/30 p-4 space-y-2">
-						<div className=" flex items-center gap-2 text-muted-foreground">
+						<div className="flex items-center gap-0.5 text-muted-foreground">
 							<DollarSignIcon className="size-4" />
 
-							<span className="text-xs">
-								درآمد به واسطه دعوت دوستان
-							</span>
+							<span className="text-xs">درآمد از کد دعوت</span>
 						</div>
 
 						<p className="text-xs font-medium">
