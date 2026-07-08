@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useEffectEvent } from "react";
+
 import {
 	Badge,
 	Table,
@@ -20,8 +22,22 @@ import { TicketDetailsDialog } from "../dialogs";
    MAIN COMPONENT
 ========================= */
 
-export function TicketTable() {
+interface Props {
+	onSuccess?: (tickets?: Ticket[]) => void;
+}
+
+export function TicketTable({ onSuccess }: Props) {
 	const { data, isLoading, isError } = useMyTickets();
+
+	const onSuccessCallback = useEffectEvent((data?: Ticket[]) => {
+		onSuccess?.(data);
+	});
+
+	useEffect(() => {
+		if (data?.success) {
+			onSuccessCallback(data.data);
+		}
+	}, [data]);
 
 	if (isLoading) return <TableState type="loading" />;
 

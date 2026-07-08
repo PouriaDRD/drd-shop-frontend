@@ -24,7 +24,7 @@ export default function NotificationsPage() {
 	const unreadCount = data?.success ? data.data.unread_count : 0;
 
 	return (
-		<PageLayout className="space-y-6">
+		<PageLayout className="flex flex-col gap-4">
 			<NotificationHeader
 				unreadCount={unreadCount}
 				isLoading={isLoading}
@@ -32,7 +32,7 @@ export default function NotificationsPage() {
 			/>
 
 			<Card className="overflow-hidden">
-				<ScrollArea className="h-162.5" dir="rtl">
+				<ScrollArea className="max-h-162.5" dir="rtl">
 					<NotificationList
 						notifications={notifications}
 						isLoading={isLoading}

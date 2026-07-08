@@ -3,7 +3,7 @@
 import { RequestDepositDialog } from "@/features/finance/components/dialogs";
 import { useMyWallet } from "@/features/finance/mutations";
 
-import { StatBaseCard } from "./stat-base-card";
+import { StatBaseCard } from "../stat-base-card";
 
 interface Props {
 	onSuccess?: () => void;

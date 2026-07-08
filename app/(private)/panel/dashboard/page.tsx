@@ -2,9 +2,9 @@
 
 import { ErrorState, PageHeader, PageLayout } from "@/components/pages";
 import {
+	DashboardStats,
 	DashLoading,
 	DetailsCard,
-	StatsRow,
 } from "@/components/pages/dashboard";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { LoginHistoryTable } from "@/features/auth/components/tables";
@@ -34,7 +34,9 @@ export default function PanelDashboardPage() {
 				title="داشبورد"
 				description="خلاصه اطلاعات و وضعیت حساب شما"
 			/>
-			<StatsRow user={user} />
+
+			<DashboardStats user={user} />
+
 			<div className="grid grid-cols-1 gap-4">
 				<DetailsCard user={user} />
 			</div>

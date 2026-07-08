@@ -30,7 +30,7 @@ import {
 
 export default function FinancePage() {
 	return (
-		<PageLayout className="space-y-6">
+		<PageLayout className="flex flex-col gap-4">
 			<PageHeader
 				title="مالی"
 				description="مدیریت کیف پول، تراکنش‌ها و درخواست‌های مالی"

@@ -7,7 +7,7 @@ import { ShoppingCart } from "lucide-react";
 
 import { PageHeader, PageLayout } from "@/components/pages";
 import { BalanceCard } from "@/components/pages/finance/balance-card";
-import { StatBaseCard } from "@/components/pages/finance/stat-base-card";
+import { StatBaseCard } from "@/components/pages/stat-base-card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { CartEmpty, CartItemCard } from "@/features/shop/components/cart";
@@ -29,8 +29,14 @@ export default function CheckoutPage() {
 
 	if (!user || !cartSuccess) {
 		return (
-			<PageLayout className="flex flex-col gap-8">
+			<PageLayout className="flex flex-col gap-4">
+				<PageHeader
+					title="تسویه سفارش"
+					description="تسویه سفارش با مالیات و پلن‌ها"
+				/>
+
 				<PageNav onSuccess={handleOnRequestDepositSuccess} />
+
 				<CartEmpty />
 			</PageLayout>
 		);
@@ -40,15 +46,13 @@ export default function CheckoutPage() {
 	const lowBalance = user.wallet.balance < totalCartPrice;
 
 	return (
-		<PageLayout className="flex flex-col gap-8">
+		<PageLayout className="flex flex-col gap-4">
 			<PageHeader
 				title="تسویه سفارش"
 				description="تسویه سفارش با مالیات و پلن‌ها"
 			/>
 
 			<PageNav onSuccess={handleOnRequestDepositSuccess} />
-
-			<Separator />
 
 			<div className="bg-card rounded-xl p-6 shadow flex flex-col gap-4">
 				{/* HEADER */}
@@ -107,8 +111,9 @@ interface PageNavProps {
 
 function PageNav({ onSuccess }: PageNavProps) {
 	return (
-		<div className="grid grid-cols-1 d:grid-cols-2 md:grid-cols-3 gap-4">
+		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 			<BalanceCard onSuccess={onSuccess} />
+
 			<StatBaseCard label="دسترسی سریع" value={"داشبورد"} small>
 				<Link href="/panel/dashboard">
 					<Button variant="ghost" size={"sm"}>

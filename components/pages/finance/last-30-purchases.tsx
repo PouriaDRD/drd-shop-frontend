@@ -2,7 +2,7 @@
 
 import { usePurchaseStatistics } from "@/features/finance/mutations";
 
-import { StatBaseCard } from "./stat-base-card";
+import { StatBaseCard } from "../stat-base-card";
 
 export function Last30PurchasesCard() {
 	const { data, isLoading } = usePurchaseStatistics();
