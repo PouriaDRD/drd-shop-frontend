@@ -43,7 +43,7 @@ export function DetailsCard({ user }: Props) {
 
 	const initials = user.email.slice(0, 2).toUpperCase();
 
-	const referralLink = `${window.location.origin}/register?ref=${user.referral_code}`;
+	const referralLink = `${window.location.origin}/auth/register?ref=${user.referral_code}`;
 
 	const copyText = async (value: string, type: "code" | "link") => {
 		await navigator.clipboard.writeText(value);
