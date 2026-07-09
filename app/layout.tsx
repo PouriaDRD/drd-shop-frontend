@@ -36,6 +36,52 @@ export const metadata: Metadata = {
 	description: "ساخته شده توسط پوریا دارندی",
 
 	keywords: keywords,
+
+	applicationName: "DRD Shop",
+
+	metadataBase: new URL("https://drdvip.online"),
+
+	creator: "Pouria Darandi",
+	publisher: "Pouria Darandi",
+	authors: [
+		{
+			name: "Pouria Darandi",
+			url: "https://pouria-drd.ir",
+		},
+	],
+
+	openGraph: {
+		type: "website",
+		locale: "fa_IR",
+		url: "https://drdvip.online",
+		siteName: "DRD Shop",
+		title: {
+			default: "دی‌آردی شاپ",
+			template: "دی‌آردی شاپ | %s",
+		},
+		description: "ساخته شده توسط پوریا دارندی",
+	},
+
+	twitter: {
+		creator: "@pouriaDRD",
+		creatorId: "@pouriaDRD",
+		card: "summary_large_image",
+		site: "@pouriaDRD",
+		title: {
+			default: "دی‌آردی شاپ",
+			template: "دی‌آردی شاپ | %s",
+		},
+		description: "ساخته شده توسط پوریا دارندی",
+	},
+
+	alternates: {
+		canonical: "https://drdvip.online",
+	},
+
+	robots: {
+		index: true,
+		follow: true,
+	},
 };
 
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
