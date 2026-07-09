@@ -21,7 +21,6 @@ interface Props {
 }
 
 export function useRegisterForm({ onSuccess }: Props) {
-	// Router
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const next = searchParams.get("next");
@@ -34,22 +33,23 @@ export function useRegisterForm({ onSuccess }: Props) {
 		resolver: zodResolver(registerSchema),
 		defaultValues: {
 			email: registerStore.email,
-			referral_code:
-				sessionStorage.getItem("referral_code") ??
-				registerStore.referral_code ??
-				searchParams.get("ref") ??
-				"",
+			referral_code: "",
 			password: "",
 			password_confirm: "",
 		},
 	});
 
+	/**
+	 * Sync referral code from URL
+	 */
 	useEffect(() => {
-		const ref = searchParams.get("ref");
+		const referralCode = searchParams.get("ref");
 
-		if (ref) {
-			sessionStorage.setItem("referral_code", ref);
-			form.setValue("referral_code", ref);
+		if (referralCode) {
+			form.setValue("referral_code", referralCode, {
+				shouldDirty: false,
+				shouldValidate: false,
+			});
 		}
 	}, [searchParams, form]);
 
@@ -70,14 +70,13 @@ export function useRegisterForm({ onSuccess }: Props) {
 
 		toast.success("حساب کاربری با موفقیت ایجاد شد!");
 
-		// Reset form and store
 		form.reset();
 		registerStore.reset();
 
 		onSuccess?.();
 
-		// Redirect to dashboard page or next link
 		const redirectTo = next ?? "/panel/dashboard";
+
 		router.push(redirectTo as "/");
 	};
 
@@ -88,9 +87,8 @@ export function useRegisterForm({ onSuccess }: Props) {
 					toast.error(res.message || "خطا در ثبت نام");
 					return;
 				}
-				if (res.success) {
-					await handleOnSuccess(res.data);
-				}
+
+				await handleOnSuccess(res.data);
 			},
 			onError: () => {
 				toast.error("خطا در ثبت نام");
@@ -98,10 +96,12 @@ export function useRegisterForm({ onSuccess }: Props) {
 		});
 	});
 
-	// Sync form -> store
+	/**
+	 * Sync form values with zustand store
+	 */
 	useEffect(() => {
 		// eslint-disable-next-line react-hooks/incompatible-library
-		const subscription = form.watch(async (values) => {
+		const subscription = form.watch((values) => {
 			registerStore.set({
 				email: values.email,
 				referral_code: values.referral_code,
@@ -109,19 +109,25 @@ export function useRegisterForm({ onSuccess }: Props) {
 				password_confirm: values.password_confirm,
 			});
 		});
+
 		return () => subscription.unsubscribe();
 	}, [form, registerStore]);
 
+	/**
+	 * Restore form after zustand hydration
+	 */
 	const onHasHydrated = useEffectEvent(() => {
+		const referralCode =
+			registerStore.referral_code || searchParams.get("ref") || "";
+
 		form.reset({
 			email: registerStore.email,
-			referral_code: registerStore.referral_code,
+			referral_code: referralCode,
 			password: "",
 			password_confirm: "",
 		});
 	});
 
-	// Reset form from store on mount
 	useEffect(() => {
 		if (registerStore._hasHydrated) {
 			onHasHydrated();

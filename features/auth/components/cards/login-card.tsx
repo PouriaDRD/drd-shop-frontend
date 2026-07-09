@@ -21,7 +21,7 @@ interface Props {
 
 function LoginCard({ onSuccess }: Props) {
 	return (
-		<Card className="mx-auto max-w-full sm:max-w-xs w-full bg-background ring-0 border-0">
+		<Card className="mx-auto max-w-full sm:max-w-xs w-full ring-0 border-0 bg-transparent shadow-none">
 			<CardHeader className="flex flex-col items-center">
 				<AppIcon className="size-11" />
 				<div className="text-center">

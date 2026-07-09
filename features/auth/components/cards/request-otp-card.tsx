@@ -22,7 +22,7 @@ export default function RequestOtpCard({ otpType }: Props) {
 	return (
 		<div
 			className={`flex flex-col items-center justify-between gap-4
-			mx-auto w-full max-w-xs bg-none border-0 p-4`}>
+			mx-auto w-full max-w-xs bg-transparent shadow-none border-0 p-4`}>
 			<CardHeader className="flex flex-col items-center w-full">
 				<AppIcon className="size-11" />
 				<CardTitle>
