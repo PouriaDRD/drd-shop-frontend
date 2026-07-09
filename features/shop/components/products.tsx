@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/features/shared/utils";
 import { useProducts } from "@/features/shop/mutations";
 
-import { ProductPlans } from "./product-plans ";
+import { ProductPlans } from "./product-plans";
 
 interface Props {
 	className?: string;

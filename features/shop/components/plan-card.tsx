@@ -100,6 +100,7 @@ export function PlanCard({ plan, featured, productId }: PlanCardProps) {
 
 	return (
 		<Card
+			dir="rtl"
 			className={cn(
 				"relative flex flex-col shadow-none transition-colors",
 				!plan.is_available && "opacity-50",

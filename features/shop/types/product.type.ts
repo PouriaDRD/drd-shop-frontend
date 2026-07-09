@@ -13,7 +13,7 @@ export type ProductDetail = {
 	slug: string;
 	title: string;
 	description: string;
-	type: string;
+	type: ProductType;
 	plans: Plan[];
 };
 

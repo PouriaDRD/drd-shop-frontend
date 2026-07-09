@@ -25,7 +25,9 @@ export function HeroContent() {
 			<HeroBadge />
 
 			<div className="space-y-5">
-				<h1 className="font-bold leading-tight tracking-tight text-4xl md:text-4xl lg:text-5xl">
+				<h1
+					suppressHydrationWarning
+					className="font-bold leading-tight tracking-tight text-4xl md:text-4xl lg:text-5xl">
 					وی پی انی که هرجا باشی،
 					<br />
 					<span>قطع نمی‌شه!</span>
