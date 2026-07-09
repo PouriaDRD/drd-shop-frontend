@@ -30,27 +30,24 @@ export function useRegisterForm({ onSuccess }: Props) {
 	const registerMutation = useRegister();
 	const registerStore = useRegisterStore();
 
-	const referralCode = sessionStorage.getItem("referral_code") ?? "";
+	const form = useForm({
+		resolver: zodResolver(registerSchema),
+		defaultValues: {
+			email: registerStore.email,
+			referral_code: registerStore.referral_code,
+			password: "",
+			password_confirm: "",
+		},
+	});
 
 	useEffect(() => {
 		const ref = searchParams.get("ref");
 
 		if (ref) {
 			sessionStorage.setItem("referral_code", ref);
-			registerStore.set({ referral_code: ref });
+			form.setValue("referral_code", ref);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchParams]);
-
-	const form = useForm({
-		resolver: zodResolver(registerSchema),
-		defaultValues: {
-			email: registerStore.email,
-			referral_code: registerStore.referral_code ?? referralCode,
-			password: "",
-			password_confirm: "",
-		},
-	});
+	}, [searchParams, form]);
 
 	const handleOnSuccess = async (data: RegisterData) => {
 		await Promise.all([
