@@ -26,23 +26,36 @@ const keywords = [
 	"پوریا دارندی",
 	"دارندی",
 	"پوریا",
+	"دی‌آردی شاپ",
+	"DRD Shop",
+	"VPN",
+	"وی پی ان",
+	"وی پی ان ایران",
+	"VPN پرسرعت",
+	"VPN ارزان",
+	"فیلترشکن پرسرعت",
+	"اینترنت آزاد",
+	"پوریا دارندی",
 ];
 
 export const metadata: Metadata = {
 	title: {
 		default: "دی‌آردی شاپ",
-		template: "دی‌آردی شاپ | %s",
+		template: "%s | دی‌آردی شاپ",
 	},
-	description: "ساخته شده توسط پوریا دارندی",
+
+	description:
+		"دی‌آردی شاپ ارائه‌دهنده سرویس‌های VPN پرسرعت، پایدار و اقتصادی برای کاربران ایران با پشتیبانی حرفه‌ای و تجربه اینترنت بهتر.",
 
 	keywords: keywords,
 
 	applicationName: "DRD Shop",
 
-	metadataBase: new URL("https://drdvip.online"),
+	metadataBase: new URL("https://shop.pouria-drd.ir"),
 
 	creator: "Pouria Darandi",
-	publisher: "Pouria Darandi",
+	publisher: "DRD Shop",
+
 	authors: [
 		{
 			name: "Pouria Darandi",
@@ -53,34 +66,118 @@ export const metadata: Metadata = {
 	openGraph: {
 		type: "website",
 		locale: "fa_IR",
-		url: "https://drdvip.online",
+		url: "https://shop.pouria-drd.ir",
 		siteName: "DRD Shop",
-		title: {
-			default: "دی‌آردی شاپ",
-			template: "دی‌آردی شاپ | %s",
-		},
-		description: "ساخته شده توسط پوریا دارندی",
+
+		title: "دی‌آردی شاپ",
+
+		description:
+			"دی‌آردی شاپ ارائه‌دهنده سرویس‌های VPN پرسرعت، پایدار و اقتصادی برای کاربران ایران با پشتیبانی حرفه‌ای.",
+
+		images: [
+			{
+				url: "/images/og/opengraph-image.png",
+				width: 1200,
+				height: 630,
+				alt: "دی‌آردی شاپ - VPN پرسرعت",
+			},
+		],
 	},
 
 	twitter: {
-		creator: "@pouriaDRD",
-		creatorId: "@pouriaDRD",
 		card: "summary_large_image",
+
 		site: "@pouriaDRD",
-		title: {
-			default: "دی‌آردی شاپ",
-			template: "دی‌آردی شاپ | %s",
-		},
-		description: "ساخته شده توسط پوریا دارندی",
+		creator: "@pouriaDRD",
+
+		title: "دی‌آردی شاپ | خرید VPN پرسرعت و ارزان",
+
+		description:
+			"سرویس VPN پرسرعت، پایدار و اقتصادی دی‌آردی شاپ برای کاربران ایران.",
+
+		images: ["/images/tw/twitter-image.png"],
 	},
 
 	alternates: {
-		canonical: "https://drdvip.online",
+		canonical: "https://shop.pouria-drd.ir",
 	},
 
 	robots: {
 		index: true,
 		follow: true,
+
+		googleBot: {
+			index: true,
+			follow: true,
+			"max-image-preview": "large",
+			"max-snippet": -1,
+			"max-video-preview": -1,
+		},
+	},
+
+	category: "technology",
+
+	// Structured Data (JSON-LD) for SEO
+	other: {
+		"ld+json": JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "OnlineStore",
+
+			name: "DRD Shop",
+			alternateName: "دی‌آردی شاپ",
+
+			url: "https://shop.pouria-drd.ir",
+
+			logo: {
+				"@type": "ImageObject",
+				url: "https://shop.pouria-drd.ir/images/logo.png",
+			},
+
+			image: {
+				"@type": "ImageObject",
+				url: "https://shop.pouria-drd.ir/images/og/opengraph-image.png",
+				width: 1200,
+				height: 630,
+			},
+
+			description:
+				"دی‌آردی شاپ ارائه‌دهنده سرویس‌های VPN پرسرعت، پایدار و اقتصادی برای کاربران ایران با پشتیبانی حرفه‌ای.",
+
+			founder: {
+				"@type": "Person",
+				name: "Pouria Darandi",
+				url: "https://pouria-drd.ir",
+			},
+
+			brand: {
+				"@type": "Brand",
+				name: "DRD Shop",
+			},
+
+			sameAs: [
+				"https://github.com/PouriaDRD/",
+				"https://twitter.com/pouria_drd/",
+				"https://t.me/pouria_drd/",
+				"https://www.instagram.com/pouria.drd/",
+			],
+
+			areaServed: {
+				"@type": "Country",
+				name: "Iran",
+			},
+
+			availableLanguage: ["Persian", "English"],
+
+			potentialAction: {
+				"@type": "SearchAction",
+				target: {
+					"@type": "EntryPoint",
+					urlTemplate:
+						"https://shop.pouria-drd.ir/search?q={search_term_string}",
+				},
+				"query-input": "required name=search_term_string",
+			},
+		}),
 	},
 };
 
