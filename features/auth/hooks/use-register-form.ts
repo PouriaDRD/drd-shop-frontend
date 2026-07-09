@@ -34,7 +34,11 @@ export function useRegisterForm({ onSuccess }: Props) {
 		resolver: zodResolver(registerSchema),
 		defaultValues: {
 			email: registerStore.email,
-			referral_code: registerStore.referral_code,
+			referral_code:
+				sessionStorage.getItem("referral_code") ??
+				registerStore.referral_code ??
+				searchParams.get("ref") ??
+				"",
 			password: "",
 			password_confirm: "",
 		},
