@@ -13,6 +13,13 @@ import { UserProvider } from "@/features/user/context";
 
 import "./globals.css";
 
+const SITE_NAME = "دی‌آردی شاپ";
+const SITE_TITLE = "خرید VPN پرسرعت و پایدار | دی‌آردی شاپ";
+const SITE_DESCRIPTION =
+	"دی‌آردی شاپ ارائه‌دهنده سرویس‌های VPN پرسرعت، پایدار و اقتصادی با پشتیبانی حرفه‌ای و فعال برای کاربران ایران.";
+
+const SITE_URL = "https://shop.pouria-drd.ir";
+
 const keywords = [
 	"دی‌آردی وی‌ پی‌ ان",
 	"دی‌آردی",
@@ -36,25 +43,36 @@ const keywords = [
 	"فیلترشکن پرسرعت",
 	"اینترنت آزاد",
 	"پوریا دارندی",
+	"VPN",
+	"وی پی ان",
+	"خرید VPN",
+	"VPN ایران",
+	"فیلترشکن",
+	"DRD Shop",
+	"دی‌آردی شاپ",
 ];
 
 export const metadata: Metadata = {
+	metadataBase: new URL(SITE_URL),
+
 	title: {
-		default: "دی‌آردی شاپ",
+		default: SITE_NAME,
 		template: "%s | دی‌آردی شاپ",
 	},
 
-	description:
-		"دی‌آردی شاپ ارائه‌دهنده سرویس‌های VPN پرسرعت، پایدار و اقتصادی برای کاربران ایران با پشتیبانی حرفه‌ای و تجربه اینترنت بهتر.",
+	description: SITE_DESCRIPTION,
+
+	applicationName: SITE_NAME,
+
+	referrer: "origin-when-cross-origin",
+
+	category: "technology",
 
 	keywords: keywords,
 
-	applicationName: "DRD Shop",
-
-	metadataBase: new URL("https://shop2.pouria-drd.ir"),
-
 	creator: "Pouria Darandi",
-	publisher: "DRD Shop",
+
+	publisher: SITE_NAME,
 
 	authors: [
 		{
@@ -63,114 +81,74 @@ export const metadata: Metadata = {
 		},
 	],
 
+	alternates: {
+		canonical: "/",
+	},
+
+	appleWebApp: {
+		title: SITE_NAME,
+		statusBarStyle: "default",
+		capable: true,
+	},
+
 	openGraph: {
 		type: "website",
+
 		locale: "fa_IR",
-		url: "https://shop2.pouria-drd.ir",
-		siteName: "DRD Shop",
-		title: "دی‌آردی شاپ",
-		description:
-			"دی‌آردی شاپ ارائه‌دهنده سرویس‌های VPN پرسرعت، پایدار و اقتصادی برای کاربران ایران با پشتیبانی حرفه‌ای.",
+
+		url: "/",
+
+		siteName: SITE_NAME,
+
+		title: SITE_TITLE,
+
+		description: SITE_DESCRIPTION,
+
 		images: [
-			// {
-			// 	url: "https://shop.pouria-drd.ir/images/opengraph-image.png",
-			// 	width: 600,
-			// 	height: 315,
-			// 	alt: "دی‌آردی شاپ",
-			// },
 			{
-				url: "https://shop2.pouria-drd.ir/images/opengraph-image.png",
-				width: 600,
-				height: 315,
-				alt: "دی‌آردی شاپ",
+				url: "/opengraph-image.png",
+				width: 1200,
+				height: 630,
+				alt: SITE_NAME,
 			},
 		],
 	},
 
 	twitter: {
 		card: "summary_large_image",
-		site: "@pouriaDRD",
-		creator: "@pouriaDRD",
-		title: "دی‌آردی شاپ | خرید VPN پرسرعت و ارزان",
-		description:
-			"سرویس VPN پرسرعت، پایدار و اقتصادی دی‌آردی شاپ برای کاربران ایران.",
-		images: [
-			// {
-			// 	url: "https://shop.pouria-drd.ir/images/twitter-image.png",
-			// 	width: 600,
-			// 	height: 315,
-			// 	alt: "دی‌آردی شاپ",
-			// },
-			{
-				url: "https://shop2.pouria-drd.ir/images/twitter-image.png",
-				width: 600,
-				height: 315,
-				alt: "دی‌آردی شاپ",
-			},
-		],
-	},
 
-	alternates: {
-		canonical: "https://shop2.pouria-drd.ir",
+		site: "@pouria_drd",
+
+		creator: "@pouria_drd",
+
+		title: SITE_TITLE,
+
+		description: SITE_DESCRIPTION,
+
+		images: ["/twitter-image.png"],
 	},
 
 	robots: {
 		index: true,
+
 		follow: true,
+
+		nocache: false,
 
 		googleBot: {
 			index: true,
+
 			follow: true,
+
 			"max-image-preview": "large",
-			"max-snippet": -1,
-			"max-video-preview": -1,
 		},
 	},
 
-	category: "technology",
-
-	// Structured Data (JSON-LD) for SEO
-	other: {
-		"ld+json": JSON.stringify({
-			"@context": "https://schema.org",
-			"@type": "OnlineStore",
-
-			name: "DRD Shop",
-			alternateName: "دی‌آردی شاپ",
-
-			url: "https://shop2.pouria-drd.ir",
-
-			description:
-				"دی‌آردی شاپ ارائه‌دهنده سرویس‌های VPN پرسرعت، پایدار و اقتصادی برای کاربران ایران با پشتیبانی حرفه‌ای.",
-
-			founder: {
-				"@type": "Person",
-				name: "Pouria Darandi",
-				url: "https://pouria-drd.ir",
-			},
-
-			brand: {
-				"@type": "Brand",
-				name: "DRD Shop",
-			},
-
-			sameAs: [
-				"https://github.com/PouriaDRD/",
-				"https://twitter.com/pouria_drd/",
-				"https://t.me/pouria_drd/",
-				"https://www.instagram.com/pouria.drd/",
-			],
-
-			areaServed: {
-				"@type": "Country",
-				name: "Iran",
-			},
-
-			availableLanguage: ["Persian", "English"],
-		}),
+	verification: {
+		// Search Console value for "Google Search Console/Site Verification"
+		google: "",
 	},
 };
-
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
 	return (
 		<html
