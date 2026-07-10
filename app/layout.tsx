@@ -71,20 +71,20 @@ export const metadata: Metadata = {
 		title: "دی‌آردی شاپ",
 		description:
 			"دی‌آردی شاپ ارائه‌دهنده سرویس‌های VPN پرسرعت، پایدار و اقتصادی برای کاربران ایران با پشتیبانی حرفه‌ای.",
-		images: [
-			{
-				url: "https://shop.pouria-drd.ir/images/og/opengraph-image.png",
-				width: 600,
-				height: 315,
-				alt: "دی‌آردی شاپ",
-			},
-			{
-				url: "https://shop2.pouria-drd.ir/images/twitter-card.png",
-				width: 600,
-				height: 315,
-				alt: "دی‌آردی شاپ",
-			},
-		],
+		// images: [
+		// 	{
+		// 		url: "https://shop.pouria-drd.ir/images/og/opengraph-image.png",
+		// 		width: 600,
+		// 		height: 315,
+		// 		alt: "دی‌آردی شاپ",
+		// 	},
+		// 	{
+		// 		url: "https://shop2.pouria-drd.ir/images/twitter-card.png",
+		// 		width: 600,
+		// 		height: 315,
+		// 		alt: "دی‌آردی شاپ",
+		// 	},
+		// ],
 	},
 
 	twitter: {
@@ -94,20 +94,20 @@ export const metadata: Metadata = {
 		title: "دی‌آردی شاپ | خرید VPN پرسرعت و ارزان",
 		description:
 			"سرویس VPN پرسرعت، پایدار و اقتصادی دی‌آردی شاپ برای کاربران ایران.",
-		images: [
-			{
-				url: "https://shop.pouria-drd.ir/images/twitter-card.png",
-				width: 600,
-				height: 315,
-				alt: "دی‌آردی شاپ",
-			},
-			{
-				url: "https://shop2.pouria-drd.ir/images/twitter-card.png",
-				width: 600,
-				height: 315,
-				alt: "دی‌آردی شاپ",
-			},
-		],
+		// images: [
+		// 	{
+		// 		url: "https://shop.pouria-drd.ir/images/twitter-card.png",
+		// 		width: 600,
+		// 		height: 315,
+		// 		alt: "دی‌آردی شاپ",
+		// 	},
+		// 	{
+		// 		url: "https://shop2.pouria-drd.ir/images/twitter-card.png",
+		// 		width: 600,
+		// 		height: 315,
+		// 		alt: "دی‌آردی شاپ",
+		// 	},
+		// ],
 	},
 
 	alternates: {
