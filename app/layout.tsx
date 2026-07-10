@@ -79,7 +79,7 @@ export const metadata: Metadata = {
 				alt: "دی‌آردی شاپ",
 			},
 			{
-				url: "https://drd-shop-frontend.netlify.app/images/og/opengraph-image.png",
+				url: "https://shop2.pouria-drd.ir/images/twitter-card.png",
 				width: 600,
 				height: 315,
 				alt: "دی‌آردی شاپ",
@@ -102,7 +102,7 @@ export const metadata: Metadata = {
 				alt: "دی‌آردی شاپ",
 			},
 			{
-				url: "https://drd-shop-frontend.netlify.app/images/twitter-card.png",
+				url: "https://shop2.pouria-drd.ir/images/twitter-card.png",
 				width: 600,
 				height: 315,
 				alt: "دی‌آردی شاپ",
