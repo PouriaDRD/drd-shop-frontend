@@ -73,13 +73,13 @@ export const metadata: Metadata = {
 			"دی‌آردی شاپ ارائه‌دهنده سرویس‌های VPN پرسرعت، پایدار و اقتصادی برای کاربران ایران با پشتیبانی حرفه‌ای.",
 		images: [
 			// {
-			// 	url: "https://shop.pouria-drd.ir/images/og/opengraph-image.png",
+			// 	url: "https://shop.pouria-drd.ir/images/opengraph-image.png",
 			// 	width: 600,
 			// 	height: 315,
 			// 	alt: "دی‌آردی شاپ",
 			// },
 			{
-				url: "https://shop2.pouria-drd.ir/images/og/opengraph-image.png",
+				url: "https://shop2.pouria-drd.ir/images/opengraph-image.png",
 				width: 600,
 				height: 315,
 				alt: "دی‌آردی شاپ",
@@ -96,13 +96,13 @@ export const metadata: Metadata = {
 			"سرویس VPN پرسرعت، پایدار و اقتصادی دی‌آردی شاپ برای کاربران ایران.",
 		images: [
 			// {
-			// 	url: "https://shop.pouria-drd.ir/images/tw/twitter-image.png",
+			// 	url: "https://shop.pouria-drd.ir/images/twitter-image.png",
 			// 	width: 600,
 			// 	height: 315,
 			// 	alt: "دی‌آردی شاپ",
 			// },
 			{
-				url: "https://shop2.pouria-drd.ir/images/tw/twitter-image.png",
+				url: "https://shop2.pouria-drd.ir/images/twitter-image.png",
 				width: 600,
 				height: 315,
 				alt: "دی‌آردی شاپ",
