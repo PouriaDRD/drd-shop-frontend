@@ -43,49 +43,18 @@ export function PlanCard({ plan, featured, productId }: PlanCardProps) {
 	const traffic = getFeature(plan, "ترافیک");
 	const days = getFeature(plan, "روز");
 	const location = getFeature(plan, "لوکیشن");
-	const devices = deviceLabel(plan);
 
 	const features = [
 		{
 			icon: Zap,
 			label: traffic ? `${traffic} گیگابایت ترافیک` : "ترافیک نامحدود",
 		},
-		{
-			icon: Calendar,
-			label: days ? `${days} روزه` : "بدون محدودیت زمانی",
-		},
-		{
-			icon: MapPin,
-			label: location ?? "همه سرورها",
-		},
-		{
-			icon: Monitor,
-			label: devices,
-		},
+		{ icon: Calendar, label: days ? `${days} روزه` : "بدون محدودیت زمانی" },
+		{ icon: MapPin, label: location ?? "همه سرورها" },
+		{ icon: Monitor, label: deviceLabel(plan) },
 	];
 
-	const handleOnAddItem = () => {
-		addItem({
-			plan_title: plan.title,
-			plan_id: plan.id,
-			product_id: productId,
-			quantity: 1,
-			unit_price: plan.price,
-			total_price: plan.price * 1,
-			is_renewal: false,
-			service_id: null,
-		});
-	};
-
-	const handleIncreaseQuantity = () => {
-		increaseQuantity(plan.id);
-	};
-
-	const handleDecreaseQuantity = () => {
-		decreaseQuantity(plan.id);
-	};
-
-	const isDisable =
+	const isDisabled =
 		isDecreasingQuantity ||
 		isIncreasingQuantity ||
 		isAddingItem ||
@@ -98,32 +67,42 @@ export function PlanCard({ plan, featured, productId }: PlanCardProps) {
 			? "ناموجود"
 			: "افزودن به سبد خرید";
 
+	const handleAdd = () =>
+		addItem({
+			plan_title: plan.title,
+			plan_id: plan.id,
+			product_id: productId,
+			quantity: 1,
+			unit_price: plan.price,
+			total_price: plan.price,
+			is_renewal: false,
+			service_id: null,
+		});
+
 	return (
 		<Card
 			dir="rtl"
 			className={cn(
 				"relative flex flex-col shadow-none transition-colors",
+				featured && "border-foreground/20",
 				!plan.is_available && "opacity-50",
 			)}>
 			{featured && (
-				<Badge className="absolute left-4 top-4" variant={"info"}>
+				<Badge className="absolute left-4 top-4" variant="info">
 					پیشنهاد ویژه
 				</Badge>
 			)}
 
 			<CardHeader className="pb-4">
-				<div className="flex items-start justify-between gap-2">
-					<CardTitle className="text-sm font-medium">
-						{plan.title}
-					</CardTitle>
-				</div>
+				<CardTitle className="text-sm font-medium">
+					{plan.title}
+				</CardTitle>
 
 				<div className="pt-2">
 					<div className="flex items-baseline gap-1.5">
 						<span className="text-2xl font-medium">
 							{plan.price.toLocaleString("fa-IR")}
 						</span>
-
 						<span className="text-xs text-muted-foreground">
 							تومان
 						</span>
@@ -139,10 +118,10 @@ export function PlanCard({ plan, featured, productId }: PlanCardProps) {
 				<ul className="flex flex-col gap-2.5">
 					{features.map(({ icon: Icon, label }) => (
 						<li key={label} className="flex items-center gap-2.5">
-							<span className="flex h-5 w-5 items-center justify-center rounded-full bg-muted">
-								<Icon className="h-3 w-3" />
-							</span>
-
+							<Icon
+								className="h-4 w-4 shrink-0 text-muted-foreground"
+								strokeWidth={1.75}
+							/>
 							<span className="text-sm text-muted-foreground">
 								{label}
 							</span>
@@ -158,12 +137,12 @@ export function PlanCard({ plan, featured, productId }: PlanCardProps) {
 			</CardContent>
 
 			<CardFooter>
-				{!item || (item && item.quantity === 0) ? (
+				{!item || item.quantity === 0 ? (
 					<Button
 						className="w-full"
 						variant={featured ? "default" : "outline"}
-						disabled={!plan.is_available || isDisable}
-						onClick={handleOnAddItem}>
+						disabled={!plan.is_available || isDisabled}
+						onClick={handleAdd}>
 						{buttonText}
 					</Button>
 				) : (
@@ -171,8 +150,8 @@ export function PlanCard({ plan, featured, productId }: PlanCardProps) {
 						<Button
 							size="icon"
 							variant="outline"
-							disabled={isDisable}
-							onClick={handleDecreaseQuantity}>
+							disabled={isDisabled}
+							onClick={() => decreaseQuantity(plan.id)}>
 							<Minus className="size-4" />
 						</Button>
 
@@ -183,8 +162,8 @@ export function PlanCard({ plan, featured, productId }: PlanCardProps) {
 						<Button
 							size="icon"
 							variant="outline"
-							disabled={isDisable}
-							onClick={handleIncreaseQuantity}>
+							disabled={isDisabled}
+							onClick={() => increaseQuantity(plan.id)}>
 							<Plus className="size-4" />
 						</Button>
 					</div>

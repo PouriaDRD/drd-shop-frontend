@@ -79,7 +79,7 @@ export function NetworkReadout({ compact = false }: { compact?: boolean }) {
 	}, [servers]);
 
 	const health =
-		averagePing < 35 ? "Excellent" : averagePing < 80 ? "Good" : "Moderate";
+		averagePing < 35 ? "عالی" : averagePing < 80 ? "خوب" : "متوسط";
 
 	return (
 		<Card className="overflow-hidden w-full">
@@ -118,13 +118,13 @@ function NetworkHeader({ lastSync }: NetworkHeaderProps) {
 						<div className="relative size-2.5 rounded-full bg-emerald-500" />
 					</div>
 
-					<span className="font-semibold">Network Status</span>
+					<span className="font-semibold">وضعیت شبکه</span>
 
-					<Badge variant="secondary">Operational</Badge>
+					<Badge variant="secondary">فعال</Badge>
 				</div>
 
 				<p className="mt-2 text-sm text-muted-foreground">
-					Real-time infrastructure monitoring
+					پایش لحظه‌ای زیرساخت شبکه
 				</p>
 			</div>
 
@@ -134,11 +134,11 @@ function NetworkHeader({ lastSync }: NetworkHeaderProps) {
 					className="flex items-center justify-end gap-1">
 					<Clock3 className="size-3.5" />
 
-					{lastSync.toLocaleTimeString()}
+					{lastSync.toLocaleTimeString("fa-IR")}
 				</div>
 
 				<div className="mt-1">
-					Uptime{" "}
+					پایداری{" "}
 					<span className="font-medium text-foreground">99.98%</span>
 				</div>
 			</div>
@@ -163,17 +163,13 @@ function NetworkSummary({
 }: NetworkSummaryProps) {
 	return (
 		<div className="grid grid-cols-3 gap-3">
-			<SummaryCard
-				icon={Zap}
-				label="Latency"
-				value={`${averagePing} ms`}
-			/>
+			<SummaryCard icon={Zap} label="تأخیر" value={`${averagePing} ms`} />
 
-			<SummaryCard icon={Activity} label="Health" value={health} />
+			<SummaryCard icon={Activity} label="سلامت" value={health} />
 
 			<SummaryCard
 				icon={ShieldCheck}
-				label="Servers"
+				label="سرورها"
 				value={serverCount}
 			/>
 		</div>
@@ -255,13 +251,13 @@ function NetworkServerItem({ server, state }: NetworkServerItemProps) {
 
 			<div className="flex items-center gap-8 text-sm tabular-nums">
 				<div className="text-right">
-					<div className="text-muted-foreground">Load</div>
+					<div className="text-muted-foreground">بار</div>
 
 					<div className="font-medium">{state.load}%</div>
 				</div>
 
 				<div className="text-right">
-					<div className="text-muted-foreground">Ping</div>
+					<div className="text-muted-foreground">پینگ</div>
 
 					<div
 						className={`font-semibold ${getPingColor(state.ping)}`}>

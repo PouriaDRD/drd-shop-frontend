@@ -28,7 +28,7 @@ export function Header() {
 	const { isAuthenticated } = useUser();
 
 	return (
-		<header className="sticky top-0 z-50 bg-background/95 backdrop-blur-xl w-full mx-auto max-w-6xl px-4">
+		<header className="sticky top-0 z-50 bg-background/90 backdrop-blur-xl w-full mx-auto max-w-6xl px-4">
 			<div className="flex flex-row-reverse h-18 items-center justify-between w-full">
 				<div className="flex items-center gap-3 md:gap-4">
 					<CartButton />

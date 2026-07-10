@@ -35,20 +35,21 @@ export function ProductPlans({ id, productId }: ProductPlansProps) {
 	}
 
 	return (
-		<div className="space-y-8">
+		<div className="space-y-6">
 			<div
 				dir="ltr"
-				className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-				{plans.map((plan) => (
+				className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+				{plans.map((plan, i) => (
 					<PlanCard
 						key={plan.id}
 						plan={plan}
 						productId={productId}
-						featured={false}
+						featured={i === 1 && plans.length > 2}
 					/>
 				))}
 			</div>
-			<p className="mt-8 text-center text-xs text-muted-foreground">
+
+			<p className="text-center text-xs text-muted-foreground">
 				تا <strong className="text-foreground">3 روز</strong> پس از
 				خرید، امکان بازگشت وجه وجود دارد.
 			</p>

@@ -68,23 +68,27 @@ export const metadata: Metadata = {
 		locale: "fa_IR",
 		url: "https://shop.pouria-drd.ir",
 		siteName: "DRD Shop",
-
 		title: "دی‌آردی شاپ",
-
 		description:
 			"دی‌آردی شاپ ارائه‌دهنده سرویس‌های VPN پرسرعت، پایدار و اقتصادی برای کاربران ایران با پشتیبانی حرفه‌ای.",
+		images: [
+			{
+				url: "https://shop.pouria-drd.ir/images/og/opengraph-image.png",
+				width: 600,
+				height: 315,
+				alt: "دی‌آردی شاپ",
+			},
+		],
 	},
 
 	twitter: {
 		card: "summary_large_image",
-
 		site: "@pouriaDRD",
 		creator: "@pouriaDRD",
-
 		title: "دی‌آردی شاپ | خرید VPN پرسرعت و ارزان",
-
 		description:
 			"سرویس VPN پرسرعت، پایدار و اقتصادی دی‌آردی شاپ برای کاربران ایران.",
+		images: ["https://shop.pouria-drd.ir/images/tw/twitter-image.png"],
 	},
 
 	alternates: {
@@ -157,11 +161,11 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
 			data-scroll-behavior="smooth"
 			className={cn(
 				`${peyda.variable}`,
-				//  ${iranYekanX.variable}}`,
+				`${iranYekanX.variable}}`,
 				// `${geistSans.variable} ${geistMono.variable}`,
 				`h-full antialiased`,
 			)}>
-			<body className="font-peyda" suppressHydrationWarning>
+			<body className="font-iran-yekan-x! ss02!" suppressHydrationWarning>
 				<QCProvider>
 					<ThemeProvider
 						attribute="class"
@@ -240,18 +244,18 @@ const peyda = localFont({
 	variable: "--font-peyda",
 });
 
-// const iranYekanX = localFont({
-// 	src: [
-// 		{
-// 			weight: "normal",
-// 			style: "normal",
-// 			path: "./assets/fonts/IRANYekanX/IRANYekanX-Regular.woff",
-// 		},
-// 		{
-// 			weight: "bold",
-// 			style: "normal",
-// 			path: "./assets/fonts/IRANYekanX/IRANYekanX-Bold.woff",
-// 		},
-// 	],
-// 	variable: "--font-iran-yekan-x",
-// });
+const iranYekanX = localFont({
+	src: [
+		{
+			weight: "normal",
+			style: "normal",
+			path: "./assets/fonts/IRANYekanX/IRANYekanX-Regular.woff",
+		},
+		{
+			weight: "bold",
+			style: "normal",
+			path: "./assets/fonts/IRANYekanX/IRANYekanX-Bold.woff",
+		},
+	],
+	variable: "--font-iran-yekan-x",
+});
