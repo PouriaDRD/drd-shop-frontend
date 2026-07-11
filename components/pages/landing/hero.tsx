@@ -34,7 +34,7 @@ function HeroContent() {
 					className="text-4xl font-bold leading-tight tracking-tight lg:text-5xl">
 					وی پی انی که هرجا باشی،
 					<br />
-					<span>قطع نمی‌شه!</span>
+					<span suppressHydrationWarning>قطع نمی‌شه!</span>
 				</h1>
 
 				<p className="mx-auto max-w-md text-base leading-8 text-muted-foreground md:mx-0">

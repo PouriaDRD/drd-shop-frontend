@@ -134,7 +134,7 @@ function ServiceRow({
 
 			{/* REMAINING VOLUME */}
 			<TableCell className="text-center">
-				{remaining ? (
+				{remaining && item.stats?.status === "unknown" ? (
 					<Badge variant="outline">
 						{remaining.value} {remaining.unit}
 					</Badge>
