@@ -38,11 +38,11 @@ export type TicketMessage = {
 	sender: string;
 	message: string;
 	is_staff_reply: boolean;
-	attachments?: Attachment[] | null;
+	attachments?: AttachmentType[] | null;
 	created_at: Date;
 };
 
-export type Attachment = {
+export type AttachmentType = {
 	id: string;
 	file: string;
 	created_at: Date;

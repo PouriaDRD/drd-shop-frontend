@@ -48,7 +48,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { isImageFile, toIranDateTime } from "@/features/shared/utils";
 
 import { useTicketDetails } from "../../mutations";
-import { TicketMessage } from "../../types";
+import { AttachmentType, TicketMessage } from "../../types";
 import { TicketReplyForm } from "../forms";
 
 interface Props {
@@ -143,51 +143,11 @@ function TicketMessageItem({ message }: MessageProps) {
 							message.attachments.length > 0 && (
 								<AttachmentGroup className="flex flex-col items-end w-full">
 									{message.attachments.map((attachment) => {
-										const isImage = isImageFile(
-											attachment.file,
-										);
-
 										return (
-											<Attachment
-												dir="rtl"
+											<AttachmentHandler
 												key={attachment.id}
-												size="default"
-												orientation={"vertical"}
-												className="bg-white hover:bg-white!">
-												{isImage && (
-													<AttachmentMedia className="border">
-														<Image
-															src={
-																attachment.file
-															}
-															alt="فایل پیوست"
-															width={64}
-															height={64}
-															unoptimized
-														/>
-													</AttachmentMedia>
-												)}
-
-												<AttachmentContent>
-													<AttachmentTitle>
-														فایل پیوست
-													</AttachmentTitle>
-
-													<AttachmentDescription>
-														دانلود فایل
-													</AttachmentDescription>
-												</AttachmentContent>
-
-												<AttachmentTrigger asChild>
-													<Link
-														href={
-															attachment.file as "/"
-														}
-														target="_blank"
-														rel="noopener noreferrer"
-													/>
-												</AttachmentTrigger>
-											</Attachment>
+												attachment={attachment}
+											/>
 										);
 									})}
 								</AttachmentGroup>
@@ -216,6 +176,45 @@ function TicketMessageItem({ message }: MessageProps) {
 				</MessageFooter>
 			</MessageContent>
 		</Message>
+	);
+}
+
+function AttachmentHandler({ attachment }: { attachment: AttachmentType }) {
+	const isImage = isImageFile(attachment.file);
+
+	return (
+		<Attachment
+			dir="rtl"
+			key={attachment.id}
+			size="default"
+			orientation={"vertical"}
+			className="bg-white hover:bg-white!">
+			{isImage && (
+				<AttachmentMedia className="border">
+					<Image
+						src={attachment.file}
+						alt="فایل پیوست"
+						width={64}
+						height={64}
+						unoptimized
+					/>
+				</AttachmentMedia>
+			)}
+
+			<AttachmentContent>
+				<AttachmentTitle>فایل پیوست</AttachmentTitle>
+
+				<AttachmentDescription>دانلود فایل</AttachmentDescription>
+			</AttachmentContent>
+
+			<AttachmentTrigger asChild>
+				<Link
+					href={attachment.file as "/"}
+					target="_blank"
+					rel="noopener noreferrer"
+				/>
+			</AttachmentTrigger>
+		</Attachment>
 	);
 }
 

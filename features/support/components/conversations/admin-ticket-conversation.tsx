@@ -48,7 +48,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { isImageFile, toIranDateTime } from "@/features/shared/utils";
 
 import { useAdminTicketDetails } from "../../mutations";
-import { TicketMessage } from "../../types";
+import type { AttachmentType, TicketMessage } from "../../types";
 import { AdminTicketReplyForm } from "../forms";
 
 interface Props {
@@ -121,7 +121,7 @@ function TicketMessageItem({ message }: MessageProps) {
 	const date = toIranDateTime(message.created_at);
 
 	return (
-		<Message align={message.is_staff_reply ? "end" : "start"}>
+		<Message align={!message.is_staff_reply ? "end" : "start"}>
 			<MessageAvatar className="aspect-square border">
 				{message.is_staff_reply ? (
 					<ShieldIcon className="size-4" />
@@ -133,7 +133,9 @@ function TicketMessageItem({ message }: MessageProps) {
 			<MessageContent>
 				<MessageHeader>
 					<span className="text-white">
-						{message.is_staff_reply ? "پشتیبانی" : "شما"}
+						{message.is_staff_reply
+							? "پشتیبانی"
+							: `${message.sender}`}
 					</span>
 				</MessageHeader>
 
@@ -143,51 +145,11 @@ function TicketMessageItem({ message }: MessageProps) {
 							message.attachments.length > 0 && (
 								<AttachmentGroup className="flex flex-col items-end w-full">
 									{message.attachments.map((attachment) => {
-										const isImage = isImageFile(
-											attachment.file,
-										);
-
 										return (
-											<Attachment
-												dir="rtl"
+											<AttachmentHandler
 												key={attachment.id}
-												size="default"
-												orientation={"vertical"}
-												className="bg-white hover:bg-white!">
-												{isImage && (
-													<AttachmentMedia className="border">
-														<Image
-															src={
-																attachment.file
-															}
-															alt="فایل پیوست"
-															width={64}
-															height={64}
-															unoptimized
-														/>
-													</AttachmentMedia>
-												)}
-
-												<AttachmentContent>
-													<AttachmentTitle>
-														فایل پیوست
-													</AttachmentTitle>
-
-													<AttachmentDescription>
-														دانلود فایل
-													</AttachmentDescription>
-												</AttachmentContent>
-
-												<AttachmentTrigger asChild>
-													<Link
-														href={
-															attachment.file as "/"
-														}
-														target="_blank"
-														rel="noopener noreferrer"
-													/>
-												</AttachmentTrigger>
-											</Attachment>
+												attachment={attachment}
+											/>
 										);
 									})}
 								</AttachmentGroup>
@@ -196,7 +158,7 @@ function TicketMessageItem({ message }: MessageProps) {
 					<div
 						className={`rounded-xl px-4 py-3 whitespace-pre-wrap
 						${
-							!message.is_staff_reply
+							message.is_staff_reply
 								? "bg-teal-700 text-white w-fit"
 								: "bg-white text-black"
 						}
@@ -207,7 +169,7 @@ function TicketMessageItem({ message }: MessageProps) {
 
 				<MessageFooter
 					className={`flex flex-col gap-1 text-white
-					${message.is_staff_reply ? "items-end" : "items-start"}
+					${!message.is_staff_reply ? "items-end" : "items-start"}
 					`}>
 					<span className="font-bold">{date.time}</span>
 					<span className="text-[10px]">
@@ -216,6 +178,45 @@ function TicketMessageItem({ message }: MessageProps) {
 				</MessageFooter>
 			</MessageContent>
 		</Message>
+	);
+}
+
+function AttachmentHandler({ attachment }: { attachment: AttachmentType }) {
+	const isImage = isImageFile(attachment.file);
+
+	return (
+		<Attachment
+			dir="rtl"
+			key={attachment.id}
+			size="default"
+			orientation={"vertical"}
+			className="bg-white hover:bg-white!">
+			{isImage && (
+				<AttachmentMedia className="border">
+					<Image
+						src={attachment.file}
+						alt="فایل پیوست"
+						width={64}
+						height={64}
+						unoptimized
+					/>
+				</AttachmentMedia>
+			)}
+
+			<AttachmentContent>
+				<AttachmentTitle>فایل پیوست</AttachmentTitle>
+
+				<AttachmentDescription>دانلود فایل</AttachmentDescription>
+			</AttachmentContent>
+
+			<AttachmentTrigger asChild>
+				<Link
+					href={attachment.file as "/"}
+					target="_blank"
+					rel="noopener noreferrer"
+				/>
+			</AttachmentTrigger>
+		</Attachment>
 	);
 }
 
