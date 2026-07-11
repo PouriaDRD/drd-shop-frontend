@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { MessageCircleDashedIcon, ShieldIcon, User2Icon } from "lucide-react";
+import { HeadsetIcon, MessageCircleDashedIcon, User2Icon } from "lucide-react";
 
 import { ScrollArea } from "@/components/ui";
 import {
@@ -85,7 +85,7 @@ export function TicketConversation({ ticket_id }: Props) {
 					bg-cover bg-center bg-no-repeat h-full`}>
 					<MessageScroller>
 						<MessageScrollerViewport>
-							<MessageScrollerContent className="p-6">
+							<MessageScrollerContent className="py-3 pr-3">
 								{ticket.messages.map((message, index) => (
 									<MessageScrollerItem
 										key={message.id}
@@ -124,13 +124,13 @@ function TicketMessageItem({ message }: MessageProps) {
 		<Message align={message.is_staff_reply ? "end" : "start"}>
 			<MessageAvatar className="aspect-square border">
 				{message.is_staff_reply ? (
-					<ShieldIcon className="size-4" />
+					<HeadsetIcon className="size-4" />
 				) : (
 					<User2Icon className="size-4" />
 				)}
 			</MessageAvatar>
 
-			<MessageContent>
+			<MessageContent className="gap-0.5">
 				<MessageHeader>
 					<span className="text-white">
 						{message.is_staff_reply ? "پشتیبانی" : "شما"}
@@ -154,7 +154,7 @@ function TicketMessageItem({ message }: MessageProps) {
 							)}
 					</ScrollArea>
 					<div
-						className={`rounded-xl px-4 py-3 whitespace-pre-wrap
+						className={`flex flex-col gap-2 rounded-xl px-4 py-3 whitespace-pre-wrap
 						${
 							!message.is_staff_reply
 								? "bg-teal-700 text-white w-fit"
@@ -162,14 +162,14 @@ function TicketMessageItem({ message }: MessageProps) {
 						}
 						`}>
 						{message.message}
+						<span className={`text-xs `}>{date.time}</span>
 					</div>
 				</MessageGroup>
 
 				<MessageFooter
-					className={`flex flex-col gap-1 text-white
+					className={`flex flex-col gap-1 text-white mt-1
 					${message.is_staff_reply ? "items-end" : "items-start"}
-					`}>
-					<span className="font-bold">{date.time}</span>
+					bg-black/20 rounded-2xl px-4 py-2 w-fit backdrop-blur-2xl`}>
 					<span className="text-[10px]">
 						{date.dateWithMonthName}
 					</span>

@@ -29,17 +29,20 @@ function SupportPage() {
 				description="ارسال تیکت و ارتباط با پشتیبانی"
 			/>
 
-			<SupportStats tickets={tickets} />
+			<Activity
+				mode={user && user.role === "user" ? "visible" : "hidden"}>
+				<SupportStats tickets={tickets} />
 
-			<Card className="overflow-hidden">
-				<CardHeader className="flex flex-row justify-between gap-4 border-b">
-					<CardTitle className="text-base">تیکت‌های من</CardTitle>
+				<Card className="overflow-hidden">
+					<CardHeader className="flex flex-row justify-between gap-4 border-b">
+						<CardTitle className="text-base">تیکت‌های من</CardTitle>
 
-					<TicketCreateDialog />
-				</CardHeader>
+						<TicketCreateDialog />
+					</CardHeader>
 
-				<TicketTable onSuccess={handleOnTicketSuccess} />
-			</Card>
+					<TicketTable onSuccess={handleOnTicketSuccess} />
+				</Card>
+			</Activity>
 
 			<Activity mode={user && user.role != "user" ? "visible" : "hidden"}>
 				<Card className="overflow-hidden">
