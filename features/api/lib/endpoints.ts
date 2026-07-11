@@ -50,8 +50,12 @@ export const endpoints = {
 
 	support: {
 		myTickets: "support/my-tickets/",
+		createTicket: "support/my-tickets/create/",
 		ticketDetails: (id: string) => `support/my-tickets/${id}/`,
 		replyTicket: (id: string) => `support/my-tickets/${id}/reply/`,
-		createTicket: "support/my-tickets/create/",
+
+		adminTickets: "support/admin-tickets/",
+		adminTicketDetails: (id: string) => `support/admin-tickets/${id}/`,
+		replyAdminTicket: (id: string) => `support/admin-tickets/${id}/reply/`,
 	},
 };

@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 
-import { useTicketReply } from "../mutations";
+import { useAdminTicketReply } from "../mutations";
 import { ticketReplySchema } from "../schemas";
 import { TicketReplyFormData } from "../types";
 
@@ -15,8 +15,8 @@ interface Props {
 	onSuccess?: () => void;
 }
 
-export function useTicketReplyForm({ ticketId, onSuccess }: Props) {
-	const mutation = useTicketReply(ticketId);
+export function useAdminTicketReplyForm({ ticketId, onSuccess }: Props) {
+	const mutation = useAdminTicketReply(ticketId);
 
 	const form = useForm<TicketReplyFormData>({
 		resolver: zodResolver(ticketReplySchema),
@@ -55,11 +55,10 @@ export function useTicketReplyForm({ ticketId, onSuccess }: Props) {
 					toast.error("خطا در ارتباط با سرور");
 				},
 			});
-		} catch (error) {
+		} catch (error: unknown) {
 			if (process.env.NODE_ENV === "development") {
 				console.error(error);
 			}
-
 			toast.error("خطای غیرمنتظره رخ داد");
 		}
 	});

@@ -36,6 +36,8 @@ export const queryKeys = {
 
 	support: {
 		myTickets: ["support", "my-tickets"],
+		adminTickets: ["support", "admin-tickets"],
 		ticketDetails: (id: string) => ["support", "my-tickets", id],
+		adminTicketDetails: (id: string) => ["support", "admin-tickets", id],
 	},
 };

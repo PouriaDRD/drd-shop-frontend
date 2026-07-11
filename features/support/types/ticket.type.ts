@@ -15,13 +15,21 @@ export const Ticket_Category_TYPES = [
 export type Ticket = {
 	id: string;
 	title: string;
-	category:TicketCategory;
+	category: TicketCategory;
 	status: TicketStatus;
 	updated_at: Date;
 	created_at: Date;
 };
 
+export type AdminTicket = Ticket & {
+	user: string;
+};
+
 export type TicketDetail = Ticket & {
+	messages: TicketMessage[];
+};
+
+export type AdminTicketDetail = AdminTicket & {
 	messages: TicketMessage[];
 };
 

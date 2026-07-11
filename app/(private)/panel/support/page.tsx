@@ -1,15 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { Activity, useState } from "react";
 
 import { PageHeader, PageLayout } from "@/components/pages";
 import { SupportStats } from "@/components/pages/support";
 import { Card, CardHeader, CardTitle } from "@/components/ui";
 import { TicketCreateDialog } from "@/features/support/components/dialogs/ticket-create-dialog";
-import { TicketTable } from "@/features/support/components/tables";
+import {
+	AminTicketTable,
+	TicketTable,
+} from "@/features/support/components/tables";
 import { Ticket } from "@/features/support/types";
+import { useUser } from "@/features/user/context";
 
 function SupportPage() {
+	const { user } = useUser();
+
 	const [tickets, setTickets] = useState<Ticket[] | undefined>(undefined);
 
 	const handleOnTicketSuccess = (tickets?: Ticket[]) => {
@@ -27,13 +33,25 @@ function SupportPage() {
 
 			<Card className="overflow-hidden">
 				<CardHeader className="flex flex-row justify-between gap-4 border-b">
-					<CardTitle className="text-base">تیکت ها</CardTitle>
+					<CardTitle className="text-base">تیکت‌های من</CardTitle>
 
 					<TicketCreateDialog />
 				</CardHeader>
 
 				<TicketTable onSuccess={handleOnTicketSuccess} />
 			</Card>
+
+			<Activity mode={user && user.role != "user" ? "visible" : "hidden"}>
+				<Card className="overflow-hidden">
+					<CardHeader className="flex flex-row justify-between gap-4 border-b">
+						<CardTitle className="text-base">
+							تیکت‌های کاربران
+						</CardTitle>
+					</CardHeader>
+
+					<AminTicketTable />
+				</Card>
+			</Activity>
 		</PageLayout>
 	);
 }

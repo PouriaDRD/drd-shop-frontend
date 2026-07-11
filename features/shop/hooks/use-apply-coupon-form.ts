@@ -54,7 +54,9 @@ export function useApplyCouponForm({ onSuccess }: Props) {
 				await handleOnSuccess();
 			}
 		} catch (err) {
-			console.error(err);
+			if (process.env.NODE_ENV === "development") {
+				console.error(err);
+			}
 			toast.error("خطای غیرمنتظره رخ داد");
 		}
 	});

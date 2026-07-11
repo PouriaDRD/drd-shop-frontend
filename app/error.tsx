@@ -17,7 +17,9 @@ interface Props {
 export default function Error({ error, reset }: Props) {
 	useEffect(() => {
 		// Log to your error monitoring (Sentry, etc.)
-		console.error(error);
+		if (process.env.NODE_ENV === "development") {
+			console.error(error);
+		}
 	}, [error]);
 
 	return (
