@@ -5,6 +5,7 @@ import { Activity, useState } from "react";
 import { PageHeader, PageLayout } from "@/components/pages";
 import { SupportStats } from "@/components/pages/support";
 import { Card, CardHeader, CardTitle } from "@/components/ui";
+import { AnnouncementsAlert } from "@/features/notifications/components/alerts";
 import { TicketCreateDialog } from "@/features/support/components/dialogs/ticket-create-dialog";
 import {
 	AminTicketTable,
@@ -28,6 +29,10 @@ function SupportPage() {
 				title="پشتیبانی"
 				description="ارسال تیکت و ارتباط با پشتیبانی"
 			/>
+
+			<div className="w-full">
+				<AnnouncementsAlert />
+			</div>
 
 			<Activity
 				mode={user && user.role === "user" ? "visible" : "hidden"}>

@@ -8,6 +8,7 @@ import {
 } from "@/components/pages/dashboard";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { LoginHistoryTable } from "@/features/auth/components/tables";
+import { AnnouncementsAlert } from "@/features/notifications/components/alerts";
 import { useUser } from "@/features/user/context";
 
 export default function PanelDashboardPage() {
@@ -34,6 +35,9 @@ export default function PanelDashboardPage() {
 				title="داشبورد"
 				description="خلاصه اطلاعات و وضعیت حساب شما"
 			/>
+			<div className="w-full">
+				<AnnouncementsAlert />
+			</div>
 
 			<DashboardStats user={user} />
 

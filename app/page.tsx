@@ -8,9 +8,10 @@ import { Products } from "@/features/shop/components";
 export default function LandingPage() {
 	return (
 		<Fragment>
-			<AnnouncementsAlert />
 			<Header />
-
+			<div className="mt-8 p-4 mx-auto max-w-6xl">
+				<AnnouncementsAlert />
+			</div>
 			<main className="mx-auto flex max-w-6xl flex-col divide-y px-4 pb-8">
 				<Hero />
 				<Features />
