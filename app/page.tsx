@@ -15,7 +15,7 @@ export default function LandingPage() {
 	return (
 		<Fragment>
 			<Header />
-			<div className="mt-8 p-4 mx-auto max-w-7xl">
+			<div className="mx-auto max-w-7xl pt-12">
 				<AnnouncementsAlert />
 			</div>
 			<main className="mx-auto flex max-w-7xl flex-col divide-y px-4 pb-8">

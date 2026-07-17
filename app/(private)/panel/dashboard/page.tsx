@@ -35,9 +35,8 @@ export default function PanelDashboardPage() {
 				title="داشبورد"
 				description="خلاصه اطلاعات و وضعیت حساب شما"
 			/>
-			<div className="w-full">
-				<AnnouncementsAlert />
-			</div>
+
+			<AnnouncementsAlert />
 
 			<DashboardStats user={user} />
 

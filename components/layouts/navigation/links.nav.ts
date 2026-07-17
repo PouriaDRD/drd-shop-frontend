@@ -3,6 +3,7 @@ import { Route } from "next";
 import {
 	LayoutDashboard,
 	LucideIcon,
+	ServerIcon,
 	ShoppingBag,
 	ShoppingCart,
 	WalletIcon,
@@ -42,6 +43,12 @@ export const SIDEBAR_LINKS: NavigationLink[] = [
 		Icon: ShoppingBag,
 		allowedRoles: ["admin", "superuser", "user"],
 	},
+	{
+		name: "سرویس‌های‌من",
+		href: "/panel/services",
+		Icon: ServerIcon,
+		allowedRoles: ["admin", "superuser", "user"],
+	},
 ];
 
 export const MOBILE_LINKS: NavigationLink[] = [
@@ -55,6 +62,12 @@ export const MOBILE_LINKS: NavigationLink[] = [
 		name: "مالی",
 		href: "/panel/finance",
 		Icon: WalletIcon,
+		allowedRoles: ["admin", "superuser", "user"],
+	},
+	{
+		name: "سرویس‌ها",
+		href: "/panel/services",
+		Icon: ServerIcon,
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 	{

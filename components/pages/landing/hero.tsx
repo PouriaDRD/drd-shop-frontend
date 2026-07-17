@@ -9,7 +9,7 @@ import { NetworkReadout } from "./network-readout";
 
 export function Hero() {
 	return (
-		<section className="relative overflow-hidden py-16 md:py-24">
+		<section className="relative overflow-hidden py-16">
 			<div className="flex flex-col items-center justify-between gap-12 md:flex-row">
 				<HeroContent />
 				<HeroPreview />
