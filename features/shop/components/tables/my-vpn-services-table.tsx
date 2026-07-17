@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useEffectEvent } from "react";
+
 import { RefreshCwIcon } from "lucide-react";
 
 import {
@@ -24,9 +26,42 @@ import { V2rayVPNDialog } from "../dialogs";
    MAIN TABLE
 ----------------------------- */
 
-export function MyVPNServicesTable() {
+interface Stats {
+	total: number;
+	active: number;
+	expired: number;
+}
+
+interface Props {
+	onSuccess?: (stats: Stats) => void;
+}
+
+export function MyVPNServicesTable({ onSuccess }: Props) {
 	const { data, isLoading, isError } = useMyVpnServices();
 	const { addItem, isAddingItem, cartStore } = useCartActions();
+
+	const onSucceeded = useEffectEvent(() => {
+		onSuccess?.({
+			total: data?.success ? data.data.length : 0,
+			active: data?.success
+				? data.data.filter((item) => item.stats?.status === "active")
+						.length
+				: 0,
+			expired: data?.success
+				? data.data.filter(
+						(item) =>
+							item.stats?.status === "expired" ||
+							item.stats?.status === "unknown",
+					).length
+				: 0,
+		});
+	});
+
+	useEffect(() => {
+		if (data && data.success) {
+			onSucceeded();
+		}
+	}, [data]);
 
 	if (isLoading) return <TableState type="loading" />;
 	if (isError || !data?.success) return <TableState type="error" />;

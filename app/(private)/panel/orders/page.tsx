@@ -35,7 +35,7 @@ export default function OrdersPage() {
 					<CardTitle className="text-base">لیست سفارشات</CardTitle>
 				</CardHeader>
 
-				<MyOrdersTable onSuccess={(res) => setTotalOrders(res)} />
+				<MyOrdersTable onSuccess={setTotalOrders} />
 			</Card>
 		</PageLayout>
 	);
