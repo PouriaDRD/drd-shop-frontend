@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useEffectEvent } from "react";
+
 import {
 	Badge,
 	Table,
@@ -20,8 +22,22 @@ import { OrderDetailDialog } from "../dialogs";
    MAIN TABLE
 ----------------------------- */
 
-export function MyOrdersTable() {
+interface Props {
+	onSuccess?: (totalOrders: number) => void;
+}
+
+export function MyOrdersTable({ onSuccess }: Props) {
 	const { data, isLoading, isError } = useMyOrders();
+
+	const onSucceeded = useEffectEvent(() => {
+		onSuccess?.(data?.success ? data.data.length : 0);
+	});
+
+	useEffect(() => {
+		if (data && data.success) {
+			onSucceeded();
+		}
+	}, [data]);
 
 	if (isLoading) return <TableState type="loading" />;
 	if (isError || !data?.success) return <TableState type="error" />;
