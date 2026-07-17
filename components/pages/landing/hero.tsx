@@ -37,7 +37,9 @@ function HeroContent() {
 					<span suppressHydrationWarning>قطع نمی‌شه!</span>
 				</h1>
 
-				<p className="mx-auto max-w-md text-base leading-8 text-muted-foreground md:mx-0">
+				<p
+					suppressHydrationWarning
+					className="mx-auto max-w-md text-base leading-8 text-muted-foreground md:mx-0">
 					بدون افت سرعت، بدون ثبت لاگ، با زیرساختی که وضعیتش را هر
 					لحظه می‌توانی ببینی، نه فقط حرفش را بشنوی.
 				</p>

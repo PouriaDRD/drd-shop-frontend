@@ -17,24 +17,10 @@ export const requestDepositSchema = z.object({
 
 	reference_number: z
 		.string("شماره مرجع اجباری است")
-		.transform((v) => normalizeToEnglish(v))
-		.pipe(
-			z
-				.string("شماره مرجع اجباری است")
-				.min(1, "شماره مرجع اجباری است")
-				.max(255, "شماره مرجع  بیش از حد مجاز است"),
-		),
-
+		.transform((v) => normalizeToEnglish(v)),
 	tracking_code: z
 		.string("کد رهگیری اجباری است ")
-		.transform((v) => normalizeToEnglish(v))
-		.pipe(
-			z
-				.string("کد رهگیری اجباری است ")
-				.min(1, "کد رهگیری را وارد کنید.")
-				.max(255, "کد رهگیری بیش از حد مجاز است."),
-		),
-
+		.transform((v) => normalizeToEnglish(v)),
 	sender_name: z
 		.string("نام صاحب کارت را وارد کنید.")
 		.trim()
@@ -65,7 +51,7 @@ export const requestDepositSchema = z.object({
 		.min(1, "زمان تراکنش را وارد کنید."),
 
 	receipt_image: z
-		.instanceof(File)
+		.instanceof(File, { error: "عکس رسید اجباری است" })
 		.refine((file) => file.size <= MAX_FILE_SIZE, {
 			message: "حجم هر فایل باید کمتر از 110 مگابایت باشد.",
 		}),

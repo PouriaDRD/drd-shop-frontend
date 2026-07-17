@@ -54,14 +54,14 @@ export function RequestDepositForm({ onSuccess }: Props) {
 				<ReferenceNumberField
 					control={form.control}
 					name="reference_number"
-					label="شماره مرجع"
+					label="شماره مرجع (اختیاری)"
 				/>
 
 				{/* Tracking */}
 				<TrackingCodeField
 					control={form.control}
 					name="tracking_code"
-					label="کد پیگیری"
+					label="کد پیگیری (اختیاری)"
 				/>
 
 				{/* Date */}

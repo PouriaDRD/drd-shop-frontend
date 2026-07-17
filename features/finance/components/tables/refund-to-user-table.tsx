@@ -49,7 +49,7 @@ export function RefundToUserTable() {
 
 					<TableHead className="text-center">کارت مبدا</TableHead>
 
-					<TableHead className="text-center">پیگیری</TableHead>
+					{/* <TableHead className="text-center">پیگیری</TableHead> */}
 				</TableRow>
 			</TableHeader>
 
@@ -106,10 +106,10 @@ function RefundRow({ item, index }: { item: RefundToUser; index: number }) {
 				</div>
 			</TableCell>
 
-			<TableCell className="text-center flex flex-col gap-2">
+			{/* <TableCell className="text-center flex flex-col gap-2">
 				<span>مرجع: {item.reference_number}</span>
 				<span>رهگیری: {item.tracking_code}</span>
-			</TableCell>
+			</TableCell> */}
 		</TableRow>
 	);
 }
@@ -188,7 +188,7 @@ function TableState({ type }: { type: "loading" | "error" | "empty" }) {
 
 					<TableHead className="text-center">کارت مبدا</TableHead>
 
-					<TableHead className="text-center">پیگیری</TableHead>
+					{/* <TableHead className="text-center">پیگیری</TableHead> */}
 				</TableRow>
 			</TableHeader>
 		</Table>

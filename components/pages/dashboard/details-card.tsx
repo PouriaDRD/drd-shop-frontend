@@ -157,7 +157,7 @@ export function DetailsCard({ user }: Props) {
 								کد دعوت
 							</p>
 
-							<p className="font-mono text-sm font-semibold">
+							<p className="text-sm font-semibold">
 								{user.referral_code}
 							</p>
 						</div>

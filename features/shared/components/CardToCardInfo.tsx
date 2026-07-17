@@ -149,13 +149,13 @@ export function CardToCardInfo() {
 				<Separator />
 
 				{/* OWNER */}
-				<div className="flex items-center justify-between text-sm">
+				{/* <div className="flex items-center justify-between text-sm">
 					<span className="text-muted-foreground">نام صاحب حساب</span>
 
 					<span className="font-medium text-right">
 						{card.owner_name}
 					</span>
-				</div>
+				</div> */}
 
 				{/* WARNING */}
 				<p className="rounded-md bg-amber-500/10 p-2 text-xs leading-6 text-amber-700 dark:text-amber-400">
