@@ -70,3 +70,28 @@ export const MOBILE_LINKS: NavigationLink[] = [
 		allowedRoles: ["admin", "superuser", "user"],
 	},
 ];
+
+export type LadingLink = {
+	label: string;
+	href: string;
+};
+
+export const LANDING_LINKS: LadingLink[] = [
+	{
+		label: "ویژگی‌ها",
+		href: "#features",
+	},
+
+	{
+		label: "محصولات",
+		href: "#products",
+	},
+	{
+		label: "دانلود",
+		href: "#downloads",
+	},
+	{
+		label: "پشتیبانی",
+		href: "#info",
+	},
+];

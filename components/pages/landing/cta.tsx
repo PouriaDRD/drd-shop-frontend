@@ -7,7 +7,7 @@ import { Badge, Button } from "@/components/ui";
 export function CTA() {
 	return (
 		<section className="py-16 md:py-20">
-			<div className="flex flex-col items-center rounded-3xl bg-muted/40 px-8 py-16 text-center">
+			<div className="flex flex-col items-center rounded-3xl px-8 py-16 text-center">
 				<Badge
 					variant="secondary"
 					className="mb-6 gap-2 rounded-full px-4 py-1.5">

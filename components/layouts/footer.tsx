@@ -10,8 +10,9 @@ import {
 
 import { InstagramIcon } from "../icons";
 import AppLogo from "../icons/app-logo";
-import { navLinks } from "../pages/landing/landing.data";
 import { Button, Card, CardContent, Separator } from "../ui";
+
+import { LANDING_LINKS } from "./navigation/links.nav";
 
 export function Footer() {
 	return (
@@ -51,7 +52,7 @@ export function Footer() {
 							<h3 className="mb-5 font-semibold">دسترسی سریع</h3>
 
 							<nav className="space-y-2">
-								{navLinks.map((link) => (
+								{LANDING_LINKS.map((link) => (
 									<Link
 										key={link.href}
 										href={link.href as "/"}

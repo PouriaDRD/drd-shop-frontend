@@ -12,7 +12,6 @@ import { CartButton } from "@/features/shop/components/cart";
 import { useUser } from "@/features/user/context";
 
 import AppLogo from "../icons/app-logo";
-import { navLinks } from "../pages/landing/landing.data";
 import {
 	Button,
 	Separator,
@@ -24,11 +23,13 @@ import {
 	SheetTrigger,
 } from "../ui";
 
+import { LANDING_LINKS } from "./navigation/links.nav";
+
 export function Header() {
 	const { isAuthenticated } = useUser();
 
 	return (
-		<header className="sticky top-0 z-50 bg-background/90 backdrop-blur-xl w-full mx-auto max-w-6xl px-4">
+		<header className="sticky top-0 z-50 bg-background/90 backdrop-blur-xl w-full mx-auto max-w-7xl px-4">
 			<div className="flex flex-row-reverse h-18 items-center justify-between w-full">
 				<div className="flex items-center gap-3 md:gap-4">
 					<CartButton />
@@ -58,7 +59,7 @@ export function HeaderLogo() {
 export function HeaderNav() {
 	return (
 		<nav className="hidden items-center gap-2 md:flex">
-			{navLinks.map((link) => (
+			{LANDING_LINKS.map((link) => (
 				<Link
 					suppressHydrationWarning
 					key={link.href}
@@ -116,16 +117,16 @@ export function MobileMenu() {
 					<Separator className="my-2" />
 
 					<nav className="flex flex-1 flex-col gap-2 px-2">
-						{navLinks.map((link) => (
-							<Button
-								key={link.href}
-								variant="ghost"
-								className="justify-start"
-								asChild>
+						{LANDING_LINKS.map((link) => (
+							<SheetTrigger key={link.href} asChild>
 								<Link href={link.href as "/"}>
-									{link.label}
+									<Button
+										variant="ghost"
+										className="justify-start">
+										{link.label}
+									</Button>
 								</Link>
-							</Button>
+							</SheetTrigger>
 						))}
 					</nav>
 

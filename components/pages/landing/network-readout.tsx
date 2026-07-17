@@ -5,8 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Activity, Clock3, Server, ShieldCheck, Zap } from "lucide-react";
 
 import { Badge, Card, CardContent } from "@/components/ui";
-
-import { liveServers } from "./landing.data";
+import { SERVERS } from "@/features/shared/constants";
 
 /* -------------------------------------------------------------------------- */
 /*                                    Types                                   */
@@ -36,7 +35,7 @@ const getPingColor = (ping: number) => {
 
 export function NetworkReadout({ compact = false }: { compact?: boolean }) {
 	const [servers, setServers] = useState<ServerState[]>(
-		liveServers.map((server) => ({
+		SERVERS.map((server) => ({
 			ping: server.ping,
 			load: server.load,
 		})),
@@ -48,7 +47,7 @@ export function NetworkReadout({ compact = false }: { compact?: boolean }) {
 		const interval = setInterval(() => {
 			setServers((current) =>
 				current.map((server, index) => {
-					const base = liveServers[index];
+					const base = SERVERS[index];
 
 					return {
 						ping: clamp(
@@ -90,7 +89,7 @@ export function NetworkReadout({ compact = false }: { compact?: boolean }) {
 				<NetworkSummary
 					averagePing={averagePing}
 					health={health}
-					serverCount={liveServers.length}
+					serverCount={SERVERS.length}
 				/>
 
 				<NetworkServerList servers={servers} />
@@ -210,7 +209,7 @@ interface NetworkServerListProps {
 function NetworkServerList({ servers }: NetworkServerListProps) {
 	return (
 		<div className="space-y-2">
-			{liveServers.map((server, index) => (
+			{SERVERS.map((server, index) => (
 				<NetworkServerItem
 					key={server.id}
 					server={server}
@@ -226,7 +225,7 @@ function NetworkServerList({ servers }: NetworkServerListProps) {
 /* -------------------------------------------------------------------------- */
 
 interface NetworkServerItemProps {
-	server: (typeof liveServers)[number];
+	server: (typeof SERVERS)[number];
 	state: ServerState;
 }
 

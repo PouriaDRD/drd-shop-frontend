@@ -3,8 +3,8 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
 import { Badge, Button } from "@/components/ui";
+import { SERVERS } from "@/features/shared/constants";
 
-import { liveServers } from "./landing.data";
 import { NetworkReadout } from "./network-readout";
 
 export function Hero() {
@@ -25,7 +25,7 @@ function HeroContent() {
 				variant="secondary"
 				className="gap-2 rounded-full px-4 py-1.5">
 				<span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-				+{liveServers.length} سرور آنلاین در همین لحظه
+				+{SERVERS.length} سرور آنلاین در همین لحظه
 			</Badge>
 
 			<div className="space-y-5">

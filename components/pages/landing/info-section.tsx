@@ -17,8 +17,8 @@ import {
 	CardTitle,
 	Separator,
 } from "@/components/ui";
-
-import { faqs, SocialChannel, socialChannels } from "./landing.data";
+import { FAQS, SOCIAL_CHANNELS } from "@/features/shared/constants";
+import { SocialChannel } from "@/features/shared/types";
 
 export function InfoSection() {
 	return (
@@ -38,7 +38,7 @@ export function InfoSection() {
 							type="single"
 							collapsible
 							defaultValue="faq-0">
-							{faqs.map((faq, index) => (
+							{FAQS.map((faq, index) => (
 								<AccordionItem
 									key={faq.question}
 									value={`faq-${index}`}>
@@ -64,10 +64,10 @@ export function InfoSection() {
 					</CardHeader>
 
 					<CardContent className="space-y-1">
-						{socialChannels.map((channel, index) => (
+						{SOCIAL_CHANNELS.map((channel, index) => (
 							<SocialRow
 								channel={channel}
-								isLast={index === socialChannels.length - 1}
+								isLast={index === SOCIAL_CHANNELS.length - 1}
 								key={channel.id}
 							/>
 						))}

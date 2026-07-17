@@ -1,4 +1,5 @@
-import { liveServers } from "./landing.data";
+import { SERVERS } from "@/features/shared/constants";
+
 import { NetworkReadout } from "./network-readout";
 
 export function ServerStatus() {
@@ -21,7 +22,7 @@ export function ServerStatus() {
 					</p>
 
 					<div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-						{liveServers.map((s) => (
+						{SERVERS.map((s) => (
 							<div
 								key={s.id}
 								className="rounded-lg border bg-card px-3 py-2.5">

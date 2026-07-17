@@ -3,8 +3,7 @@ import Link from "next/link";
 import { MessageCircle, Send } from "lucide-react";
 
 import { InstagramIcon } from "@/components/icons";
-
-import { socialChannels } from "./landing.data";
+import { SOCIAL_CHANNELS } from "@/features/shared/constants";
 
 const iconMap = {
 	telegram: Send,
@@ -24,8 +23,8 @@ export function SocialChannels() {
 				</h2>
 
 				<div
-					className={`grid grid-cols-2 gap-3 sm:grid-cols-${socialChannels.length}`}>
-					{socialChannels.map((channel) => {
+					className={`grid grid-cols-2 gap-3 sm:grid-cols-${SOCIAL_CHANNELS.length}`}>
+					{SOCIAL_CHANNELS.map((channel) => {
 						const Icon = iconMap[channel.platform];
 						return (
 							<Link

@@ -31,7 +31,7 @@ class ApiClient {
 			body,
 			params,
 			init,
-			timeout = 15000,
+			timeout = 60000, // 60 seconds
 			isMultipart = false,
 			retry = true,
 		} = props;

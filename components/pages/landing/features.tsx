@@ -1,6 +1,8 @@
 import { EyeOff, Globe2, Headset, Laptop, Lock, Zap } from "lucide-react";
 
-import { type Feature, features } from "./landing.data";
+import { FEATURES } from "@/features/shared/constants";
+import { Feature } from "@/features/shared/types";
+
 import { SectionHeader } from "./section-header";
 
 const iconMap: Record<Feature["icon"], typeof Zap> = {
@@ -21,7 +23,7 @@ export function Features() {
 			/>
 
 			<div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border sm:grid-cols-2 lg:grid-cols-3">
-				{features.map((feature) => (
+				{FEATURES.map((feature) => (
 					<FeatureCard feature={feature} key={feature.id} />
 				))}
 			</div>

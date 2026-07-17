@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { ChevronDown } from "lucide-react";
 
-import { faqs } from "./landing.data";
+import { FAQS } from "@/features/shared/constants";
 
 export function FAQ() {
 	const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -20,7 +20,7 @@ export function FAQ() {
 				</h2>
 
 				<div className="flex flex-col">
-					{faqs.map((faq, index) => {
+					{FAQS.map((faq, index) => {
 						const isOpen = openIndex === index;
 						return (
 							<div key={faq.question} className="border-b">
