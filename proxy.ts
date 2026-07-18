@@ -3,34 +3,61 @@ import { type NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/features/auth/actions";
 
 export async function proxy(request: NextRequest) {
-	// Redirect to login page if the user is not authenticated
-	const redirectUrl = new URL("/auth/login", request.url);
-	// Preserve the original URL in the 'next' parameter
-	redirectUrl.searchParams.set("next", request.url);
-
 	try {
 		// Check if the user is authenticated
 		const session = await getSession();
 
-		// Redirect to login if the user is not authenticated
-		if (!session) {
-			return NextResponse.redirect(redirectUrl, { status: 303 });
+		// Allow the request to proceed if authenticated
+		if (session) {
+			return NextResponse.next();
 		}
 
-		// Create a new session for the proxied request
-		// await createSession(session, "acs");
+		// Create redirect URL
+		const redirectUrl = request.nextUrl.clone();
+		redirectUrl.pathname = "/auth/login";
+		redirectUrl.search = "";
 
-		// Allow the request to proceed if all checks pass
-		return NextResponse.next();
+		// Preserve only the path and query (avoid localhost / host issues)
+		const next =
+			request.nextUrl.pathname +
+			(request.nextUrl.search || "") +
+			(request.nextUrl.hash || "");
+
+		redirectUrl.searchParams.set("next", next);
+
+		return NextResponse.redirect(redirectUrl, {
+			status: 303,
+		});
 	} catch (error) {
 		if (process.env.NODE_ENV === "development") {
-			console.error("Error during middleware:", error);
+			console.error("Proxy error:", error);
+
+			console.log({
+				url: request.url,
+				nextUrl: request.nextUrl.href,
+				host: request.headers.get("host"),
+				forwardedHost: request.headers.get("x-forwarded-host"),
+				forwardedProto: request.headers.get("x-forwarded-proto"),
+			});
 		}
-		return NextResponse.redirect(redirectUrl, { status: 303 });
+
+		const redirectUrl = request.nextUrl.clone();
+		redirectUrl.pathname = "/auth/login";
+		redirectUrl.search = "";
+
+		redirectUrl.searchParams.set(
+			"next",
+			request.nextUrl.pathname +
+				(request.nextUrl.search || "") +
+				(request.nextUrl.hash || ""),
+		);
+
+		return NextResponse.redirect(redirectUrl, {
+			status: 303,
+		});
 	}
 }
 
-// Apply middleware to specific routes only
 export const config = {
 	matcher: ["/panel/:path*", "/checkout/:path*"],
 };
