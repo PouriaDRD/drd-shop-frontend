@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
 		short_name: "DRD Shop",
 		description:
 			"دی‌آردی شاپ ارائه‌دهنده سرویس‌های VPN پرسرعت، پایدار و اقتصادی با پشتیبانی حرفه‌ای و فعال برای کاربران ایران.",
-		start_url: "/",
+		start_url: "/panel/dashboard",
 		display: "standalone",
 		background_color: "#f9f9f9",
 		theme_color: "#1447e6",
