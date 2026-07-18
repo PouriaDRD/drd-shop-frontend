@@ -117,7 +117,9 @@ function NetworkHeader({ lastSync }: NetworkHeaderProps) {
 						<div className="relative size-2.5 rounded-full bg-emerald-500" />
 					</div>
 
-					<span className="font-semibold">وضعیت شبکه</span>
+					<span suppressHydrationWarning className="font-semibold">
+						وضعیت شبکه
+					</span>
 
 					<Badge variant="secondary">فعال</Badge>
 				</div>

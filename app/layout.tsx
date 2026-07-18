@@ -50,14 +50,19 @@ const keywords = [
 	"فیلترشکن",
 	"DRD Shop",
 	"دی‌آردی شاپ",
+	"دی آر دی",
+	"دی آر دی شاپ",
+	"DRD Shop",
 ];
 
 export const metadata: Metadata = {
 	metadataBase: new URL(SITE_URL),
 
+	manifest: "/manifest.webmanifest",
+
 	title: {
 		default: SITE_NAME,
-		template: "%s | دی‌آردی شاپ",
+		template: "دی‌آردی شاپ | %s",
 	},
 
 	description: SITE_DESCRIPTION,
