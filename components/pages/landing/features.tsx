@@ -16,13 +16,13 @@ const iconMap: Record<Feature["icon"], typeof Zap> = {
 
 export function Features() {
 	return (
-		<section id="features" className="py-16 md:py-20">
+		<section id="features" className="py-16 md:py-24">
 			<SectionHeader
 				eyebrow="چرا دی‌آردی وی‌پی‌ان"
 				title="هرچیزی که از یک وی‌پی‌ان واقعی انتظار داری"
 			/>
 
-			<div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border sm:grid-cols-2 lg:grid-cols-3">
+			<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 				{FEATURES.map((feature) => (
 					<FeatureCard feature={feature} key={feature.id} />
 				))}
@@ -34,9 +34,11 @@ export function Features() {
 function FeatureCard({ feature }: { feature: Feature }) {
 	const Icon = iconMap[feature.icon];
 	return (
-		<div className="group bg-card p-6 transition-colors hover:bg-muted/40">
-			<Icon className="h-5 w-5 text-foreground" strokeWidth={1.75} />
-			<h3 className="mt-4 text-[15px] font-medium text-foreground">
+		<div className="group relative overflow-hidden rounded-2xl border bg-card p-6 transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md">
+			<div className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+				<Icon className="h-5 w-5" strokeWidth={1.75} />
+			</div>
+			<h3 className="mt-5 text-[15px] font-medium text-foreground">
 				{feature.title}
 			</h3>
 			<p className="mt-1.5 text-sm leading-6 text-muted-foreground">

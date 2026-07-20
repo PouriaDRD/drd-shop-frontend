@@ -2,11 +2,12 @@ import { Fragment } from "react";
 
 import { Footer, Header } from "@/components/layouts";
 import {
-	CTA,
+	// CTA,
 	DownloadSection,
 	Features,
 	Hero,
 	InfoSection,
+	ServerStatus,
 } from "@/components/pages/landing";
 import { AnnouncementsAlert } from "@/features/notifications/components/alerts";
 import { Products } from "@/features/shop/components";
@@ -15,15 +16,26 @@ export default function LandingPage() {
 	return (
 		<Fragment>
 			<Header />
-			<div className="mx-auto max-w-7xl pt-12">
+
+			<div className="mx-auto max-w-7xl px-4 pt-6">
 				<AnnouncementsAlert />
 			</div>
-			<main className="mx-auto flex max-w-7xl flex-col divide-y px-4 pb-8">
+
+			<main className="mx-auto max-w-7xl space-y-32 px-4 py-16 relative">
+				{/* <div className="hidden md:block absolute -top-40 -right-40 h-150 w-150 rounded-full bg-primary/8 blur-3xl dark:bg-primary/15" /> */}
+
 				<Hero />
+
 				<Features />
+
 				<Products />
+
+				<ServerStatus />
+
 				<DownloadSection />
-				<CTA />
+
+				{/* <CTA /> */}
+
 				<InfoSection />
 			</main>
 

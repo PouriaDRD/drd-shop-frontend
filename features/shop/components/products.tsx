@@ -45,7 +45,9 @@ export function Products({ className }: Props) {
 						</div>
 
 						{product.description && (
-							<p className="-mt-2 text-sm text-muted-foreground">
+							<p
+								suppressHydrationWarning
+								className="-mt-2 text-sm text-muted-foreground">
 								{product.description}
 							</p>
 						)}

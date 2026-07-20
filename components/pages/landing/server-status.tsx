@@ -4,7 +4,7 @@ import { NetworkReadout } from "./network-readout";
 
 export function ServerStatus() {
 	return (
-		<section id="servers" className="border-t bg-background">
+		<section id="servers">
 			<div className="mx-auto grid gap-10 py-20 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
 				<div>
 					<p className="mb-2 text-xs text-muted-foreground">

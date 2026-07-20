@@ -4,7 +4,7 @@ import { Activity } from "react";
 
 import Link from "next/link";
 
-import { Menu } from "lucide-react";
+import { Menu, XIcon } from "lucide-react";
 
 import { ThemeSwitcher } from "@/features/preferences/components";
 import { AppVersion } from "@/features/shared/components";
@@ -14,7 +14,6 @@ import { useUser } from "@/features/user/context";
 import AppLogo from "../icons/app-logo";
 import {
 	Button,
-	Separator,
 	Sheet,
 	SheetContent,
 	SheetFooter,
@@ -29,124 +28,140 @@ export function Header() {
 	const { isAuthenticated } = useUser();
 
 	return (
-		<header className="sticky top-0 z-50 bg-background/90 backdrop-blur-xl w-full mx-auto max-w-7xl px-4">
-			<div className="flex flex-row-reverse h-18 items-center justify-between w-full">
-				<div className="flex items-center gap-3 md:gap-4">
+		<div className="sticky top-5 z-50 px-4">
+			<header
+				className={`mx-auto flex h-16 w-full max-w-7xl
+				items-center justify-between rounded-2xl border
+				 bg-background/85 px-5 backdrop-blur-2xl`}>
+				<div className="hidden items-center gap-2 md:flex">
+					<HeaderActions isAuthenticated={isAuthenticated} />
+
 					<CartButton />
+
 					<ThemeSwitcher />
-					<HeaderLogo />
 				</div>
 
 				<HeaderNav />
 
-				<HeaderActions isAuthenticated={isAuthenticated} />
+				<div className="flex items-center gap-0.5 md:hidden">
+					<MobileMenu isAuthenticated={isAuthenticated} />
 
-				<MobileMenu />
-			</div>
-		</header>
-	);
-}
-export function HeaderLogo() {
-	return (
-		<div className="flex flex-row items-center justify-center gap-4">
-			<Link href="/" className="shrink-0">
-				<AppLogo hideLogoTextOnMobile />
-			</Link>
+					<ThemeSwitcher variant={"ghost"} />
+				</div>
+
+				<div className="flex items-center gap-2 md:gap-3">
+					<div className="md:hidden">
+						<CartButton variant={"ghost"} />
+					</div>
+					<HeaderLogo />
+				</div>
+			</header>
 		</div>
 	);
 }
 
-export function HeaderNav() {
+function HeaderLogo() {
 	return (
-		<nav className="hidden items-center gap-2 md:flex">
-			{LANDING_LINKS.map((link) => (
-				<Link
-					suppressHydrationWarning
-					key={link.href}
-					href={link.href as "/"}>
-					<Button variant={"ghost"}>{link.label}</Button>
+		<Link href="/" className="shrink-0">
+			<AppLogo hideLogoTextOnMobile />
+		</Link>
+	);
+}
+
+function HeaderNav() {
+	return (
+		<nav className="hidden items-center rounded-full border bg-muted/40 p-1 md:flex">
+			{LANDING_LINKS.map((item) => (
+				<Link key={item.href} href={item.href as "/"}>
+					<Button variant="ghost" className="rounded-full px-5">
+						{item.label}
+					</Button>
 				</Link>
 			))}
 		</nav>
 	);
 }
 
-export function HeaderActions({
-	isAuthenticated,
-}: {
-	isAuthenticated: boolean;
-}) {
+function HeaderActions({ isAuthenticated }: { isAuthenticated: boolean }) {
 	return (
-		<div className="hidden items-center gap-2 md:flex flex-row-reverse">
+		<>
 			<Activity mode={isAuthenticated ? "visible" : "hidden"}>
-				<Button asChild variant="ghost">
-					<Link href="/panel/dashboard">ورود به پنل</Link>
-				</Button>
+				<Link href="/panel/dashboard">
+					<Button>ورود به پنل</Button>
+				</Link>
 			</Activity>
 
 			<Activity mode={isAuthenticated ? "hidden" : "visible"}>
-				<Button variant="ghost" asChild>
-					<Link href="/auth/login">ورود</Link>
-				</Button>
-
-				<Button asChild>
-					<Link href="/auth/register">ثبت نام</Link>
-				</Button>
+				<Link href="/auth/login">
+					<Button>ورود | ثبت‌نام</Button>
+				</Link>
 			</Activity>
-		</div>
+		</>
 	);
 }
 
-export function MobileMenu() {
+function MobileMenu({ isAuthenticated }: { isAuthenticated: boolean }) {
 	return (
-		<div className="flex items-center gap-2 md:hidden">
-			<Sheet>
-				<SheetTrigger asChild>
-					<Button size="icon" variant="ghost">
-						<Menu className="size-5" />
-					</Button>
-				</SheetTrigger>
+		<Sheet>
+			<SheetTrigger asChild>
+				<Button size="icon" variant="ghost" className="rounded-xl">
+					<Menu className="size-5" />
+				</Button>
+			</SheetTrigger>
 
-				<SheetContent side="right" className="flex w-75 flex-col">
-					<SheetHeader className="px-4 py-3.5">
-						<SheetTitle className="flex flex-row items-center justify-start">
-							<HeaderLogo />
-						</SheetTitle>
-					</SheetHeader>
+			<SheetContent showCloseButton={false} className="w-80">
+				<SheetHeader className="w-full px-4">
+					<SheetTitle className="flex items-center justify-between">
+						<HeaderLogo />
 
-					<Separator className="my-2" />
-
-					<nav className="flex flex-1 flex-col gap-2 px-2">
-						{LANDING_LINKS.map((link) => (
-							<SheetTrigger key={link.href} asChild>
-								<Link href={link.href as "/"}>
-									<Button
-										variant="ghost"
-										className="justify-start">
-										{link.label}
-									</Button>
-								</Link>
-							</SheetTrigger>
-						))}
-					</nav>
-
-					<Separator className="my-6" />
-
-					<SheetFooter className="gap-6">
-						<div className="flex flex-col gap-3">
-							<Button variant="outline" asChild>
-								<Link href="/auth/login">ورود</Link>
+						<SheetTrigger asChild>
+							<Button size={"icon-sm"} variant={"ghost"}>
+								<XIcon />
 							</Button>
+						</SheetTrigger>
+					</SheetTitle>
+				</SheetHeader>
 
-							<Button asChild>
-								<Link href="/auth/register">ثبت نام</Link>
-							</Button>
-						</div>
+				<nav className="flex flex-col gap-2 py-4 px-1">
+					{LANDING_LINKS.map((item) => (
+						<SheetTrigger key={item.href} asChild>
+							<Link href={item.href as "/"}>
+								<Button
+									variant="ghost"
+									className="w-full justify-start rounded-xl">
+									{item.label}
+								</Button>
+							</Link>
+						</SheetTrigger>
+					))}
+				</nav>
+
+				<SheetFooter className="mt-auto w-full">
+					<div className="flex flex-col items-center gap-3 w-full">
+						<Activity mode={isAuthenticated ? "hidden" : "visible"}>
+							<Link href="/auth/login" className="w-full">
+								<Button variant="outline" className="w-full">
+									ورود
+								</Button>
+							</Link>
+
+							<Link href="/auth/register" className="w-full">
+								<Button className="w-full">ثبت نام</Button>
+							</Link>
+						</Activity>
+
+						<Activity mode={isAuthenticated ? "visible" : "hidden"}>
+							<Link href="/panel/dashboard" className="w-full">
+								<Button className="w-full" variant={"outline"}>
+									ورود به پنل
+								</Button>
+							</Link>
+						</Activity>
 
 						<AppVersion />
-					</SheetFooter>
-				</SheetContent>
-			</Sheet>
-		</div>
+					</div>
+				</SheetFooter>
+			</SheetContent>
+		</Sheet>
 	);
 }

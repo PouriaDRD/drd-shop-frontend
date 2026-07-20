@@ -25,7 +25,7 @@ export default function AppLogo(props: Props) {
 				<span
 					suppressHydrationWarning
 					className={cn(
-						"font-bold text-xl md:text-2xl text-center",
+						"font-bold text-xl md:text-2xl text-center mt-1",
 						`${hideLogoTextOnMobile && "hidden md:block"}`,
 					)}>
 					DRD Shop

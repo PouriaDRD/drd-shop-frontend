@@ -23,14 +23,14 @@ import { SectionHeader } from "./section-header";
 
 export function DownloadSection({ className }: { className?: string }) {
 	return (
-		<section id="downloads" className={cn("py-20", className)}>
+		<section id="downloads" className={cn("py-16 md:py-24", className)}>
 			<SectionHeader
 				eyebrow="دانلود"
 				title="کلاینت مناسب دستگاه خود را انتخاب کنید"
 				description="برای اتصال به سرویس از یکی از نرم‌افزارهای زیر استفاده کنید."
 			/>
 
-			<div className="grid gap-6 lg:grid-cols-2">
+			<div className="grid gap-5 lg:grid-cols-2">
 				{downloadClients.map((client) => (
 					<DownloadCard key={client.id} client={client} />
 				))}
@@ -47,7 +47,7 @@ function DownloadCard({ client }: { client: DownloadClient }) {
 	const links = client.downloads.filter((d) => d.platform !== "direct");
 
 	return (
-		<Card className="group overflow-hidden border transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
+		<Card className="overflow-hidden rounded-2xl border shadow-none transition-colors hover:border-primary/30">
 			<CardHeader className="space-y-5">
 				<div className="flex items-start justify-between">
 					<div>
@@ -55,39 +55,41 @@ function DownloadCard({ client }: { client: DownloadClient }) {
 							<Image
 								src={client.logo}
 								alt={client.title}
-								width={56}
-								height={56}
-								className="size-14 rounded-2xl mb-2"
+								width={48}
+								height={48}
+								className="mb-3 size-12 rounded-xl"
 							/>
 						)}
 
-						<CardTitle className="text-xl">
+						<CardTitle className="text-lg font-medium">
 							{client.title}
 						</CardTitle>
 
-						<p className="mt-2 text-sm text-muted-foreground leading-7">
+						<p
+							suppressHydrationWarning
+							className="mt-1.5 text-sm leading-7 text-muted-foreground">
 							{client.description}
 						</p>
 					</div>
 
 					{client.badge && (
-						<Badge>{badgeMap[client.badge].label}</Badge>
+						<Badge variant="secondary" className="rounded-full">
+							{badgeMap[client.badge].label}
+						</Badge>
 					)}
 				</div>
 
 				<div className="flex flex-wrap gap-2">
 					{client.platforms.map((platform) => {
 						const item = downloadPlatformMap[platform];
-
 						const Icon = item.icon;
 
 						return (
 							<Badge
 								key={platform}
 								variant="secondary"
-								className="gap-1 rounded-full">
+								className="gap-1 rounded-full bg-muted/60 font-normal">
 								<Icon className="size-3.5" />
-
 								{item.label}
 							</Badge>
 						);
@@ -95,9 +97,9 @@ function DownloadCard({ client }: { client: DownloadClient }) {
 				</div>
 			</CardHeader>
 
-			<CardContent className="space-y-6">
+			<CardContent className="space-y-4">
 				{directDownload && (
-					<Button asChild size="lg" className="w-full">
+					<Button asChild size="lg" className="w-full rounded-xl">
 						<Link href={directDownload.href as "/"}>
 							<Download className="size-4" />
 							دانلود مستقیم
@@ -107,10 +109,9 @@ function DownloadCard({ client }: { client: DownloadClient }) {
 				)}
 
 				{links.length > 0 && (
-					<div className="rounded-xl border bg-muted/30">
-						{links.map((download, index) => {
+					<div className="divide-y overflow-hidden rounded-xl border">
+						{links.map((download) => {
 							const item = downloadPlatformMap[download.platform];
-
 							const Icon = item.icon;
 
 							return (
@@ -118,16 +119,11 @@ function DownloadCard({ client }: { client: DownloadClient }) {
 									key={download.platform}
 									href={download.href as "/"}
 									target="_blank"
-									className={`flex items-center justify-between px-4 py-3 transition-colors hover:bg-muted ${
-										index !== links.length - 1
-											? "border-b"
-											: ""
-									}`}>
+									className="flex items-center justify-between px-4 py-3 transition-colors hover:bg-muted/50">
 									<div className="flex items-center gap-3">
-										<div className="flex size-9 items-center justify-center rounded-lg bg-background">
+										<div className="flex size-8 items-center justify-center rounded-lg bg-muted">
 											<Icon className="size-4" />
 										</div>
-
 										<span className="text-sm font-medium">
 											{item.label}
 										</span>

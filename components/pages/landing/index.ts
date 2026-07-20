@@ -3,6 +3,7 @@ export * from "./download-section";
 export * from "./faq";
 export * from "./features";
 export * from "./hero";
+export * from "./hero-visual";
 export * from "./info-section";
 export * from "./network-readout";
 export * from "./server-status";

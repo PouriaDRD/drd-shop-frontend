@@ -2,16 +2,25 @@
 
 import { Fragment, useState } from "react";
 
+import { VariantProps } from "class-variance-authority";
 import { ShoppingCart } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/features/shared/utils";
 
 import { useCart } from "../../hooks";
 
 import { CartSheet } from "./cart-sheet";
 
-export function CartButton() {
+interface BaseSwitcherProps {
+	className?: string;
+	align?: "start" | "center" | "end";
+	size?: VariantProps<typeof buttonVariants>["size"];
+	variant?: VariantProps<typeof buttonVariants>["variant"];
+}
+
+export function CartButton(props: BaseSwitcherProps) {
 	const { cartItems, isLoading } = useCart();
 
 	const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -23,9 +32,9 @@ export function CartButton() {
 	return (
 		<Fragment>
 			<Button
-				size="icon-sm"
-				variant="outline"
-				className="relative"
+				size={props.size ?? "icon-sm"}
+				variant={props.variant ?? "outline"}
+				className={cn("relative", props.className)}
 				disabled={isLoading}
 				onClick={onClick}>
 				<ShoppingCart className="size-4" />
