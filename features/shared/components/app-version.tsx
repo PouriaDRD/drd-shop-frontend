@@ -13,7 +13,7 @@ const AppVersion = (props: AppVersionProps) => {
 	return (
 		<div
 			className={cn(
-				`text-muted-foreground text-xs text-center w-full space-x-1`,
+				`text-muted-foreground text-xs text-center w-full space-x-1 font-mono!`,
 				props.className,
 			)}>
 			<span>نسخه</span>

@@ -112,16 +112,16 @@ function NetworkHeader({ lastSync }: NetworkHeaderProps) {
 			<div>
 				<div className="flex items-center gap-2">
 					<div className="relative">
-						<div className="absolute inset-0 animate-ping rounded-full bg-emerald-500/40" />
+						<div className="absolute inset-0 animate-ping rounded-full bg-green-700/40" />
 
-						<div className="relative size-2.5 rounded-full bg-emerald-500" />
+						<div className="relative size-2.5 rounded-full bg-green-700" />
 					</div>
 
 					<span suppressHydrationWarning className="font-semibold">
 						وضعیت شبکه
 					</span>
 
-					<Badge variant="secondary">فعال</Badge>
+					<Badge variant="success">فعال</Badge>
 				</div>
 
 				<p className="mt-2 text-sm text-muted-foreground">
@@ -135,12 +135,16 @@ function NetworkHeader({ lastSync }: NetworkHeaderProps) {
 					className="flex items-center justify-end gap-1">
 					<Clock3 className="size-3.5" />
 
-					{lastSync.toLocaleTimeString("fa-IR")}
+					<span suppressHydrationWarning className="font-mono!">
+						{lastSync.toLocaleTimeString("fa-IR")}
+					</span>
 				</div>
 
 				<div className="mt-1">
-					پایداری{" "}
-					<span className="font-medium text-foreground">99.98%</span>
+					پایداری
+					<span className="font-medium text-foreground font-mono! mr-1">
+						99.98%
+					</span>
 				</div>
 			</div>
 		</div>
@@ -164,7 +168,7 @@ function NetworkSummary({
 }: NetworkSummaryProps) {
 	return (
 		<div className="grid grid-cols-3 gap-3">
-			<SummaryCard icon={Zap} label="تأخیر" value={`${averagePing} ms`} />
+			<SummaryCard icon={Zap} label="تأخیر" value={`${averagePing}ms`} />
 
 			<SummaryCard icon={Activity} label="سلامت" value={health} />
 
@@ -195,7 +199,7 @@ function SummaryCard({ icon: Icon, label, value }: SummaryCardProps) {
 				{label}
 			</div>
 
-			<div className="mt-2 text-xl font-semibold">{value}</div>
+			<div className="mt-2 text-xl font-semibold font-mono!">{value}</div>
 		</div>
 	);
 }
@@ -254,15 +258,15 @@ function NetworkServerItem({ server, state }: NetworkServerItemProps) {
 				<div className="text-right">
 					<div className="text-muted-foreground">بار</div>
 
-					<div className="font-medium">{state.load}%</div>
+					<div className="font-medium font-mono!">{state.load}%</div>
 				</div>
 
 				<div className="text-right">
 					<div className="text-muted-foreground">پینگ</div>
 
 					<div
-						className={`font-semibold ${getPingColor(state.ping)}`}>
-						{state.ping} ms
+						className={`font-semibold font-mono! ${getPingColor(state.ping)}`}>
+						{state.ping}ms
 					</div>
 				</div>
 			</div>

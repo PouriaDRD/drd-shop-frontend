@@ -107,7 +107,7 @@ export function Footer() {
 
 				<div
 					className={`
-					flex
+					flex font-mono!
 					flex-col-reverse
 					gap-4
 					text-sm
@@ -121,7 +121,7 @@ export function Footer() {
 					</p>
 
 					<div className="flex items-center gap-2">
-						<span className=" size-2 rounded-full bg-emerald-500 animate-pulse" />
+						<span className=" size-2 rounded-full bg-green-700 animate-pulse" />
 						سرویس‌ها فعال هستند
 					</div>
 				</div>

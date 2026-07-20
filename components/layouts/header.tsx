@@ -32,7 +32,7 @@ export function Header() {
 			<header
 				className={`mx-auto flex h-16 w-full max-w-7xl
 				items-center justify-between rounded-2xl border
-				 bg-background/85 px-5 backdrop-blur-2xl`}>
+				bg-background/85 px-4 md:px-6 backdrop-blur-2xl`}>
 				<div className="hidden items-center gap-2 md:flex">
 					<HeaderActions isAuthenticated={isAuthenticated} />
 

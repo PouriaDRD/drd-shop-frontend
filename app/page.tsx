@@ -21,16 +21,16 @@ export default function LandingPage() {
 				<AnnouncementsAlert />
 			</div>
 
-			<main className="mx-auto max-w-7xl space-y-32 px-4 py-16 relative">
+			<main className="mx-auto max-w-7xl px-4 relative">
 				{/* <div className="hidden md:block absolute -top-40 -right-40 h-150 w-150 rounded-full bg-primary/8 blur-3xl dark:bg-primary/15" /> */}
 
 				<Hero />
 
+				<ServerStatus />
+
 				<Features />
 
 				<Products />
-
-				<ServerStatus />
 
 				<DownloadSection />
 

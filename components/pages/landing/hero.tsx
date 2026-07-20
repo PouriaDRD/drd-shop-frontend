@@ -10,7 +10,7 @@ export function Hero() {
 	return (
 		<section className="relative overflow-hidden py-16 md:py-24">
 			<div className="container relative z-10 mx-auto px-4">
-				<div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+				<div className="flex flex-col md:flex-row items-start justify-between gap-12 lg:grid-cols-2 lg:gap-16">
 					<HeroContent />
 					<HeroVisual />
 				</div>
@@ -21,7 +21,7 @@ export function Hero() {
 
 function HeroContent() {
 	return (
-		<div className="flex flex-col space-y-8">
+		<div className="flex flex-col space-y-8 w-full">
 			<div className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm">
 				<span className="relative flex size-2">
 					<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/50" />

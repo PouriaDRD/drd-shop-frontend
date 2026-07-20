@@ -30,7 +30,7 @@ export function HeroVisual({ particlesNum = 20 }: Props) {
 		"M120 130 C170 70 230 70 280 130 C300 200 250 260 200 290 C140 260 90 200 120 130";
 
 	return (
-		<div className="relative mx-auto aspect-square w-full max-w-lg lg:max-w-none">
+		<div className="relative mx-auto aspect-square w-full max-w-lg lg:max-w-none h-112.5 md:h-fit">
 			<div className="relative h-full w-full overflow-hidden rounded-3xl border border-border/70 bg-card shadow-2xl shadow-black/10 dark:shadow-black/40">
 				{/* Grid */}
 				<div className="absolute inset-0 bg-[linear-gradient(to_right,#888_1px,transparent_1px),linear-gradient(to_bottom,#888_1px,transparent_1px)] bg-size-[40px_40px] opacity-[0.08]" />
@@ -88,11 +88,11 @@ export function HeroVisual({ particlesNum = 20 }: Props) {
 					transition={{
 						delay: 0.2,
 					}}
-					className="absolute right-5 top-5 rounded-xl border border-border bg-background/80 px-3 py-2 text-xs backdrop-blur">
+					className="absolute right-5 top-5 rounded-xl border border-border bg-background/80 px-3 py-2 text-xs text-left backdrop-blur">
 					<div className="flex items-center gap-2">
-						<Wifi className="size-3.5 text-primary" />
+						<Wifi className="size-4 text-primary" />
 
-						<span className="font-semibold">68ms</span>
+						<span className="font-semibold font-mono!">68ms</span>
 					</div>
 
 					<div className="text-muted-foreground">Latency</div>
@@ -153,7 +153,7 @@ export function HeroVisual({ particlesNum = 20 }: Props) {
 					/>
 
 					{/* Packet glow */}
-					<circle r="10" fill="currentColor" opacity="0.12">
+					<circle r="10" fill="#4468c7" opacity="0.12">
 						<animateMotion
 							dur="6s"
 							repeatCount="indefinite"
@@ -162,7 +162,7 @@ export function HeroVisual({ particlesNum = 20 }: Props) {
 					</circle>
 
 					{/* Packet */}
-					<circle r="4" fill="currentColor">
+					<circle r="4" fill="#476fd8">
 						<animateMotion
 							dur="6s"
 							repeatCount="indefinite"

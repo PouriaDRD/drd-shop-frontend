@@ -18,14 +18,14 @@ export default function AppLogo(props: Props) {
 	return (
 		<div
 			className={cn(
-				"flex items-center justify-center text-center gap-2",
+				"flex items-center justify-center text-center gap-4",
 				className,
 			)}>
 			<Activity mode={hideLogoText ? "hidden" : "visible"}>
 				<span
 					suppressHydrationWarning
 					className={cn(
-						"font-bold text-xl md:text-2xl text-center mt-1",
+						"font-bold text-xl md:text-2xl text-center font-mono!",
 						`${hideLogoTextOnMobile && "hidden md:block"}`,
 					)}>
 					DRD Shop
