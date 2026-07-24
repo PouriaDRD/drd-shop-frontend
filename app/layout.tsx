@@ -154,6 +154,7 @@ export const metadata: Metadata = {
 		google: "",
 	},
 };
+
 export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
 	return (
 		<html

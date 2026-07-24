@@ -7,7 +7,7 @@ function robots(): MetadataRoute.Robots {
 			allow: "/",
 			disallow: ["admin", "panel", "checkout"],
 		},
-		sitemap: "https://drdvip.online/sitemap.xml",
+		sitemap: "https://shop.pouria-drd.ir/sitemap.xml",
 	};
 }
 
