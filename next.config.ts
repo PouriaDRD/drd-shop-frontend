@@ -32,6 +32,10 @@ const nextConfig: NextConfig = {
 		root: path.join(__dirname, ".."),
 	},
 
+	experimental: {
+		proxyClientMaxBodySize: "25MB",
+	},
+
 	headers: async () => [
 		{
 			source: "/(.*)",
