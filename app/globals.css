@@ -5,6 +5,7 @@
 @theme {
 	--font-peyda: var(--font-peyda);
 	--font-iran-yekan-x: var(--font-iran-yekan-x);
+	--font-vazirmatn: var(--font-vazirmatn);
 
 	--animate-shimmer: shimmer 1.8s linear infinite;
 
@@ -184,9 +185,11 @@
 	/* Fonts */
 	--font-sans: var(--font-sans);
 	--font-mono: var(--font-geist-mono);
-	--font-heading: var(--font-iran-yekan-x);
+	--font-heading: var(--font-vazirmatn);
+
 	--font-peyda: var(--font-peyda);
 	--font-iran-yekan-x: var(--font-iran-yekan-x);
+	--font-vazirmatn: var(--font-vazirmatn);
 
 	/* =======================================================
 	   Colors

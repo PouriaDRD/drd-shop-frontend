@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 import localFont from "next/font/local";
 
 import { TooltipProvider } from "@/components/ui";
@@ -163,12 +163,19 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
 			suppressHydrationWarning
 			data-scroll-behavior="smooth"
 			className={cn(
-				`${peyda.variable}`,
-				`${iranYekanX.variable}}`,
-				`${geistSans.variable} ${geistMono.variable}`,
-				`h-full antialiased`,
+				"h-full",
+				"antialiased",
+				geistSans.variable,
+				geistMono.variable,
+				"font-sans",
+				inter.variable,
+				peyda.variable,
+				VazirMatn.variable,
+				iranYekanX.variable,
+				"ss02",
+				"font-vazirmatn!",
 			)}>
-			<body className="font-peyda!" suppressHydrationWarning>
+			<body className="font-vazirmatn! ss02" suppressHydrationWarning>
 				<QCProvider>
 					<ThemeProvider
 						attribute="class"
@@ -185,6 +192,8 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
 		</html>
 	);
 }
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -261,4 +270,55 @@ const iranYekanX = localFont({
 		},
 	],
 	variable: "--font-iran-yekan-x",
+});
+
+const VazirMatn = localFont({
+	src: [
+		{
+			weight: "100",
+			style: "normal",
+			path: "./assets/fonts/Vazirmatn/woff2/Vazirmatn-Thin-FD.woff2",
+		},
+		{
+			weight: "200",
+			style: "normal",
+			path: "./assets/fonts/Vazirmatn/woff2/Vazirmatn-Light-FD.woff2",
+		},
+		{
+			weight: "300",
+			style: "normal",
+			path: "./assets/fonts/Vazirmatn/woff2/Vazirmatn-Light-FD.woff2",
+		},
+		{
+			weight: "400",
+			style: "normal",
+			path: "./assets/fonts/Vazirmatn/woff2/Vazirmatn-Regular-FD.woff2",
+		},
+		{
+			weight: "500",
+			style: "normal",
+			path: "./assets/fonts/Vazirmatn/woff2/Vazirmatn-Medium-FD.woff2",
+		},
+		{
+			weight: "600",
+			style: "normal",
+			path: "./assets/fonts/Vazirmatn/woff2/Vazirmatn-Bold-FD.woff2",
+		},
+		{
+			weight: "700",
+			style: "normal",
+			path: "./assets/fonts/Vazirmatn/woff2/Vazirmatn-Bold-FD.woff2",
+		},
+		{
+			weight: "800",
+			style: "normal",
+			path: "./assets/fonts/Vazirmatn/woff2/Vazirmatn-Bold-FD.woff2",
+		},
+		{
+			weight: "900",
+			style: "normal",
+			path: "./assets/fonts/Vazirmatn/woff2/Vazirmatn-Black-FD.woff2",
+		},
+	],
+	variable: "--font-vazirmatn",
 });
